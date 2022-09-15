@@ -1,3 +1,8 @@
-.App {
-  text-align: center;
+@import url("../vendors/fonts.css");
+
+@import url("../page/page.css");
+
+.body {
+  background-color: #f3f3f3;
+  margin: 0;
 }
