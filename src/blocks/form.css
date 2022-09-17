@@ -1,0 +1,111 @@
+.form__field {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form__input {
+  border: none;
+  border-bottom: 1px solid black;
+  width: 440px;
+  height: 24px;
+}
+
+.form__input:focus {
+  outline: none;
+}
+
+.form__radio-list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  gap: 11px;
+}
+
+.form__radio {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.form__radio-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form__radio-element {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.form__radio-text {
+  margin: 0;
+}
+
+.form__radio-label {
+  width: 16px;
+  height: 16px;
+  border: 1px black solid;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.form__radio-label .form__radio:checked {
+  opacity: 1;
+}
+
+.form__radio-label .form__checkmark {
+  width: calc(100% - 5px);
+  height: calc(100% - 5px);
+  border-radius: 50%;
+  background-color: black;
+  display: inline-block;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.form__radio {
+  display: none;
+}
+
+.form__radio:checked + .form__checkmark {
+  opacity: 1;
+}
+
+.form__button {
+  background-color: black;
+  color: white;
+  border: none;
+  font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  border-radius: 5px;
+  height: 36px;
+  width: 124px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.6s;
+}
+
+.form__button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.form__button:disabled {
+  cursor: default;
+  background-color: rgba(0, 0, 0, 0.3);
+}

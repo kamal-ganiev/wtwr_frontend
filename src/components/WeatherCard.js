@@ -18,7 +18,7 @@ import snowNight from "../images/WeatherCard/Nighttime/__snow.jpg";
 import stormNight from "../images/WeatherCard/Nighttime/__storm.jpg";
 import fogNight from "../images/WeatherCard/Nighttime/__fog.jpg";
 
-function WeatherCard() {
+function WeatherCard(props) {
   const night = {
     clear: clearNight,
     cloudy: cloudyNight,
@@ -37,17 +37,15 @@ function WeatherCard() {
     fog: fogDay,
   };
 
-  const temp = 75;
-
   return (
-    <div
+    <section
       className="weather__card"
       style={{
         backgroundImage: `url(${day.rain})`,
       }}
     >
-      <h2 className="weather__temp">{temp} F</h2>
-    </div>
+      <h2 className="weather__temp">{props.temp} F</h2>
+    </section>
   );
 }
 

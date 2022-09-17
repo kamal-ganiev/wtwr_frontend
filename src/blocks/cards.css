@@ -1,0 +1,17 @@
+.cards {
+  margin: 0;
+}
+
+.cards__title {
+  margin: 40px 0 34px;
+  font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.cards__list {
+  margin: 0;
+  border: 1px solid gray;
+}
