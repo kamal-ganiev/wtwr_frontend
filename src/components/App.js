@@ -5,7 +5,8 @@ import Main from "./Main";
 import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
 import ModalWithForm from "./ModalWithForm";
-import { handleModalOpen, test } from "./ModalWithForm";
+import { handleModalOpen } from "./ModalWithForm";
+import Footer from "./Footer";
 
 function App() {
   document.body.classList.add("body");
@@ -25,6 +26,7 @@ function App() {
           buttonText="Add garment"
           name="add"
         />
+        <Footer />
       </div>
     </div>
   );

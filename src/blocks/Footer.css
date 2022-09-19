@@ -1,0 +1,18 @@
+.footer {
+  margin: 0 0 24px;
+  display: flex;
+  font-family: "Cabinet Grotesk", "Arial", "Halvetica", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  justify-content: space-between;
+}
+
+.footer__copyright {
+  margin: 0;
+}
+
+.footer__date {
+  margin: 0;
+}
