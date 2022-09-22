@@ -1,6 +1,17 @@
 .page {
   margin: 0 auto;
   padding: 32px 40px 24px;
-  max-width: 1440px;
-  border: 1px dashed blue;
+  max-width: 1360px;
+}
+
+@media screen and (max-width: 1441px) {
+  .page {
+    max-width: 1015px;
+  }
+}
+
+@media screen and (max-width: 1096px) {
+  .page {
+    max-width: 670px;
+  }
 }

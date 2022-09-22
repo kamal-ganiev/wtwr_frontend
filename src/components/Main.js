@@ -9,7 +9,7 @@ function Main(props) {
         <h3 className="cards__title">
           Today is {props.temp} F / You may want to wear:
         </h3>
-        <ul className="cards__list">{props.children[1]}</ul>
+        {props.children[1]}
       </section>
     </main>
   );

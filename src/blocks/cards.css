@@ -12,6 +12,9 @@
 }
 
 .cards__list {
-  margin: 0;
-  border: 1px solid gray;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
