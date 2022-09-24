@@ -1,47 +1,37 @@
 import "../blocks/WeatherCard.css";
-
-/// Importing Daytime Backgrounds \\\
-
-import clearDay from "../images/WeatherCard/Daytime/__clear.jpg";
-import cloudyDay from "../images/WeatherCard/Daytime/__cloudy.jpg";
-import rainDay from "../images/WeatherCard/Daytime/__rain.jpg";
-import snowDay from "../images/WeatherCard/Daytime/__snow.jpg";
-import stormDay from "../images/WeatherCard/Daytime/__storm.jpg";
-import fogDay from "../images/WeatherCard/Daytime/__fog.jpg";
-
-/// Importing Nighttime Backgrounds \\\
-
-import clearNight from "../images/WeatherCard/Nighttime/__clear.jpg";
-import cloudyNight from "../images/WeatherCard/Nighttime/__cloudy.jpg";
-import rainNight from "../images/WeatherCard/Nighttime/__rain.jpg";
-import snowNight from "../images/WeatherCard/Nighttime/__snow.jpg";
-import stormNight from "../images/WeatherCard/Nighttime/__storm.jpg";
-import fogNight from "../images/WeatherCard/Nighttime/__fog.jpg";
+import { night, day, weatherCodes } from "../utils/constants";
 
 function WeatherCard(props) {
-  const night = {
-    clear: clearNight,
-    cloudy: cloudyNight,
-    rain: rainNight,
-    snow: snowNight,
-    storm: stormNight,
-    fog: fogNight,
-  };
+  /// Declaring Variables for Background \\\
+  let backgroundTime;
+  let backgroundCover;
 
-  const day = {
-    clear: clearDay,
-    cloudy: cloudyDay,
-    rain: rainDay,
-    snow: snowDay,
-    storm: stormDay,
-    fog: fogDay,
-  };
+  /// Checking if It's Day or Night \\\
+  props.isDay === 1 ? (backgroundTime = day) : (backgroundTime = night);
+
+  /// Setting Background Image according to Wearher \\\
+  if (weatherCodes.cloudyCodeList.includes(props.weather)) {
+    backgroundCover = backgroundTime.cloudy;
+  } else if (
+    weatherCodes.rainCodeList.includes(props.weather) ||
+    weatherCodes.sleetCodeList.includes(props.weather)
+  ) {
+    backgroundCover = backgroundTime.rain;
+  } else if (weatherCodes.snowCodeList.includes(props.weather)) {
+    backgroundCover = backgroundTime.snow;
+  } else if (weatherCodes.fogCodeList.includes(props.weather)) {
+    backgroundCover = backgroundTime.fog;
+  } else if (weatherCodes.stormCodeList.includes(props.weather)) {
+    backgroundCover = backgroundTime.storm;
+  } else {
+    backgroundCover = backgroundTime.clear;
+  }
 
   return (
     <section
       className="weather__card"
       style={{
-        backgroundImage: `url(${day.rain})`,
+        backgroundImage: `url(${backgroundCover})`,
       }}
     >
       <h2 className="weather__temp">{props.temp} F</h2>

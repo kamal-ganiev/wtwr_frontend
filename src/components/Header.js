@@ -3,11 +3,6 @@ import logo from "../images/Header/__logo.svg";
 import avatar from "../images/Header/__avatar.jpg";
 
 function Header(props) {
-  const currentDate = new Date().toLocaleString("default", {
-    month: "long",
-    day: "numeric",
-  });
-
   return (
     <header className="header">
       <div className="header__left-side">
@@ -17,7 +12,9 @@ function Header(props) {
           alt="Vector logo WTWR"
           id="HeaderLogo"
         />
-        <p className="header__info">{currentDate},</p>
+        <p className="header__info">
+          {props.currentDate}, {props.currentLocation}
+        </p>
       </div>
       <div className="header__right-side">
         <button

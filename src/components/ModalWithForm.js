@@ -4,6 +4,7 @@ import "../blocks/form.css";
 function ModalWithForm(props) {
   const radioList = document.querySelectorAll(".form__radio");
 
+  /// Setting Opacity of Checked and Non-checked Radio Buttons \\\
   function isChecked() {
     radioList.forEach((radio) => {
       if (radio.checked) {
@@ -14,6 +15,7 @@ function ModalWithForm(props) {
     });
   }
 
+  /// Closing Modal Fun \\\
   function handleModalClose(evt) {
     evt.target
       .closest(`.modal_type_${props.name}`)
