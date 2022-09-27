@@ -5,7 +5,8 @@ import Main from "./Main";
 import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
 import ModalWithForm from "./ModalWithForm";
-import { handleModalOpen } from "./ModalWithForm";
+import AddGarmentForm from "./AddGarmentForm";
+import ItemModal from "./ItemModal";
 import Footer from "./Footer";
 import { defaultClothingItems, currentDate } from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
@@ -15,15 +16,18 @@ function App() {
   document.body.classList.add("body");
 
   /// Calling Api \\\
+
   const api = new WeatherApi();
 
   /// useState Hook Calls \\\
+
   const [temp, setTemp] = useState();
   const [weather, setWeather] = useState(1000);
   const [location, setLocation] = useState("New York");
   const [isDay, setIsDay] = useState(1);
 
   /// useEfect Hook Calls \\\
+
   useEffect(() => {
     api
       .getCurrentWeather("39.96118,-82.99879")
@@ -39,6 +43,42 @@ function App() {
         console.log(err);
       });
   }, []);
+
+  /// Opening/Closing Modal Fun \\\
+
+  function handleModalClose(evt) {
+    evt.target.closest(`.modal`).classList.remove("modal_opened");
+  }
+
+  function handleModalOpen(name) {
+    document.querySelector(`.modal_type_${name}`).classList.add("modal_opened");
+  }
+
+  function handleEscClose(evt) {
+    if (evt.key === "Escape") {
+    }
+  }
+
+  function handleOutsideClickClose(evt) {
+    if (evt.target === evt.currentTarget) {
+      handleModalClose(evt);
+    }
+  }
+
+  /// Handling ItemModal open \\\
+
+  function handleItemModalOpen(name, data) {
+    const itemModal = document.querySelector(`.modal_type_${name}`);
+    console.log(data);
+    itemModal.classList.add("modal_opened");
+    itemModal.querySelector(
+      ".item-modal__image"
+    ).style.backgroundImage = `url('${data.image}')`;
+    itemModal.querySelector(".item-modal__title").textContent = data.title;
+    itemModal.querySelector(
+      ".item-modal__description"
+    ).textContent = `Weather: ${data.description}`;
+  }
 
   return (
     <div className="App">
@@ -61,6 +101,7 @@ function App() {
             key="ItemCard"
             cardList={defaultClothingItems}
             weatherCondition={weatherTemp(temp)}
+            openModal={handleItemModalOpen}
           />
         </Main>
         <ModalWithForm
@@ -68,6 +109,13 @@ function App() {
           id="AddingGarment"
           buttonText="Add garment"
           name="add"
+          onClose={(handleModalClose, handleEscClose, handleOutsideClickClose)}
+        >
+          <AddGarmentForm />
+        </ModalWithForm>
+        <ItemModal
+          name="ItemModal"
+          onClose={(handleModalClose, handleEscClose, handleOutsideClickClose)}
         />
         <Footer />
       </div>

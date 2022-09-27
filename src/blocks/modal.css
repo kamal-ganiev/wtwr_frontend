@@ -47,18 +47,19 @@
 }
 
 .modal__close-button {
+  fill: rgba(0, 0, 0, 0.3);
+  width: 20px;
+  height: 20px;
+  z-index: 5;
   position: absolute;
   top: 20px;
   right: 28px;
-  width: 20px;
-  height: 20px;
-  background-color: white;
-  border: none;
+  cursor: pointer;
+  transition: 0.3s;
   background-image: url("../images/ModalWithForm/__close-button.svg");
-  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  transition: 00.3s;
+  border: none;
   cursor: pointer;
 }
 

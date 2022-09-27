@@ -1,0 +1,46 @@
+.item-modal {
+  background-color: white;
+  padding: 0;
+  position: relative;
+  border-radius: 20px;
+  width: 498px;
+  height: 610px;
+  overflow: hidden;
+}
+
+.item-modal__image {
+  width: 100%;
+  height: 82%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.item-modal__close-button {
+  width: 20px;
+  height: 20px;
+  z-index: 5;
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  cursor: pointer;
+  transition: 0.3s;
+  background-image: url("../images/ItemModal/__close-modal.svg");
+  background-position: center;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.item-modal__close-button:hover {
+  opacity: 0.6;
+}
+
+.item-modal__title {
+  margin: 20px auto 12px 32px;
+}
+
+.item-modal__description {
+  margin: 0 auto 0 32px;
+}
