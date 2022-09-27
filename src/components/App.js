@@ -48,14 +48,18 @@ function App() {
 
   function handleModalClose(evt) {
     evt.target.closest(`.modal`).classList.remove("modal_opened");
+    document.removeEventListener("keydown", handleEscClose);
   }
 
   function handleModalOpen(name) {
     document.querySelector(`.modal_type_${name}`).classList.add("modal_opened");
+    document.addEventListener("keydown", handleEscClose);
   }
 
   function handleEscClose(evt) {
     if (evt.key === "Escape") {
+      document.querySelector(".modal_opened").classList.remove("modal_opened");
+      document.removeEventListener("keydown", handleEscClose);
     }
   }
 
@@ -69,7 +73,6 @@ function App() {
 
   function handleItemModalOpen(name, data) {
     const itemModal = document.querySelector(`.modal_type_${name}`);
-    console.log(data);
     itemModal.classList.add("modal_opened");
     itemModal.querySelector(
       ".item-modal__image"
@@ -78,6 +81,7 @@ function App() {
     itemModal.querySelector(
       ".item-modal__description"
     ).textContent = `Weather: ${data.description}`;
+    document.addEventListener("keydown", handleEscClose);
   }
 
   return (
