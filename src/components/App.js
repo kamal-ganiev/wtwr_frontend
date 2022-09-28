@@ -63,11 +63,12 @@ function App() {
     }
   }
 
-  function handleOutsideClickClose(evt) {
-    if (evt.target === evt.currentTarget) {
-      handleModalClose(evt);
-    }
-  }
+  // function handleOutsideClickClose(Selector) {
+  //   const modal = document.querySelector(Selector);
+  //   if (modal.target === modal.currentTarget) {
+  //     handleModalClose(modal);
+  //   }
+  // }
 
   /// Handling ItemModal open \\\
 
@@ -113,14 +114,11 @@ function App() {
           id="AddingGarment"
           buttonText="Add garment"
           name="add"
-          onClose={(handleModalClose, handleEscClose, handleOutsideClickClose)}
+          onClose={handleModalClose}
         >
           <AddGarmentForm />
         </ModalWithForm>
-        <ItemModal
-          name="ItemModal"
-          onClose={(handleModalClose, handleEscClose, handleOutsideClickClose)}
-        />
+        <ItemModal name="ItemModal" onClose={handleModalClose} />
         <Footer />
       </div>
     </div>
