@@ -1,6 +1,3 @@
-import "../blocks/modal.css";
-import "../blocks/form.css";
-
 function ModalWithForm(props) {
   return (
     <div

@@ -1,4 +1,4 @@
-import "../blocks/App.css";
+import "../page/index.css";
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
