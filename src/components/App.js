@@ -33,9 +33,7 @@ function App() {
       .getCurrentWeather("39.96118,-82.99879")
       .then((currentWeather) => {
         setWeather(currentWeather.current.condition.code);
-        setLocation(
-          `${currentWeather.location.name}, ${currentWeather.location.region}`
-        );
+        setLocation(`${currentWeather.location.name}`);
         setIsDay(currentWeather.current.is_day);
         setTemp(Math.round(currentWeather.current.temp_f));
       })
