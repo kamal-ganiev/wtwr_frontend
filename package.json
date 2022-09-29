@@ -2,7 +2,7 @@
   "name": "se_project_react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kamal-gan.github.io/se_project_react",
+  "homepage": "https://kamal-ganiev.github.io/se_project_react",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
