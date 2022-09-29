@@ -135,7 +135,6 @@ function App() {
           name="add"
           onClose={{
             handleModalClose,
-            handleEscClose,
             handleOutsideClickClose,
           }}
         >
@@ -145,7 +144,6 @@ function App() {
           name="ItemModal"
           onClose={{
             handleModalClose,
-            handleEscClose,
             handleOutsideClickClose,
           }}
         />
