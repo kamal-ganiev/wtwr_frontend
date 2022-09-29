@@ -1,3 +1,6 @@
+import "../blocks/card.css";
+import "../blocks/cards.css";
+
 import React from "react";
 
 class ItemCard extends React.Component {

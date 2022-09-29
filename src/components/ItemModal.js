@@ -1,3 +1,6 @@
+import "../blocks/item-modal.css";
+import "../blocks/modal.css";
+
 function ItemModal(props) {
   return (
     <div

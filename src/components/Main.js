@@ -1,3 +1,6 @@
+import "../blocks/Main.css";
+import "../blocks/cards.css";
+
 function Main(props) {
   return (
     <main className="main">

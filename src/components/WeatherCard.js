@@ -1,3 +1,5 @@
+import "../blocks/WeatherCard.css";
+
 import { night, day, weatherCodes } from "../utils/constants";
 
 function WeatherCard(props) {
