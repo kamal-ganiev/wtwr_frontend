@@ -2,7 +2,10 @@ import "../blocks/item-modal.css";
 
 function ItemModal(props) {
   return (
-    <div className={`modal modal_type_${props.name}`}>
+    <div
+      className={`modal modal_type_${props.name}`}
+      onClick={props.onClose.handleOutsideClickClose}
+    >
       <div className="item-modal">
         <div
           className="item-modal__image"
@@ -15,7 +18,7 @@ function ItemModal(props) {
         <button
           className="item-modal__close-button"
           type="button"
-          onClick={props.onClose}
+          onClick={props.onClose.handleModalClose}
         ></button>
       </div>
     </div>

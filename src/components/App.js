@@ -82,12 +82,12 @@ function App() {
     }
   }
 
-  // function handleOutsideClickClose(Selector) {
-  //   const modal = document.querySelector(Selector);
-  //   if (modal.target === modal.currentTarget) {
-  //     handleModalClose(modal);
-  //   }
-  // }
+  function handleOutsideClickClose(evt) {
+    if (evt.target === evt.currentTarget) {
+      evt.target.closest(`.modal`).classList.remove("modal_opened");
+      document.removeEventListener("keydown", handleEscClose);
+    }
+  }
 
   /// Handling ItemModal open \\\
 
@@ -133,11 +133,22 @@ function App() {
           id="AddingGarment"
           buttonText="Add garment"
           name="add"
-          onClose={handleModalClose}
+          onClose={{
+            handleModalClose,
+            handleEscClose,
+            handleOutsideClickClose,
+          }}
         >
           <AddGarmentForm />
         </ModalWithForm>
-        <ItemModal name="ItemModal" onClose={handleModalClose} />
+        <ItemModal
+          name="ItemModal"
+          onClose={{
+            handleModalClose,
+            handleEscClose,
+            handleOutsideClickClose,
+          }}
+        />
         <Footer />
       </div>
     </div>
