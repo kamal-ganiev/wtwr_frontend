@@ -102,7 +102,7 @@ const currentDate = new Date().toLocaleString("en-EN", {
   day: "numeric",
 });
 
-////////// Validation config //////////
+/// Validation config \\\
 
 const validationConfig = {
   formSelector: ".form",
