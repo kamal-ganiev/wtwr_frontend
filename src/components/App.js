@@ -8,12 +8,33 @@ import ModalWithForm from "./ModalWithForm";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
-import { defaultClothingItems, currentDate } from "../utils/constants";
+import FormValidator from "../utils/FormValidator";
+import {
+  defaultClothingItems,
+  currentDate,
+  validationConfig,
+  formValidators,
+} from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 
 function App() {
   document.body.classList.add("body");
+
+  // /// Form Validation \\\
+
+  const enableValidation = (config) => {
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
+    formList.forEach((formElement) => {
+      const validator = new FormValidator(config, formElement);
+      const formName = formElement.getAttribute("name");
+
+      formValidators[formName] = validator;
+      validator.enableValidation();
+    });
+  };
+
+  enableValidation(validationConfig);
 
   /// Calling Api \\\
 

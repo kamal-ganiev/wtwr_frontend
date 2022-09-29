@@ -9,10 +9,8 @@ function AddGarmentForm() {
     radioList.forEach((radio) => {
       if (radio.checked) {
         radio.closest("li").style.opacity = 1;
-        console.log(radio.closest("li"));
       } else {
         radio.closest("li").style.opacity = 0.5;
-        console.log(radio.closest("li"));
       }
     });
   }
@@ -20,22 +18,28 @@ function AddGarmentForm() {
   return (
     <>
       <label className="form__field modal__label">
-        Name
+        <p className="form__input-title name-input">
+          Name <span className="form__error-message name-input-error"></span>
+        </p>
         <input
           className="form__input modal__field"
           id="name-input"
           type="text"
           name="name"
           placeholder="Name"
+          minLength="2"
+          maxLength="40"
           required
         />
       </label>
       <label className="form__field modal__label">
-        Image
+        <p className="form__input-title link-input">
+          Image <span className="form__error-message link-input-error"></span>
+        </p>
         <input
           className="form__input modal__field"
           id="link-input"
-          name="URL"
+          name="link"
           placeholder="Image URL"
           type="url"
           required
@@ -55,6 +59,7 @@ function AddGarmentForm() {
                 value="hot"
                 name="weather"
                 onChange={isChecked}
+                required
               ></input>
               <span className="form__checkmark"></span>
             </label>
@@ -69,6 +74,7 @@ function AddGarmentForm() {
                 value="warm"
                 name="weather"
                 onChange={isChecked}
+                required
               ></input>
               <span className="form__checkmark"></span>
             </label>
@@ -83,6 +89,7 @@ function AddGarmentForm() {
                 value="cold"
                 name="weather"
                 onChange={isChecked}
+                required
               ></input>
               <span className="form__checkmark"></span>
             </label>

@@ -7,13 +7,24 @@
 
 .form__input {
   border: none;
-  border-bottom: 1px solid black;
   width: 440px;
   height: 24px;
+  border-bottom: 1px solid black;
+  transition: 0.3s;
 }
 
 .form__input:focus {
   outline: none;
+  border-bottom-color: #007dff;
+}
+
+.form__input-title {
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 440px;
+  transition: 0.3s;
 }
 
 .form__radio-list {
@@ -105,7 +116,27 @@
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-.form__button:disabled {
+.form__error-message {
+  color: #ff0000;
+  margin: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.form__error-message_active {
+  opacity: 1;
+}
+
+.form__input-error_active {
+  border-bottom-color: #ff0000;
+}
+
+.form__button_inactive {
   cursor: default;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.form__button_inactive:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
