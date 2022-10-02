@@ -18,6 +18,7 @@
   line-height: 20px;
   opacity: 0;
   transition: 0.6s;
+  cursor: pointer;
 }
 
 .modal_opened {
@@ -30,6 +31,7 @@
   border-radius: 20px;
   padding: 28px 28px 36px;
   position: relative;
+  cursor: default;
 }
 
 .modal__form {

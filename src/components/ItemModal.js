@@ -2,12 +2,25 @@ import "../blocks/item-modal.css";
 import "../blocks/modal.css";
 
 function ItemModal(props) {
+  {
+    props.isOpen && document.addEventListener("keydown", props.handleEscClose);
+  }
   return (
     <div
-      className={`modal modal_type_${props.name}`}
-      onClick={props.onClose.handleOutsideClickClose}
+      className={`modal modal_type_${props.name} ${
+        props.isOpen && "modal_opened"
+      }`}
+      onClick={() => {
+        props.onClose();
+        document.removeEventListener("keydown", props.handleEscClose);
+      }}
     >
-      <div className="item-modal">
+      <div
+        className="item-modal"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <div
           className="item-modal__image"
           style={{
@@ -19,7 +32,10 @@ function ItemModal(props) {
         <button
           className="item-modal__close-button"
           type="button"
-          onClick={props.onClose.handleModalClose}
+          onClick={() => {
+            props.onClose();
+            document.removeEventListener("keydown", props.handleEscClose);
+          }}
         ></button>
       </div>
     </div>

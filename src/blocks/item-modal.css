@@ -6,6 +6,7 @@
   width: 498px;
   height: 610px;
   overflow: hidden;
+  cursor: default;
 }
 
 .item-modal__image {

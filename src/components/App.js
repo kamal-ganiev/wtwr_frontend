@@ -21,8 +21,6 @@ import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 
 function App() {
-  document.body.classList.add("body");
-
   // /// Form Validation \\\
 
   const enableValidation = (config) => {
@@ -44,10 +42,10 @@ function App() {
 
   /// useState Hook Calls \\\
 
-  const [temp, setTemp] = useState();
+  const [temp, setTemp] = useState(75);
   const [weather, setWeather] = useState(1000);
   const [location, setLocation] = useState("New York");
-  const [isDay, setIsDay] = useState(1);
+  const [isDay, setIsDay] = useState(true);
 
   /// useEfect Hook Calls \\\
 
@@ -67,35 +65,25 @@ function App() {
 
   /// Opening/Closing Modal Fun \\\
 
-  function handleModalClose(evt) {
-    evt.target.closest(`.modal`).classList.remove("modal_opened");
-    document.removeEventListener("keydown", handleEscClose);
-  }
-
-  function handleModalOpen(name) {
-    document.querySelector(`.modal_type_${name}`).classList.add("modal_opened");
-    document.addEventListener("keydown", handleEscClose);
-  }
-
   function handleEscClose(evt) {
     if (evt.key === "Escape") {
-      document.querySelector(".modal_opened").classList.remove("modal_opened");
+      setIsModalOpen(false);
+      setIsItemModalOpen(false);
       document.removeEventListener("keydown", handleEscClose);
     }
   }
 
-  function handleOutsideClickClose(evt) {
-    if (evt.target === evt.currentTarget) {
-      evt.target.closest(`.modal`).classList.remove("modal_opened");
-      document.removeEventListener("keydown", handleEscClose);
-    }
-  }
+  // Handling Form Open \\\
 
-  /// Handling ItemModal open \\\
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  /// Handling ItemModal Open \\\
+
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
 
   function handleItemModalOpen(name, data) {
     const itemModal = document.querySelector(`.modal_type_${name}`);
-    itemModal.classList.add("modal_opened");
+    setIsItemModalOpen(true);
     itemModal.querySelector(
       ".item-modal__image"
     ).style.backgroundImage = `url('${data.image}')`;
@@ -103,26 +91,20 @@ function App() {
     itemModal.querySelector(
       ".item-modal__description"
     ).textContent = `Weather: ${data.description}`;
-    document.addEventListener("keydown", handleEscClose);
   }
 
   return (
-    <div className="App">
+    <>
       <div className="page">
         <Header
-          openModal={handleModalOpen}
+          openModal={() => {
+            setIsModalOpen(true);
+          }}
           modalName="add"
           currentDate={currentDate}
           currentLocation={location}
         />
-        <Main temp={temp}>
-          <WeatherCard
-            id="Weather"
-            key="WeatherCard"
-            temp={temp}
-            weather={weather}
-            isDay={isDay}
-          />
+        <Main temp={temp} weather={weather} isDay={isDay}>
           <ItemCard
             key="ItemCard"
             cardList={defaultClothingItems}
@@ -135,23 +117,23 @@ function App() {
           id="AddingGarment"
           buttonText="Add garment"
           name="add"
-          onClose={{
-            handleModalClose,
-            handleOutsideClickClose,
-          }}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          handleEscClose={handleEscClose}
         >
           <AddGarmentForm />
         </ModalWithForm>
         <ItemModal
           name="ItemModal"
-          onClose={{
-            handleModalClose,
-            handleOutsideClickClose,
+          isOpen={isItemModalOpen}
+          onClose={() => {
+            setIsItemModalOpen(false);
           }}
+          handleEscClose={handleEscClose}
         />
         <Footer />
       </div>
-    </div>
+    </>
   );
 }
 

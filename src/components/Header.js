@@ -17,12 +17,7 @@ function Header(props) {
         </p>
       </div>
       <div className="header__right-side">
-        <button
-          className="header__button"
-          onClick={() => {
-            props.openModal(props.modalName);
-          }}
-        >
+        <button className="header__button" onClick={props.openModal}>
           + Add clothes
         </button>
         <p className="header__user">Kamal Ganiev</p>
