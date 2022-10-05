@@ -4,38 +4,16 @@ import "../blocks/App.css";
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
-import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
 import ModalWithForm from "./ModalWithForm";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
-import FormValidator from "../utils/FormValidator";
-import {
-  defaultClothingItems,
-  currentDate,
-  validationConfig,
-  formValidators,
-} from "../utils/constants";
+import { defaultClothingItems, currentDate } from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 
 function App() {
-  // /// Form Validation \\\
-
-  const enableValidation = (config) => {
-    const formList = Array.from(document.querySelectorAll(config.formSelector));
-    formList.forEach((formElement) => {
-      const validator = new FormValidator(config, formElement);
-      const formName = formElement.getAttribute("name");
-
-      formValidators[formName] = validator;
-      validator.enableValidation();
-    });
-  };
-
-  enableValidation(validationConfig);
-
   /// Calling Api \\\
 
   const api = new WeatherApi();
