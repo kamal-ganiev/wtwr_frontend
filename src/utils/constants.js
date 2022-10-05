@@ -1,7 +1,3 @@
-/// Daclaring fs for test \\\
-
-const fs = require("fs");
-
 /// Importing Daytime Backgrounds \\\
 
 import clearDay from "../images/WeatherCard/Daytime/__clear.jpg";
