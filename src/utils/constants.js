@@ -1,3 +1,7 @@
+/// Daclaring fs for test \\\
+
+const fs = require("fs");
+
 /// Importing Daytime Backgrounds \\\
 
 import clearDay from "../images/WeatherCard/Daytime/__clear.jpg";
@@ -102,4 +106,4 @@ const currentDate = new Date().toLocaleString("en-EN", {
   day: "numeric",
 });
 
-export { night, day, weatherCodes, currentDate, defaultClothingItems };
+export { night, day, weatherCodes, currentDate, defaultClothingItems, fs };

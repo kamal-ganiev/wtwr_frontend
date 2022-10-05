@@ -9,7 +9,7 @@ import ModalWithForm from "./ModalWithForm";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
-import { defaultClothingItems, currentDate } from "../utils/constants";
+import { defaultClothingItems, currentDate, fs } from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 
