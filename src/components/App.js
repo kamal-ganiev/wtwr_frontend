@@ -72,7 +72,7 @@ function App() {
   }
 
   return (
-    <>
+    <div>
       <div className="page">
         <Header
           openModal={() => {
@@ -111,7 +111,7 @@ function App() {
         />
         <Footer />
       </div>
-    </>
+    </div>
   );
 }
 
