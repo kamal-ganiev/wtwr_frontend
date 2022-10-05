@@ -106,4 +106,4 @@ const currentDate = new Date().toLocaleString("en-EN", {
   day: "numeric",
 });
 
-export { night, day, weatherCodes, currentDate, defaultClothingItems, fs };
+export { night, day, weatherCodes, currentDate, defaultClothingItems };
