@@ -1,7 +1,7 @@
 import "../index.css";
 import "../blocks/page.css";
 import "../blocks/App.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import ItemCard from "./ItemCard";
