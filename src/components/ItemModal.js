@@ -24,11 +24,11 @@ function ItemModal(props) {
         <div
           className="item-modal__image"
           style={{
-            backgroundImage: `url('${props.image}')`,
+            backgroundImage: `url('${props.data.link}')`,
           }}
         ></div>
-        <p className="item-modal__title">{props.title}</p>
-        <p className="item-modal__description">Weather: {props.description}</p>
+        <p className="item-modal__title">{props.data.name}</p>
+        <p className="item-modal__description">Weather: {props.data.weather}</p>
         <button
           className="item-modal__close-button"
           type="button"

@@ -24,6 +24,9 @@ function App() {
   const [weather, setWeather] = useState(1000);
   const [location, setLocation] = useState("New York");
   const [isDay, setIsDay] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [itemModalData, setItemModalData] = useState({});
 
   /// useEfect Hook Calls \\\
 
@@ -51,66 +54,47 @@ function App() {
     }
   }
 
-  // Handling Form Open \\\
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  /// Handling ItemModal Open \\\
-
-  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
-
-  function handleItemModalOpen(name, data) {
-    const itemModal = document.querySelector(`.modal_type_${name}`);
-    setIsItemModalOpen(true);
-    itemModal.querySelector(
-      ".item-modal__image"
-    ).style.backgroundImage = `url('${data.image}')`;
-    itemModal.querySelector(".item-modal__title").textContent = data.title;
-    itemModal.querySelector(
-      ".item-modal__description"
-    ).textContent = `Weather: ${data.description}`;
-  }
-
   return (
-    <div>
-      <div className="page">
-        <Header
-          openModal={() => {
-            setIsModalOpen(true);
-          }}
-          modalName="add"
-          currentDate={currentDate}
-          currentLocation={location}
+    <div className="page">
+      <Header
+        openModal={() => {
+          setIsModalOpen(true);
+        }}
+        modalName="add"
+        currentDate={currentDate}
+        currentLocation={location}
+      />
+      <Main temp={temp} weather={weather} isDay={isDay}>
+        <ItemCard
+          key="ItemCard"
+          cardList={defaultClothingItems}
+          weatherCondition={weatherTemp(temp)}
+          isItemModalOpen={isItemModalOpen}
+          setIsItemModalOpen={setIsItemModalOpen}
+          setData={setItemModalData}
         />
-        <Main temp={temp} weather={weather} isDay={isDay}>
-          <ItemCard
-            key="ItemCard"
-            cardList={defaultClothingItems}
-            weatherCondition={weatherTemp(temp)}
-            openModal={handleItemModalOpen}
-          />
-        </Main>
-        <ModalWithForm
-          title="New garment"
-          id="AddingGarment"
-          buttonText="Add garment"
-          name="add"
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          handleEscClose={handleEscClose}
-        >
-          <AddGarmentForm />
-        </ModalWithForm>
-        <ItemModal
-          name="ItemModal"
-          isOpen={isItemModalOpen}
-          onClose={() => {
-            setIsItemModalOpen(false);
-          }}
-          handleEscClose={handleEscClose}
-        />
-        <Footer />
-      </div>
+      </Main>
+      <ModalWithForm
+        title="New garment"
+        id="AddingGarment"
+        buttonText="Add garment"
+        name="add"
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        handleEscClose={handleEscClose}
+      >
+        <AddGarmentForm />
+      </ModalWithForm>
+      <ItemModal
+        name="ItemModal"
+        isOpen={isItemModalOpen}
+        onClose={() => {
+          setIsItemModalOpen(false);
+        }}
+        handleEscClose={handleEscClose}
+        data={itemModalData}
+      />
+      <Footer />
     </div>
   );
 }

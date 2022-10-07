@@ -19,10 +19,11 @@ class ItemCard extends React.Component {
                 className="card"
                 style={{ backgroundImage: `url(${card.link})` }}
                 onClick={() => {
-                  this.props.openModal("ItemModal", {
-                    image: card.link,
-                    title: card.name,
-                    description: card.weather,
+                  this.props.setIsItemModalOpen(true);
+                  this.props.setData({
+                    link: card.link,
+                    name: card.name,
+                    weather: card.weather,
                   });
                 }}
               >
