@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../blocks/WeatherCard.css";
 
-import { night, day, weatherCodes } from "../utils/constants";
+import { night, day } from "../utils/constants";
 
 function WeatherCard(props) {
   /// Declaring Variables for Background \\\
