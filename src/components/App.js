@@ -57,7 +57,6 @@ function App() {
     if (evt.key === "Escape") {
       setIsModalOpen(false);
       setIsItemModalOpen(false);
-      document.removeEventListener("keydown", handleEscClose);
     }
   }
 
