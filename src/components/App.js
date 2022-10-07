@@ -44,6 +44,13 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    if (isModalOpen || isItemModalOpen) {
+      document.addEventListener("keydown", handleEscClose);
+    }
+    return () => document.removeEventListener("keydown", handleEscClose);
+  }, [isModalOpen, isItemModalOpen]);
+
   /// Opening/Closing Modal Fun \\\
 
   function handleEscClose(evt) {

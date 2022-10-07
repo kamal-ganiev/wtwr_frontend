@@ -2,9 +2,6 @@ import "../blocks/item-modal.css";
 import "../blocks/modal.css";
 
 function ItemModal(props) {
-  {
-    props.isOpen && document.addEventListener("keydown", props.handleEscClose);
-  }
   return (
     <div
       className={`modal modal_type_${props.name} ${
@@ -12,7 +9,6 @@ function ItemModal(props) {
       }`}
       onClick={() => {
         props.onClose();
-        document.removeEventListener("keydown", props.handleEscClose);
       }}
     >
       <div
@@ -34,7 +30,6 @@ function ItemModal(props) {
           type="button"
           onClick={() => {
             props.onClose();
-            document.removeEventListener("keydown", props.handleEscClose);
           }}
         ></button>
       </div>

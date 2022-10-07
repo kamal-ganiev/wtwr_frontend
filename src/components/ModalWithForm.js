@@ -10,15 +10,11 @@ function ModalWithForm({
   buttonText,
   handleEscClose,
 }) {
-  {
-    isModalOpen && document.addEventListener("keydown", handleEscClose);
-  }
   return (
     <div
       className={`modal modal_type_${name} ${isModalOpen && "modal_opened"}`}
       onClick={() => {
         setIsModalOpen(false);
-        document.removeEventListener("keydown", handleEscClose);
       }}
     >
       <div
@@ -43,7 +39,6 @@ function ModalWithForm({
           type="button"
           onClick={() => {
             setIsModalOpen(false);
-            document.removeEventListener("keydown", handleEscClose);
           }}
         ></button>
       </div>
