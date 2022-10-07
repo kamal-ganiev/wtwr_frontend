@@ -1,19 +1,23 @@
+import { useEffect, useState } from "react";
+
 function AddGarmentForm() {
-  /// List of Radio Buttons \\\
-
-  const radioList = document.querySelectorAll(".form__radio");
-
   /// Setting Opacity of Checked and Non-checked Radio Buttons \\\
 
-  function isChecked() {
-    radioList.forEach((radio) => {
-      if (radio.checked) {
-        radio.closest("li").style.opacity = 1;
-      } else {
-        radio.closest("li").style.opacity = 0.5;
-      }
-    });
-  }
+  const [hot, setHot] = useState(false);
+  const [cold, setCold] = useState(false);
+  const [warm, setWarm] = useState(false);
+
+  const checked = {
+    cold: {
+      opacity: cold ? "1" : "0.5",
+    },
+    hot: {
+      opacity: hot ? "1" : "0.5",
+    },
+    warm: {
+      opacity: warm ? "1" : "0.5",
+    },
+  };
 
   return (
     <>
@@ -50,7 +54,7 @@ function AddGarmentForm() {
           Select the weather type:
         </h4>
         <ul className="form__radio-list">
-          <li className="form__radio-element">
+          <li className="form__radio-element" style={checked.hot}>
             <label className="form__radio-label modal__label">
               <input
                 className="form__radio"
@@ -58,14 +62,18 @@ function AddGarmentForm() {
                 id="hot"
                 value="hot"
                 name="weather"
-                onChange={isChecked}
+                onChange={() => {
+                  setHot(!hot);
+                  setCold(false);
+                  setWarm(false);
+                }}
                 required
-              ></input>
-              <span className="form__checkmark"></span>
+              />
+              <span className="form__checkmark" />
             </label>
             <p className="form__radio-text">Hot</p>
           </li>
-          <li className="form__radio-element">
+          <li className="form__radio-element" style={checked.warm}>
             <label className="form__radio-label modal__label">
               <input
                 className="form__radio"
@@ -73,14 +81,18 @@ function AddGarmentForm() {
                 id="warm"
                 value="warm"
                 name="weather"
-                onChange={isChecked}
+                onChange={() => {
+                  setWarm(!warm);
+                  setCold(false);
+                  setHot(false);
+                }}
                 required
-              ></input>
-              <span className="form__checkmark"></span>
+              />
+              <span className="form__checkmark" />
             </label>
             <p className="form__radio-text">Warm</p>
           </li>
-          <li className="form__radio-element">
+          <li className="form__radio-element" style={checked.cold}>
             <label className="form__radio-label modal__label">
               <input
                 className="form__radio"
@@ -88,10 +100,14 @@ function AddGarmentForm() {
                 id="cold"
                 value="cold"
                 name="weather"
-                onChange={isChecked}
+                onChange={() => {
+                  setCold(!cold);
+                  setWarm(false);
+                  setHot(false);
+                }}
                 required
-              ></input>
-              <span className="form__checkmark"></span>
+              />
+              <span className="form__checkmark" />
             </label>
             <p className="form__radio-text">Cold</p>
           </li>
