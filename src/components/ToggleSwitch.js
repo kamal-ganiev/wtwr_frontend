@@ -1,26 +1,11 @@
-import { useEffect, useState } from "react";
 import "../blocks/toggle-switch.css";
 
-function ToggleSwitch({ sliderPos, test }) {
-  const [fahrenheitColor, setFahrenheitColor] = useState("");
-  const [celsiusColor, setCelsiusColor] = useState("");
-
-  useEffect(() => {
-    if (sliderPos === 0) {
-      setFahrenheitColor("white");
-    } else {
-      setFahrenheitColor("");
-    }
-  }, [sliderPos]);
-
-  useEffect(() => {
-    if (sliderPos === 28) {
-      setCelsiusColor("white");
-    } else {
-      setCelsiusColor("");
-    }
-  }, [sliderPos]);
-
+function ToggleSwitch({
+  sliderPos,
+  handleSlide,
+  fahrenheitColor,
+  celsiusColor,
+}) {
   return (
     <div className="toggle-switch">
       <label className="toggle-switch__label" htmlFor="emperature-switch">
@@ -37,7 +22,7 @@ function ToggleSwitch({ sliderPos, test }) {
           type="checkbox"
           className="toggle-switch__checkbox"
           id="temperature-switch"
-          onClick={test}
+          onClick={handleSlide}
         />
       </label>
       <div

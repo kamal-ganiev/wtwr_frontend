@@ -29,10 +29,28 @@ function App() {
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [itemModalData, setItemModalData] = useState({});
   const [sliderPos, setSliderPos] = useState(0);
+  const [fahrenheitColor, setFahrenheitColor] = useState("");
+  const [celsiusColor, setCelsiusColor] = useState("");
 
   /// Handle Slide Effect \\\
 
-  function test() {
+  useEffect(() => {
+    if (sliderPos === 0) {
+      setFahrenheitColor("white");
+    } else {
+      setFahrenheitColor("");
+    }
+  }, [sliderPos]);
+
+  useEffect(() => {
+    if (sliderPos === 28) {
+      setCelsiusColor("white");
+    } else {
+      setCelsiusColor("");
+    }
+  }, [sliderPos]);
+
+  function handleSlide() {
     if (sliderPos === 0) {
       setSliderPos(28);
       console.log("ok");
@@ -84,7 +102,12 @@ function App() {
         currentDate={currentDate}
         currentLocation={location}
       >
-        <ToggleSwitch sliderPos={sliderPos} test={test} />
+        <ToggleSwitch
+          sliderPos={sliderPos}
+          fahrenheitColor={fahrenheitColor}
+          celsiusColor={celsiusColor}
+          handleSlide={handleSlide}
+        />
       </Header>
       <Main temp={temp} weather={weather} isDay={isDay}>
         <ItemCard
