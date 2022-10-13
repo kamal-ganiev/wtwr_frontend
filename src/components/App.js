@@ -12,6 +12,7 @@ import Footer from "./Footer";
 import { defaultClothingItems, currentDate } from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
+import ToggleSwitch from "./ToggleSwitch";
 
 function App() {
   /// Calling Api \\\
@@ -27,6 +28,19 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [itemModalData, setItemModalData] = useState({});
+  const [sliderPos, setSliderPos] = useState(0);
+
+  /// Handle Slide Effect \\\
+
+  function test() {
+    if (sliderPos === 0) {
+      setSliderPos(28);
+      console.log("ok");
+    } else {
+      setSliderPos(0);
+      console.log("!ok");
+    }
+  }
 
   /// useEfect Hook Calls \\\
 
@@ -69,7 +83,9 @@ function App() {
         modalName="add"
         currentDate={currentDate}
         currentLocation={location}
-      />
+      >
+        <ToggleSwitch sliderPos={sliderPos} test={test} />
+      </Header>
       <Main temp={temp} weather={weather} isDay={isDay}>
         <ItemCard
           key="ItemCard"

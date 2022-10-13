@@ -17,6 +17,7 @@ function Header(props) {
         </p>
       </div>
       <div className="header__right-side">
+        {props.children}
         <button className="header__button" onClick={props.openModal}>
           + Add clothes
         </button>
