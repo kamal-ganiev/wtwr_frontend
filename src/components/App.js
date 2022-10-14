@@ -13,6 +13,7 @@ import { defaultClothingItems, currentDate } from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
+import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 
 function App() {
   /// Calling Api \\\
@@ -21,6 +22,8 @@ function App() {
 
   /// useState Hook Calls \\\
 
+  const [fahrenheit, setFahrenheit] = useState(75);
+  const [celsius, setCelsius] = useState(20);
   const [temp, setTemp] = useState(75);
   const [weather, setWeather] = useState(1000);
   const [location, setLocation] = useState("New York");
@@ -31,6 +34,7 @@ function App() {
   const [sliderPos, setSliderPos] = useState(0);
   const [fahrenheitColor, setFahrenheitColor] = useState("");
   const [celsiusColor, setCelsiusColor] = useState("");
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("");
 
   /// Handle Slide Effect \\\
 
@@ -53,10 +57,8 @@ function App() {
   function handleSlide() {
     if (sliderPos === 0) {
       setSliderPos(28);
-      console.log("ok");
     } else {
       setSliderPos(0);
-      console.log("!ok");
     }
   }
 
@@ -69,7 +71,12 @@ function App() {
         setWeather(currentWeather.current.condition.code);
         setLocation(`${currentWeather.location.name}`);
         setIsDay(currentWeather.current.is_day);
+        setFahrenheit(`${Math.round(currentWeather.current.temp_f)} °F`);
+        setCelsius(`${Math.round(currentWeather.current.temp_c)} °C`);
         setTemp(Math.round(currentWeather.current.temp_f));
+        setCurrentTemperatureUnit(
+          `${Math.round(currentWeather.current.temp_f)} °F`
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -92,54 +99,68 @@ function App() {
     }
   }
 
+  /// Handle Toggle Switch Change \\\
+
+  function handleToggleSwitchChange(evt) {
+    if (evt.target.checked) {
+      setCurrentTemperatureUnit(celsius);
+    } else {
+      setCurrentTemperatureUnit(fahrenheit);
+    }
+  }
+
   return (
     <div className="page">
-      <Header
-        openModal={() => {
-          setIsModalOpen(true);
-        }}
-        modalName="add"
-        currentDate={currentDate}
-        currentLocation={location}
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <ToggleSwitch
-          sliderPos={sliderPos}
-          fahrenheitColor={fahrenheitColor}
-          celsiusColor={celsiusColor}
-          handleSlide={handleSlide}
+        <Header
+          openModal={() => {
+            setIsModalOpen(true);
+          }}
+          modalName="add"
+          currentDate={currentDate}
+          currentLocation={location}
+        >
+          <ToggleSwitch
+            sliderPos={sliderPos}
+            fahrenheitColor={fahrenheitColor}
+            celsiusColor={celsiusColor}
+            handleSlide={handleSlide}
+          />
+        </Header>
+        <Main weather={weather} isDay={isDay}>
+          <ItemCard
+            key="ItemCard"
+            cardList={defaultClothingItems}
+            weatherCondition={weatherTemp(temp)}
+            isItemModalOpen={isItemModalOpen}
+            setIsItemModalOpen={setIsItemModalOpen}
+            setData={setItemModalData}
+          />
+        </Main>
+        <ModalWithForm
+          title="New garment"
+          id="AddingGarment"
+          buttonText="Add garment"
+          name="add"
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          handleEscClose={handleEscClose}
+        >
+          <AddGarmentForm />
+        </ModalWithForm>
+        <ItemModal
+          name="ItemModal"
+          isOpen={isItemModalOpen}
+          onClose={() => {
+            setIsItemModalOpen(false);
+          }}
+          handleEscClose={handleEscClose}
+          data={itemModalData}
         />
-      </Header>
-      <Main temp={temp} weather={weather} isDay={isDay}>
-        <ItemCard
-          key="ItemCard"
-          cardList={defaultClothingItems}
-          weatherCondition={weatherTemp(temp)}
-          isItemModalOpen={isItemModalOpen}
-          setIsItemModalOpen={setIsItemModalOpen}
-          setData={setItemModalData}
-        />
-      </Main>
-      <ModalWithForm
-        title="New garment"
-        id="AddingGarment"
-        buttonText="Add garment"
-        name="add"
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        handleEscClose={handleEscClose}
-      >
-        <AddGarmentForm />
-      </ModalWithForm>
-      <ItemModal
-        name="ItemModal"
-        isOpen={isItemModalOpen}
-        onClose={() => {
-          setIsItemModalOpen(false);
-        }}
-        handleEscClose={handleEscClose}
-        data={itemModalData}
-      />
-      <Footer />
+        <Footer />
+      </CurrentTemperatureUnitContext.Provider>
     </div>
   );
 }

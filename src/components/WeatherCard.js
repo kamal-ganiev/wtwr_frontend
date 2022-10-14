@@ -75,7 +75,7 @@ function WeatherCard(props) {
         backgroundImage: `url(${background})`,
       }}
     >
-      <h2 className="weather__temp">{props.temp} F</h2>
+      <h2 className="weather__temp">{props.temp}</h2>
     </section>
   );
 }

@@ -1,3 +1,5 @@
+import React from "react";
+import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import "../blocks/toggle-switch.css";
 
 function ToggleSwitch({
@@ -6,6 +8,8 @@ function ToggleSwitch({
   fahrenheitColor,
   celsiusColor,
 }) {
+  const switchContext = React.useContext(CurrentTemperatureUnitContext);
+
   return (
     <div className="toggle-switch">
       <label className="toggle-switch__label" htmlFor="emperature-switch">
@@ -23,6 +27,7 @@ function ToggleSwitch({
           className="toggle-switch__checkbox"
           id="temperature-switch"
           onClick={handleSlide}
+          onChange={switchContext.handleToggleSwitchChange}
         />
       </label>
       <div
