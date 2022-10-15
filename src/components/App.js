@@ -17,14 +17,16 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 import { Route } from "react-router-dom";
 import Profile from "./Profile";
 import ClothesSection from "./ClothesSection";
+import api from "../utils/api";
 
 function App() {
   /// Calling Api \\\
 
-  const api = new WeatherApi();
+  const weatherApi = new WeatherApi();
 
   /// useState Hook Calls \\\
 
+  const [itemList, setItemList] = useState([]);
   const [fahrenheit, setFahrenheit] = useState(75);
   const [celsius, setCelsius] = useState(20);
   const [temp, setTemp] = useState(75);
@@ -68,7 +70,13 @@ function App() {
   /// useEfect Hook Calls \\\
 
   useEffect(() => {
-    api
+    api.getItemCards().then((cardsList) => {
+      setItemList(cardsList);
+    });
+  }, []);
+
+  useEffect(() => {
+    weatherApi
       .getCurrentWeather("39.96118,-82.99879")
       .then((currentWeather) => {
         setWeather(currentWeather.current.condition.code);
@@ -136,7 +144,7 @@ function App() {
           <Main weather={weather} isDay={isDay}>
             <ItemCard
               key="ItemCard"
-              cardList={defaultClothingItems}
+              cardList={itemList}
               weatherCondition={weatherTemp(temp)}
               isItemModalOpen={isItemModalOpen}
               setIsItemModalOpen={setIsItemModalOpen}

@@ -15,13 +15,13 @@ class ItemCard extends React.Component {
           if (card.weather === this.props.weatherCondition) {
             return (
               <li
-                key={card._id}
+                key={card.id}
                 className="card"
-                style={{ backgroundImage: `url(${card.link})` }}
+                style={{ backgroundImage: `url(${card.imageUrl})` }}
                 onClick={() => {
                   this.props.setIsItemModalOpen(true);
                   this.props.setData({
-                    link: card.link,
+                    link: card.imageUrl,
                     name: card.name,
                     weather: card.weather,
                   });
