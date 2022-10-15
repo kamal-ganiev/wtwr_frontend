@@ -1,5 +1,5 @@
 .header {
-  margin: 0;
+  margin: 0 0 28px;
   display: flex;
   justify-content: space-between;
   font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
@@ -28,6 +28,19 @@
   margin: 0;
 }
 
+.header__info-link {
+  margin: 0;
+}
+
+.header__profile-link {
+  margin: 0;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .header__logo {
   margin: 0;
   height: 40px;
@@ -35,7 +48,7 @@
 }
 
 .header__avatar {
-  margin: 0 0 0 68px;
+  margin: 0;
   width: 40px;
   height: 40px;
   border-radius: 50%;
