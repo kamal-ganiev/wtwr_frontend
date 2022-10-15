@@ -9,7 +9,7 @@ function WeatherCard(props) {
   let backgroundCover;
 
   /// Checking if It's Day or Night \\\
-  props.isDay === 1 || true ? (backgroundTime = day) : (backgroundTime = night);
+  props.isDay === 1 ? (backgroundTime = day) : (backgroundTime = night);
 
   /// Setting Background \\\
 

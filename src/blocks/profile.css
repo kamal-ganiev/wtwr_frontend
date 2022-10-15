@@ -1,0 +1,71 @@
+.profile {
+  margin: 0 0 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile__side-bar-info {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile__avatar {
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.profile__name {
+  font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.profile__card-section {
+  max-width: 1015px;
+}
+
+.profile__card-title {
+  margin: 0 0 16px;
+  font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  display: flex;
+  gap: 20px;
+}
+
+.profile__card-text {
+  margin: 0;
+}
+
+.profile__card-button {
+  border: none;
+  background: none;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.profile__card-button:hover {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 1441px) {
+  .profile__card-section {
+    max-width: 670px;
+  }
+}
+
+@media screen and (max-width: 1096px) {
+  .profile__card-section {
+    max-width: 325px;
+  }
+}

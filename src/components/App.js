@@ -16,6 +16,7 @@ import ToggleSwitch from "./ToggleSwitch";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import { Route } from "react-router-dom";
 import Profile from "./Profile";
+import ClothesSection from "./ClothesSection";
 
 function App() {
   /// Calling Api \\\
@@ -142,30 +143,46 @@ function App() {
               setData={setItemModalData}
             />
           </Main>
-          <ModalWithForm
-            title="New garment"
-            id="AddingGarment"
-            buttonText="Add garment"
-            name="add"
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-            handleEscClose={handleEscClose}
-          >
-            <AddGarmentForm />
-          </ModalWithForm>
-          <ItemModal
-            name="ItemModal"
-            isOpen={isItemModalOpen}
-            onClose={() => {
-              setIsItemModalOpen(false);
-            }}
-            handleEscClose={handleEscClose}
-            data={itemModalData}
-          />
         </Route>
         <Route path="/se_project_react/profile">
-          <Profile></Profile>
+          <Profile>
+            <ClothesSection
+              openModal={() => {
+                setIsModalOpen(true);
+              }}
+            >
+              <ItemCard
+                key="ItemCard"
+                modalName="add"
+                cardList={defaultClothingItems}
+                weatherCondition={weatherTemp(temp)}
+                isItemModalOpen={isItemModalOpen}
+                setIsItemModalOpen={setIsItemModalOpen}
+                setData={setItemModalData}
+              />
+            </ClothesSection>
+          </Profile>
         </Route>
+        <ModalWithForm
+          title="New garment"
+          id="AddingGarment"
+          buttonText="Add garment"
+          name="add"
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          handleEscClose={handleEscClose}
+        >
+          <AddGarmentForm />
+        </ModalWithForm>
+        <ItemModal
+          name="ItemModal"
+          isOpen={isItemModalOpen}
+          onClose={() => {
+            setIsItemModalOpen(false);
+          }}
+          handleEscClose={handleEscClose}
+          data={itemModalData}
+        />
         <Footer />
       </CurrentTemperatureUnitContext.Provider>
     </div>
