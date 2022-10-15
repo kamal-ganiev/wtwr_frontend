@@ -1,4 +1,8 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = "http://localhost:3001/items";
+
+const header = {
+  "Content-type": "application/json",
+};
 
 const handleResponse = (res) => {
   if (res.ok) {
@@ -9,13 +13,35 @@ const handleResponse = (res) => {
 };
 
 const getItemCards = () => {
-  return fetch(`${baseUrl}/items`, {
-    headers: {
-      "Content-type": "application/json",
-    },
+  return fetch(`${baseUrl}`, {
+    headers: header,
   }).then(handleResponse);
 };
 
-const api = { getItemCards };
+const addItemCard = ({ id, name, imageUrl, weather }) => {
+  return fetch(`${baseUrl}`, {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify({
+      id,
+      name,
+      weather,
+      imageUrl,
+    }),
+  }).then(handleResponse);
+};
+
+const removeItemCard = (id) => {
+  return fetch(`${baseUrl}/${id}`, {
+    method: "DELETE",
+    headers: header,
+  }).then(handleResponse);
+};
+
+const api = {
+  getItemCards,
+  addItemCard,
+  removeItemCard,
+};
 
 export default api;
