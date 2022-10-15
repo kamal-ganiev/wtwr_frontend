@@ -9,7 +9,7 @@ import ModalWithForm from "./ModalWithForm";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
-import { defaultClothingItems, currentDate } from "../utils/constants";
+import { currentDate } from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
@@ -162,7 +162,7 @@ function App() {
               <ItemCard
                 key="ItemCard"
                 modalName="add"
-                cardList={defaultClothingItems}
+                cardList={itemList}
                 weatherCondition={weatherTemp(temp)}
                 isItemModalOpen={isItemModalOpen}
                 setIsItemModalOpen={setIsItemModalOpen}
