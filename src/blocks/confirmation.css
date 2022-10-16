@@ -1,35 +1,24 @@
-.item-modal {
+.confirmation {
+  position: relative;
+  padding: 60px 0;
+  max-width: 670px;
+  width: 100%;
+  max-height: 280px;
   background-color: white;
-  padding: 0;
   position: relative;
   border-radius: 20px;
-  width: 498px;
-  height: 610px;
-  overflow: hidden;
-  cursor: default;
   font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-}
-
-.item-modal__image {
-  width: 100%;
-  height: 82%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #e9e9e9;
-}
-
-.item-modal__info {
-  margin: 20px 32px 0 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
 }
 
-.item-modal__close-button {
+.confirmation__close-button {
   width: 20px;
   height: 20px;
   z-index: 5;
@@ -46,33 +35,35 @@
   background-color: rgba(0, 0, 0, 0);
 }
 
-.item-modal__close-button:hover {
+.confirmation__close-button:hover {
   opacity: 0.6;
 }
 
-.item-modal__title {
-  margin: 0 auto 12px 32px;
+.confirmation__title {
+  margin: 0 0 40px;
+  max-width: 367px;
+  text-align: center;
 }
 
-.item-modal__weather {
-  margin: 0 auto 0 32px;
-}
-
-.item-modal__remove-button {
+.confirmation__accept-button,
+.confirmation__deny-button {
   font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  line-height: 24px;
-  color: #ff4d00;
-  height: 24px;
   border: none;
   background: none;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.item-modal__remove-button:hover {
+.confirmation__accept-button {
+  margin: 0 0 24px;
+  color: #ff4d00;
+}
+
+.confirmation__accept-button:hover,
+.confirmation__deny-button:hover {
   opacity: 0.6;
 }

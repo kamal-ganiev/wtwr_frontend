@@ -18,6 +18,7 @@ import { Route } from "react-router-dom";
 import Profile from "./Profile";
 import ClothesSection from "./ClothesSection";
 import api from "../utils/api";
+import ConfirmationModal from "./ConfirmationModal";
 
 function App() {
   /// Calling Api \\\
@@ -35,11 +36,13 @@ function App() {
   const [isDay, setIsDay] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [itemModalData, setItemModalData] = useState({});
   const [sliderPos, setSliderPos] = useState(0);
   const [fahrenheitColor, setFahrenheitColor] = useState("");
   const [celsiusColor, setCelsiusColor] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("");
+  const [removingCard, setRemovingCard] = useState(0);
 
   /// Handle Slide Effect \\\
 
@@ -95,18 +98,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isModalOpen || isItemModalOpen) {
+    if (isModalOpen || isItemModalOpen || isConfirmationModalOpen) {
       document.addEventListener("keydown", handleEscClose);
     }
     return () => document.removeEventListener("keydown", handleEscClose);
-  }, [isModalOpen, isItemModalOpen]);
+  }, [isModalOpen, isItemModalOpen, isConfirmationModalOpen]);
 
-  /// Opening/Closing Modal Fun \\\
+  /// Closing Modal Fun \\\
 
   function handleEscClose(evt) {
     if (evt.key === "Escape") {
       setIsModalOpen(false);
       setIsItemModalOpen(false);
+      setIsConfirmationModalOpen(false);
     }
   }
 
@@ -190,6 +194,20 @@ function App() {
           }}
           handleEscClose={handleEscClose}
           data={itemModalData}
+          handleRemove={setIsConfirmationModalOpen}
+          setRemovingCard={setRemovingCard}
+        />
+        <ConfirmationModal
+          name="ConfirmationModal"
+          isOpen={isConfirmationModalOpen}
+          onClose={() => {
+            setIsConfirmationModalOpen(false);
+          }}
+          card={removingCard}
+          handleEscClose={handleEscClose}
+          handleCardDelete={(id) => {
+            api.removeItemCard(id);
+          }}
         />
         <Footer />
       </CurrentTemperatureUnitContext.Provider>

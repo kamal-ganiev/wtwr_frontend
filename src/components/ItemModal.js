@@ -23,8 +23,25 @@ function ItemModal(props) {
             backgroundImage: `url('${props.data.link}')`,
           }}
         ></div>
-        <p className="item-modal__title">{props.data.name}</p>
-        <p className="item-modal__description">Weather: {props.data.weather}</p>
+        <div className="item-modal__info">
+          <div className="item-modal__description">
+            <p className="item-modal__title">{props.data.name}</p>
+            <p className="item-modal__weather">Weather: {props.data.weather}</p>
+          </div>
+          <button
+            className="item-modal__remove-button"
+            onClick={() => {
+              props.handleRemove(true);
+              props.onClose();
+              props.setRemovingCard({
+                id: props.data.id,
+                card: props.data.card,
+              });
+            }}
+          >
+            Delete item
+          </button>
+        </div>
         <button
           className="item-modal__close-button"
           type="button"

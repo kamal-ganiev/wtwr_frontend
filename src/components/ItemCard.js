@@ -18,9 +18,11 @@ class ItemCard extends React.Component {
                 key={card.id}
                 className="card"
                 style={{ backgroundImage: `url(${card.imageUrl})` }}
-                onClick={() => {
+                onClick={(e) => {
                   this.props.setIsItemModalOpen(true);
                   this.props.setData({
+                    id: card.id,
+                    card: e.target,
                     link: card.imageUrl,
                     name: card.name,
                     weather: card.weather,

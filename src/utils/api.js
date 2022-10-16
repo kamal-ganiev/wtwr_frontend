@@ -12,14 +12,15 @@ const handleResponse = (res) => {
   }
 };
 
-const getItemCards = () => {
-  return fetch(`${baseUrl}`, {
+const getItemCards = async () => {
+  const res = await fetch(`${baseUrl}`, {
     headers: header,
-  }).then(handleResponse);
+  });
+  return handleResponse(res);
 };
 
-const addItemCard = ({ id, name, imageUrl, weather }) => {
-  return fetch(`${baseUrl}`, {
+const addItemCard = async ({ id, name, imageUrl, weather }) => {
+  const res = await fetch(`${baseUrl}`, {
     method: "POST",
     headers: header,
     body: JSON.stringify({
@@ -28,14 +29,16 @@ const addItemCard = ({ id, name, imageUrl, weather }) => {
       weather,
       imageUrl,
     }),
-  }).then(handleResponse);
+  });
+  return handleResponse(res);
 };
 
-const removeItemCard = (id) => {
-  return fetch(`${baseUrl}/${id}`, {
+const removeItemCard = async (id) => {
+  const res = await fetch(`${baseUrl}/${id}`, {
     method: "DELETE",
     headers: header,
-  }).then(handleResponse);
+  });
+  return handleResponse(res);
 };
 
 const api = {
