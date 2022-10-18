@@ -45,4 +45,11 @@ const currentDate = new Date().toLocaleString("en-EN", {
   day: "numeric",
 });
 
-export { night, day, currentDate };
+/// Default Coords \\\
+
+const coords = {
+  latitude: "40.730610",
+  longitude: "-73.935242",
+};
+
+export { night, day, currentDate, coords };

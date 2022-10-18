@@ -9,7 +9,7 @@ import ModalWithForm from "./ModalWithForm";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
-import { currentDate } from "../utils/constants";
+import { currentDate, coords } from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
@@ -80,7 +80,7 @@ function App() {
 
   useEffect(() => {
     weatherApi
-      .getCurrentWeather("39.96118,-82.99879")
+      .getCurrentWeather(coords)
       .then((currentWeather) => {
         setWeather(currentWeather.current.condition.code);
         setLocation(`${currentWeather.location.name}`);
@@ -165,7 +165,6 @@ function App() {
             >
               <ItemCard
                 key="ItemCard"
-                modalName="add"
                 cardList={itemList}
                 weatherCondition={weatherTemp(temp)}
                 isItemModalOpen={isItemModalOpen}

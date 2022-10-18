@@ -5,9 +5,9 @@ class WeatherApi extends React.Component {
     super(props);
   }
 
-  async getCurrentWeather(parsedLocation) {
+  async getCurrentWeather({ latitude, longitude }) {
     const res = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=2c0b7e9969e542f2975235801220410&q=${parsedLocation}&days=1`
+      `https://api.weatherapi.com/v1/forecast.json?key=2c0b7e9969e542f2975235801220410&q=${latitude},${longitude}&days=1`
     );
     if (res.ok) {
       return res.json();
