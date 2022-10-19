@@ -22,7 +22,6 @@ function ConfirmationModal({ name, isOpen, onClose, card, handleCardDelete }) {
           className="confirmation__accept-button"
           onClick={() => {
             handleCardDelete(card.id);
-            card.card.remove();
             onClose();
           }}
         >

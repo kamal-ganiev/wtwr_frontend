@@ -98,6 +98,10 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log("Change");
+  }, [itemList]);
+
+  useEffect(() => {
     if (isModalOpen || isItemModalOpen || isConfirmationModalOpen) {
       document.addEventListener("keydown", handleEscClose);
     }
@@ -122,6 +126,14 @@ function App() {
     } else {
       setCurrentTemperatureUnit(fahrenheit);
     }
+  }
+
+  /// Removing Card Function \\\
+
+  function removeCard(id) {
+    const newArray = itemList.filter((card) => card.id !== id);
+
+    setItemList(newArray);
   }
 
   return (
@@ -206,6 +218,7 @@ function App() {
           handleEscClose={handleEscClose}
           handleCardDelete={(id) => {
             api.removeItemCard(id);
+            removeCard(id);
           }}
         />
         <Footer />
