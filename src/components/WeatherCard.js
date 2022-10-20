@@ -17,9 +17,6 @@ function WeatherCard(props) {
 
   useEffect(() => {
     switch (props.weather) {
-      case 1000:
-        setBackground((backgroundCover = backgroundTime.clear));
-        break;
       case 1030:
       case 1063:
       case 1150:
@@ -77,8 +74,11 @@ function WeatherCard(props) {
       case 1147:
         setBackground((backgroundCover = backgroundTime.fog));
         break;
+      default:
+        setBackground((backgroundCover = backgroundTime.clear));
+        break;
     }
-  }, []);
+  }, [props.weather, props.isDay]);
 
   return (
     <section
