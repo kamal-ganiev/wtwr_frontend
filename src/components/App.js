@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import ItemCard from "./ItemCard";
-import ModalWithForm from "./ModalWithForm";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
@@ -132,6 +131,13 @@ function App() {
     setItemList(newArray);
   }
 
+  /// Adding Card To Array \\\
+
+  function addNewCard(item) {
+    item.id = itemList.length + 2;
+    setItemList([item, ...itemList]);
+  }
+
   return (
     <div className="page">
       <CurrentTemperatureUnitContext.Provider
@@ -182,17 +188,12 @@ function App() {
             </ClothesSection>
           </Profile>
         </Route>
-        <ModalWithForm
-          title="New garment"
-          id="AddingGarment"
-          buttonText="Add garment"
-          name="add"
+        <AddGarmentForm
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           handleEscClose={handleEscClose}
-        >
-          <AddGarmentForm />
-        </ModalWithForm>
+          addNewCard={addNewCard}
+        />
         <ItemModal
           name="ItemModal"
           isOpen={isItemModalOpen}

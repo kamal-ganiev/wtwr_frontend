@@ -8,7 +8,7 @@ function ModalWithForm({
   name,
   title,
   buttonText,
-  handleEscClose,
+  handleSubmit,
 }) {
   return (
     <div
@@ -24,12 +24,18 @@ function ModalWithForm({
         }}
       >
         <h3 className="modal__title">{title}</h3>
-        <form className="form modal__form" name={`${name}`} noValidate>
+        <form
+          className="form modal__form"
+          name={`${name}`}
+          onSubmit={(e) => {
+            handleSubmit(e);
+            setIsModalOpen(false);
+          }}
+        >
           {children}
           <button
             className="form__button modal__button modal-add-button"
             type="submit"
-            disabled
           >
             {buttonText}
           </button>
