@@ -98,10 +98,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("Change");
-  }, [itemList]);
-
-  useEffect(() => {
     if (isModalOpen || isItemModalOpen || isConfirmationModalOpen) {
       document.addEventListener("keydown", handleEscClose);
     }

@@ -13,58 +13,70 @@ function WeatherCard(props) {
 
   /// Setting Background \\\
 
-  const [background, setBackground] = useState(backgroundTime.clear);
+  const [background, setBackground] = useState(NaN);
 
   useEffect(() => {
-    if (
-      props.weather === 1030 ||
-      1063 ||
-      1150 ||
-      1153 ||
-      1168 ||
-      1171 ||
-      1180 ||
-      1183 ||
-      1186 ||
-      1189 ||
-      1192 ||
-      1195 ||
-      1198 ||
-      1201 ||
-      1240 ||
-      1243 ||
-      1246 ||
-      1069 ||
-      1072 ||
-      1204 ||
-      1207 ||
-      1237 ||
-      1249 ||
-      1252 ||
-      1261 ||
-      1264
-    ) {
-      setBackground((backgroundCover = backgroundTime.rain));
-    } else if (props.weather === 1003 || 1006 || 1009) {
-      setBackground((backgroundCover = backgroundTime.cloudy));
-    } else if (
-      props.weather === 1066 ||
-      1114 ||
-      1117 ||
-      1210 ||
-      1213 ||
-      1216 ||
-      1219 ||
-      1222 ||
-      1225 ||
-      1255 ||
-      1258
-    ) {
-      setBackground((backgroundCover = backgroundTime.snow));
-    } else if (props.weather === 1087 || 1273 || 1276 || 1279 || 1282) {
-      setBackground((backgroundCover = backgroundTime.storm));
-    } else if (props.weather === 1135 || 1147) {
-      setBackground((backgroundCover = backgroundTime.fog));
+    switch (props.weather) {
+      case 1000:
+        setBackground((backgroundCover = backgroundTime.clear));
+        break;
+      case 1030:
+      case 1063:
+      case 1150:
+      case 1153:
+      case 1168:
+      case 1171:
+      case 1180:
+      case 1183:
+      case 1186:
+      case 1189:
+      case 1192:
+      case 1195:
+      case 1198:
+      case 1201:
+      case 1240:
+      case 1243:
+      case 1246:
+      case 1069:
+      case 1072:
+      case 1204:
+      case 1207:
+      case 1237:
+      case 1249:
+      case 1252:
+      case 1261:
+      case 1264:
+        setBackground((backgroundCover = backgroundTime.rain));
+        break;
+      case 1003:
+      case 1006:
+      case 1009:
+        setBackground((backgroundCover = backgroundTime.cloudy));
+        break;
+      case 1066:
+      case 1114:
+      case 1117:
+      case 1210:
+      case 1213:
+      case 1216:
+      case 1219:
+      case 1222:
+      case 1225:
+      case 1255:
+      case 1258:
+        setBackground((backgroundCover = backgroundTime.snow));
+        break;
+      case 1087:
+      case 1273:
+      case 1276:
+      case 1279:
+      case 1282:
+        setBackground((backgroundCover = backgroundTime.storm));
+        break;
+      case 1135:
+      case 1147:
+        setBackground((backgroundCover = backgroundTime.fog));
+        break;
     }
   }, []);
 
