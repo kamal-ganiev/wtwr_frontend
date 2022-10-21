@@ -213,8 +213,14 @@ function App() {
           card={removingCard}
           handleEscClose={handleEscClose}
           handleCardDelete={(id) => {
-            api.removeItemCard(id);
-            removeCard(id);
+            api
+              .removeItemCard(id)
+              .then(() => {
+                removeCard(id);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           }}
         />
         <Footer />
