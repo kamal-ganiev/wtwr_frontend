@@ -150,17 +150,6 @@ function App() {
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <iframe
-          src="https://giphy.com/embed/5KO3FnJ53Uu0uXmL0W"
-          width="480"
-          height="316"
-          frameBorder="0"
-          class="giphy-embed"
-          allowFullScreen
-        ></iframe>
-        <p>
-          <a href="https://giphy.com/gifs/5KO3FnJ53Uu0uXmL0W">via GIPHY</a>
-        </p>
         <Header
           openModal={() => {
             setIsModalOpen(true);

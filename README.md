@@ -22,16 +22,16 @@ This link of page itself: (page is still in work, images might not be loaded)
 
 1. Toggle temperature from Fahrenhait to Celsius and back:
 
-![Toggle Switch](https://giphy.com/embed/JGanUoRmlUTS2OxnKV);
+![Toggle Switch](https://i.giphy.com/media/JGanUoRmlUTS2OxnKV/giphy.webp);
 
 2. Add cards with new clothes to your list:
 
-![Adding Card Process](https://giphy.com/embed/fa7enQbvmnv2nqvRSV);
+![Adding Card Process](https://i.giphy.com/media/fa7enQbvmnv2nqvRSV/giphy.webp);
 
 3. Remove card with confirmation modal:
 
-![Removing Card](https://giphy.com/embed/VrurOqBKpN1Q4LCTLr);
+![Removing Card](https://i.giphy.com/media/VrurOqBKpN1Q4LCTLr/giphy.webp);
 
 4. Easily switch between "Main" and "Profile" with React.Routes:
 
-![Switching Between Pages](https://giphy.com/gifs/5KO3FnJ53Uu0uXmL0W);
+![Switching Between Pages](https://i.giphy.com/media/5KO3FnJ53Uu0uXmL0W/giphy.webp);
