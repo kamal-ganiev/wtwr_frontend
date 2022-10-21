@@ -17,3 +17,21 @@ This link of design of the WTWR website. It was made on Figma:
 This link of page itself: (page is still in work, images might not be loaded)
 
 - [What to Wear?](https://kamal-ganiev.github.io/se_project_react/)
+
+### Features
+
+1. Toggle temperature from Fahrenhait to Celsius and back:
+
+![Toggle Switch](https://giphy.com/embed/JGanUoRmlUTS2OxnKV);
+
+2. Add cards with new clothes to your list:
+
+![Adding Card Process](https://giphy.com/embed/fa7enQbvmnv2nqvRSV);
+
+3. Remove card with confirmation modal:
+
+![Removing Card](https://giphy.com/embed/VrurOqBKpN1Q4LCTLr);
+
+4. Easily switch between "Main" and "Profile" with React.Routes:
+
+![Switching Between Pages](https://giphy.com/gifs/5KO3FnJ53Uu0uXmL0W);
