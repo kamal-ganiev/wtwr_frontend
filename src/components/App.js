@@ -4,7 +4,7 @@ import "../blocks/App.css";
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
-import ItemCard from "./ItemCard";
+import ItemCards from "./ItemCards";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
@@ -167,8 +167,8 @@ function App() {
         </Header>
         <Route exact path="/se_project_react">
           <Main weather={weather} isDay={isDay}>
-            <ItemCard
-              key="ItemCard"
+            <ItemCards
+              key="ItemCards"
               cardList={itemList}
               weatherCondition={weatherTemp(temp)}
               isItemModalOpen={isItemModalOpen}
@@ -184,8 +184,8 @@ function App() {
                 setIsModalOpen(true);
               }}
             >
-              <ItemCard
-                key="ItemCard"
+              <ItemCards
+                key="ItemCards"
                 cardList={itemList}
                 isItemModalOpen={isItemModalOpen}
                 setIsItemModalOpen={setIsItemModalOpen}

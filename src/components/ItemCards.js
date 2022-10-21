@@ -3,7 +3,7 @@ import "../blocks/cards.css";
 
 import React from "react";
 
-function ItemCard(props) {
+function ItemCards(props) {
   return (
     <ul className="cards__list">
       {props.cardList.map((card) => {
@@ -39,4 +39,4 @@ function ItemCard(props) {
   );
 }
 
-export default ItemCard;
+export default ItemCards;
