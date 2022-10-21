@@ -135,7 +135,14 @@ function App() {
 
   function addNewCard(item) {
     item.id = itemList.length + 2;
-    setItemList([item, ...itemList]);
+    api
+      .addItemCard(item)
+      .then(() => {
+        setItemList([item, ...itemList]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
