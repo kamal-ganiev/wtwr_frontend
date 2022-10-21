@@ -7,7 +7,10 @@ function ItemCard(props) {
   return (
     <ul className="cards__list">
       {props.cardList.map((card) => {
-        if (card.weather === props.weatherCondition) {
+        if (
+          card.weather === props.weatherCondition ||
+          props.weatherCondition === undefined
+        ) {
           return (
             <li
               key={card.id}

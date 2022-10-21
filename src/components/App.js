@@ -180,7 +180,6 @@ function App() {
               <ItemCard
                 key="ItemCard"
                 cardList={itemList}
-                weatherCondition={weatherTemp(temp)}
                 isItemModalOpen={isItemModalOpen}
                 setIsItemModalOpen={setIsItemModalOpen}
                 setData={setItemModalData}
