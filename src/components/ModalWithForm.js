@@ -33,12 +33,6 @@ function ModalWithForm({
           }}
         >
           {children}
-          <button
-            className="form__button modal__button modal-add-button"
-            type="submit"
-          >
-            {buttonText}
-          </button>
         </form>
         <button
           className="modal__close-button"

@@ -69,3 +69,31 @@
 .modal__close-button:hover {
   opacity: 0.6;
 }
+
+.modal-login-button {
+  width: 73px;
+  height: 36px;
+}
+
+.modal__button-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal__login-button-container {
+  margin-top: 8px;
+}
+
+.modal__login-register-button {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal__login-register-button:hover {
+  color: rgba(0, 0, 0, 0.3);
+}

@@ -22,12 +22,18 @@ function Header(props) {
       <div className="header__right-side">
         {props.children}
         <button className="header__button" onClick={props.openModal}>
+          Sign Up
+        </button>
+        <button className="header__button" onClick={props.openModal}>
+          Log In
+        </button>
+        {/*<button className="header__button" onClick={props.openModal}>
           + Add clothes
         </button>
         <Link to="/se_project_react/profile" className="header__profile-link">
           <p className="header__user">Kamal Ganiev</p>
           <img className="header__avatar" src={avatar} />
-        </Link>
+  </Link>*/}
       </div>
     </header>
   );

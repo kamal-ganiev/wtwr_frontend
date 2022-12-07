@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 
 function AddGarmentForm(props) {
@@ -32,6 +32,12 @@ function AddGarmentForm(props) {
     setCold(false);
     setHot(false);
   }
+
+  useEffect(() => {
+    setWarm(false);
+    setCold(false);
+    setHot(false);
+  }, [props.isModalOpen]);
 
   return (
     <ModalWithForm
@@ -154,6 +160,12 @@ function AddGarmentForm(props) {
           </li>
         </ul>
       </div>
+      <button
+        className="form__button modal__button modal-add-button"
+        type="submit"
+      >
+        Add garment
+      </button>
     </ModalWithForm>
   );
 }

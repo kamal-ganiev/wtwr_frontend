@@ -18,6 +18,8 @@ import Profile from "./Profile";
 import ClothesSection from "./ClothesSection";
 import api from "../utils/api";
 import ConfirmationModal from "./ConfirmationModal";
+import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
 
 function App() {
   /// Calling Api \\\
@@ -194,7 +196,7 @@ function App() {
             </ClothesSection>
           </Profile>
         </Route>
-        <AddGarmentForm
+        <RegisterModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           handleEscClose={handleEscClose}

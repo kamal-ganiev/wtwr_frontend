@@ -13,13 +13,13 @@ function ItemCards(props) {
         ) {
           return (
             <li
-              key={card.id}
+              key={card._id}
               className="card"
               style={{ backgroundImage: `url(${card.imageUrl})` }}
               onClick={(e) => {
                 props.setIsItemModalOpen(true);
                 props.setData({
-                  id: card.id,
+                  id: card._id,
                   card: e.target,
                   link: card.imageUrl,
                   name: card.name,
