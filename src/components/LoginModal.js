@@ -1,7 +1,12 @@
 import { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 
-function LoginModal(props) {
+function LoginModal({
+  isModalOpen,
+  setIsModalOpen,
+  handleEscClose,
+  redirectToRegModal,
+}) {
   function handleSubmit(e) {
     e.preventDefault();
     e.target.closest("form").reset();
@@ -16,12 +21,12 @@ function LoginModal(props) {
       id="Login"
       buttonText="Log in"
       name="login"
-      isModalOpen={props.isModalOpen}
-      setIsModalOpen={props.setIsModalOpen}
-      handleEscClose={props.handleEscClose}
+      isModalOpen={isModalOpen}
+      setIsModalOpen={setIsModalOpen}
+      handleEscClose={handleEscClose}
       handleSubmit={(e) => {
         handleSubmit(e);
-        props.setIsModalOpen(false);
+        setIsModalOpen(false);
       }}
     >
       <label className="form__field modal__label">
@@ -64,7 +69,14 @@ function LoginModal(props) {
         >
           Log in
         </button>
-        <button className="modal__login-register-button" type="button">
+        <button
+          className="modal__login-register-button"
+          onClick={() => {
+            setIsModalOpen(false);
+            redirectToRegModal(true);
+          }}
+          type="button"
+        >
           or Register
         </button>
       </div>

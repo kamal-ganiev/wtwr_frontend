@@ -249,11 +249,13 @@ function App() {
         <RegisterModal
           isModalOpen={isRegModalOpen}
           setIsModalOpen={setIsRegModalOpen}
+          redirectToLogModal={setIsLogModalOpen}
           handleEscClose={handleEscClose}
         />
         <LoginModal
           isModalOpen={isLogModalOpen}
           setIsModalOpen={setIsLogModalOpen}
+          redirectToRegModal={setIsRegModalOpen}
           handleEscClose={handleEscClose}
         />
         <AddGarmentForm
