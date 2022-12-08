@@ -7,7 +7,6 @@ function ModalWithForm({
   children,
   name,
   title,
-  buttonText,
   handleSubmit,
 }) {
   return (

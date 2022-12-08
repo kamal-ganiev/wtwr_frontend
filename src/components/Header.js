@@ -3,7 +3,13 @@ import logo from "../images/Header/__logo.svg";
 import avatar from "../images/Header/__avatar.jpg";
 import { Link } from "react-router-dom";
 
-function Header(props) {
+function Header({
+  children,
+  openLoginModal,
+  openRegistrationModal,
+  currentDate,
+  currentLocation,
+}) {
   return (
     <header className="header">
       <div className="header__left-side">
@@ -16,15 +22,15 @@ function Header(props) {
           />
         </Link>
         <p className="header__info">
-          {props.currentDate}, {props.currentLocation}
+          {currentDate}, {currentLocation}
         </p>
       </div>
       <div className="header__right-side">
-        {props.children}
-        <button className="header__button" onClick={props.openModal}>
+        {children}
+        <button className="header__button" onClick={openRegistrationModal}>
           Sign Up
         </button>
-        <button className="header__button" onClick={props.openModal}>
+        <button className="header__button" onClick={openLoginModal}>
           Log In
         </button>
         {/*<button className="header__button" onClick={props.openModal}>

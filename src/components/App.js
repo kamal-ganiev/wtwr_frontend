@@ -28,21 +28,32 @@ function App() {
 
   /// useState Hook Calls \\\
 
-  const [itemList, setItemList] = useState([]);
+  /// States for Modals:
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isRegModalOpen, setIsRegModalOpen] = useState(false);
+  const [isLogModalOpen, setIsLogModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [itemModalData, setItemModalData] = useState({});
+
+  /// States for Weather Card:
   const [fahrenheit, setFahrenheit] = useState(75);
   const [celsius, setCelsius] = useState(20);
+
+  /// States for Weather Api:
   const [temp, setTemp] = useState(75);
   const [weather, setWeather] = useState(1000);
   const [location, setLocation] = useState("New York");
   const [isDay, setIsDay] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [itemModalData, setItemModalData] = useState({});
+
+  /// States for Temperature Slider:
   const [sliderPos, setSliderPos] = useState(0);
   const [fahrenheitColor, setFahrenheitColor] = useState("");
   const [celsiusColor, setCelsiusColor] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("");
+
+  /// States for Cards:
+  const [itemList, setItemList] = useState([]);
   const [removingCard, setRemovingCard] = useState(0);
 
   /// Handle Slide Effect \\\
@@ -99,17 +110,31 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isModalOpen || isItemModalOpen || isConfirmationModalOpen) {
+    if (
+      isAddModalOpen ||
+      isLogModalOpen ||
+      isRegModalOpen ||
+      isItemModalOpen ||
+      isConfirmationModalOpen
+    ) {
       document.addEventListener("keydown", handleEscClose);
     }
     return () => document.removeEventListener("keydown", handleEscClose);
-  }, [isModalOpen, isItemModalOpen, isConfirmationModalOpen]);
+  }, [
+    isAddModalOpen,
+    isRegModalOpen,
+    isLogModalOpen,
+    isItemModalOpen,
+    isConfirmationModalOpen,
+  ]);
 
   /// Closing Modal Fun \\\
 
   function handleEscClose(evt) {
     if (evt.key === "Escape") {
-      setIsModalOpen(false);
+      setIsAddModalOpen(false);
+      setIsLogModalOpen(false);
+      setIsRegModalOpen(false);
       setIsItemModalOpen(false);
       setIsConfirmationModalOpen(false);
     }
@@ -153,10 +178,12 @@ function App() {
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <Header
-          openModal={() => {
-            setIsModalOpen(true);
+          openLoginModal={() => {
+            setIsLogModalOpen(true);
           }}
-          modalName="add"
+          openRegistrationModal={() => {
+            setIsRegModalOpen(true);
+          }}
           currentDate={currentDate}
           currentLocation={location}
         >
@@ -183,7 +210,7 @@ function App() {
           <Profile>
             <ClothesSection
               openModal={() => {
-                setIsModalOpen(true);
+                setIsAddModalOpen(true);
               }}
             >
               <ItemCards
@@ -197,8 +224,18 @@ function App() {
           </Profile>
         </Route>
         <RegisterModal
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
+          isModalOpen={isRegModalOpen}
+          setIsModalOpen={setIsRegModalOpen}
+          handleEscClose={handleEscClose}
+        />
+        <LoginModal
+          isModalOpen={isLogModalOpen}
+          setIsModalOpen={setIsLogModalOpen}
+          handleEscClose={handleEscClose}
+        />
+        <AddGarmentForm
+          isModalOpen={isAddModalOpen}
+          setIsModalOpen={setIsAddModalOpen}
           handleEscClose={handleEscClose}
           addNewCard={addNewCard}
         />

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 
-function RegisterModal(props) {
+function RegisterModal({ isModalOpen, setIsModalOpen, handleEscClose }) {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
   const [email, setEmail] = useState("");
@@ -19,12 +19,12 @@ function RegisterModal(props) {
       id="Registration"
       buttonText="Next"
       name="registration"
-      isModalOpen={props.isModalOpen}
-      setIsModalOpen={props.setIsModalOpen}
-      handleEscClose={props.handleEscClose}
+      isModalOpen={isModalOpen}
+      setIsModalOpen={setIsModalOpen}
+      handleEscClose={handleEscClose}
       handleSubmit={(e) => {
         handleSubmit(e);
-        props.setIsModalOpen(false);
+        setIsModalOpen(false);
       }}
     >
       <label className="form__field modal__label">
