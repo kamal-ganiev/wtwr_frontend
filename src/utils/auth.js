@@ -5,6 +5,7 @@ export const header = {
 
 export const register = (name, avatar, email, password) => {
   fetch(`${BASE_URL}/signup`, {
+    method: "POST",
     headers: header,
     body: JSON.stringify({ name, avatar, email, password }),
   });
@@ -12,6 +13,7 @@ export const register = (name, avatar, email, password) => {
 
 export const login = (email, password) => {
   fetch(`${BASE_URL}/signin`, {
+    method: "POST",
     headers: header,
     body: JSON.stringify({ email, password }),
   });

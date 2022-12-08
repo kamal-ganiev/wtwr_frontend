@@ -13,13 +13,14 @@ import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import Profile from "./Profile";
 import ClothesSection from "./ClothesSection";
 import api from "../utils/api";
 import ConfirmationModal from "./ConfirmationModal";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   /// Calling Api \\\
@@ -27,6 +28,8 @@ function App() {
   const weatherApi = new WeatherApi();
 
   /// useState Hook Calls \\\
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   /// States for Modals:
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -206,6 +209,26 @@ function App() {
             />
           </Main>
         </Route>
+        <ProtectedRoute
+          path="/se_project_react/profile"
+          isLoggedIn={isLoggedIn}
+        >
+          <Profile>
+            <ClothesSection
+              openModal={() => {
+                setIsAddModalOpen(true);
+              }}
+            >
+              <ItemCards
+                key="ItemCards"
+                cardList={itemList}
+                isItemModalOpen={isItemModalOpen}
+                setIsItemModalOpen={setIsItemModalOpen}
+                setData={setItemModalData}
+              />
+            </ClothesSection>
+          </Profile>
+        </ProtectedRoute>
         <Route path="/se_project_react/profile">
           <Profile>
             <ClothesSection
@@ -270,6 +293,9 @@ function App() {
           }}
         />
         <Footer />
+        <Route exact path="/">
+          <Redirect to="se_project_react" />
+        </Route>
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );
