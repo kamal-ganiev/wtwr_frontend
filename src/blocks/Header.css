@@ -55,10 +55,32 @@
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
+.header__image-placeholder {
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.header__image-placeholder-text {
+  margin: 0;
+  font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+}
+
 .header__button {
   border: none;
   background-color: #f3f3f3;
-  font-family: "Cabinet Grotesk", sans-serif;
+  font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;

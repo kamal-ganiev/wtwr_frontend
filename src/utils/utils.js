@@ -10,4 +10,15 @@ function weatherTemp(temperature) {
   }
 }
 
-export { weatherTemp };
+/// Placeholder for User Avatar \\\
+
+function firstLetter(word) {
+  const arr = word.split(" ");
+  var result = "";
+  arr.forEach((word) => {
+    result += word.slice(0, 1);
+  });
+  return result;
+}
+
+export { weatherTemp, firstLetter };

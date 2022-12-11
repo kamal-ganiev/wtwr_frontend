@@ -1,7 +1,9 @@
+import React from "react";
 import "../blocks/Header.css";
 import logo from "../images/Header/__logo.svg";
-import avatar from "../images/Header/__avatar.jpg";
 import { Link } from "react-router-dom";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import { firstLetter } from "../utils/utils";
 
 function Header({
   children,
@@ -12,6 +14,8 @@ function Header({
   currentLocation,
   isLoggedIn,
 }) {
+  const user = React.useContext(CurrentUserContext);
+
   return (
     <header className="header">
       <div className="header__left-side">
@@ -33,10 +37,27 @@ function Header({
           <button className="header__button" onClick={openAddModal}>
             + Add clothes
           </button>
-          <Link to="/se_project_react/profile" className="header__profile-link">
-            <p className="header__user">Kamal Ganiev</p>
-            <img className="header__avatar" src={avatar} />
-          </Link>
+          {user.avatar === "" ? (
+            <Link
+              to="/se_project_react/profile"
+              className="header__profile-link"
+            >
+              <p className="header__user">{user.name}</p>
+              <div className="header__image-placeholder">
+                <p className="header__image-placeholder-text">
+                  {firstLetter(user.name)}
+                </p>
+              </div>
+            </Link>
+          ) : (
+            <Link
+              to="/se_project_react/profile"
+              className="header__profile-link"
+            >
+              <p className="header__user">{user.name}</p>
+              <img className="header__avatar" src={user.avatar} />
+            </Link>
+          )}
         </div>
       )}
       {!isLoggedIn && (
