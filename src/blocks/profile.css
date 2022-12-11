@@ -51,6 +51,7 @@
 
 .profile__card-section {
   max-width: 1015px;
+  width: 100%;
 }
 
 .profile__card-title {

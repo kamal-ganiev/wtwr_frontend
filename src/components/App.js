@@ -207,6 +207,9 @@ function App() {
             openRegistrationModal={() => {
               setIsRegModalOpen(true);
             }}
+            openAddModal={() => {
+              setIsAddModalOpen(true);
+            }}
             currentDate={currentDate}
             currentLocation={location}
             isLoggedIn={isLoggedIn}

@@ -97,3 +97,8 @@
 .modal__login-register-button:hover {
   color: rgba(0, 0, 0, 0.3);
 }
+
+.modal-add-button {
+  width: 124px;
+  height: 36px;
+}
