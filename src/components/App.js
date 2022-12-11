@@ -227,6 +227,7 @@ function App() {
                 isItemModalOpen={isItemModalOpen}
                 setIsItemModalOpen={setIsItemModalOpen}
                 setData={setItemModalData}
+                isOwn={true}
               />
             </Main>
           </Route>
@@ -250,23 +251,6 @@ function App() {
               </ClothesSection>
             </Profile>
           </ProtectedRoute>
-          <Route path="/se_project_react/profile">
-            <Profile>
-              <ClothesSection
-                openModal={() => {
-                  setIsAddModalOpen(true);
-                }}
-              >
-                <ItemCards
-                  key="ItemCards"
-                  cardList={itemList}
-                  isItemModalOpen={isItemModalOpen}
-                  setIsItemModalOpen={setIsItemModalOpen}
-                  setData={setItemModalData}
-                />
-              </ClothesSection>
-            </Profile>
-          </Route>
           <RegisterModal
             isModalOpen={isRegModalOpen}
             setIsModalOpen={setIsRegModalOpen}

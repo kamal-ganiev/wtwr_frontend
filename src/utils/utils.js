@@ -21,4 +21,12 @@ function firstLetter(word) {
   return result;
 }
 
-export { weatherTemp, firstLetter };
+/// Check owner \\\
+
+function isOwn(card, user) {
+  if (card.owner.id === user._id) {
+    return true;
+  } else return false;
+}
+
+export { weatherTemp, firstLetter, isOwn };

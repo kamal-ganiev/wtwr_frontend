@@ -76,3 +76,11 @@
 .item-modal__remove-button:hover {
   opacity: 0.6;
 }
+
+.item-modal__remove-button_visible {
+  display: block;
+}
+
+.item-modal__remove-button_hidden {
+  display: none;
+}

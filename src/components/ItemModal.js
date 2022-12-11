@@ -1,7 +1,12 @@
+import React from "react";
 import "../blocks/item-modal.css";
 import "../blocks/modal.css";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function ItemModal(props) {
+  const user = React.useContext(CurrentUserContext);
+  const isOwn = props.data.owner === user._id;
+
   return (
     <div
       className={`modal modal_type_${props.name} ${
@@ -29,7 +34,11 @@ function ItemModal(props) {
             <p className="item-modal__weather">Weather: {props.data.weather}</p>
           </div>
           <button
-            className="item-modal__remove-button"
+            className={`item-modal__remove-button ${
+              isOwn
+                ? `item-modal__remove-button_visible`
+                : `item-modal__remove-button_hidden`
+            }`}
             onClick={() => {
               props.handleRemove(true);
               props.onClose();
