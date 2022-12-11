@@ -209,6 +209,7 @@ function App() {
             }}
             currentDate={currentDate}
             currentLocation={location}
+            isLoggedIn={isLoggedIn}
           >
             <ToggleSwitch
               sliderPos={sliderPos}

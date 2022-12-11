@@ -10,6 +10,7 @@ function Header({
   openAddModal,
   currentDate,
   currentLocation,
+  isLoggedIn,
 }) {
   return (
     <header className="header">
@@ -26,22 +27,29 @@ function Header({
           {currentDate}, {currentLocation}
         </p>
       </div>
-      <div className="header__right-side">
-        {children}
-        <button className="header__button" onClick={openRegistrationModal}>
-          Sign Up
-        </button>
-        <button className="header__button" onClick={openLoginModal}>
-          Log In
-        </button>
-        <button className="header__button" onClick={openAddModal}>
-          + Add clothes
-        </button>
-        <Link to="/se_project_react/profile" className="header__profile-link">
-          <p className="header__user">Kamal Ganiev</p>
-          <img className="header__avatar" src={avatar} />
-        </Link>
-      </div>
+      {isLoggedIn && (
+        <div className="header__right-side">
+          {children}
+          <button className="header__button" onClick={openAddModal}>
+            + Add clothes
+          </button>
+          <Link to="/se_project_react/profile" className="header__profile-link">
+            <p className="header__user">Kamal Ganiev</p>
+            <img className="header__avatar" src={avatar} />
+          </Link>
+        </div>
+      )}
+      {!isLoggedIn && (
+        <div className="header__right-side">
+          {children}
+          <button className="header__button" onClick={openRegistrationModal}>
+            Sign Up
+          </button>
+          <button className="header__button" onClick={openLoginModal}>
+            Log In
+          </button>
+        </div>
+      )}
     </header>
   );
 }
