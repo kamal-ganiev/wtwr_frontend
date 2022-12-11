@@ -8,7 +8,7 @@ import ItemCards from "./ItemCards";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
-import { currentDate, coords } from "../utils/constants";
+import { currentDate, coords, token } from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
@@ -62,6 +62,31 @@ function App() {
   /// States for Cards:
   const [itemList, setItemList] = useState([]);
   const [removingCard, setRemovingCard] = useState(0);
+
+  /// Checking Token \\\
+
+  useEffect(() => {
+    fetch("http://localhost:3002/users/me", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        if (res.status === 203) {
+          console.log(res);
+          setIsLoggedIn(true);
+        } else {
+          return Promise.reject(res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   /// Handle Slide Effect \\\
 

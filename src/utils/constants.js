@@ -16,6 +16,10 @@ import snowNight from "../images/WeatherCard/Nighttime/__snow.jpg";
 import stormNight from "../images/WeatherCard/Nighttime/__storm.jpg";
 import fogNight from "../images/WeatherCard/Nighttime/__fog.jpg";
 
+/// Token \\\
+
+const token = localStorage.getItem("jwt");
+
 /// Night Time Background Object \\\
 
 const night = {
@@ -52,4 +56,4 @@ const coords = {
   longitude: "-73.935242",
 };
 
-export { night, day, currentDate, coords };
+export { night, day, currentDate, coords, token };

@@ -5,16 +5,6 @@ const header = {
   "Content-Type": "application/json",
 };
 
-const handleResponse = (res) => {
-  try {
-    if (res.status === 200) {
-      return res.json();
-    }
-  } catch (err) {
-    return Promise.reject(err);
-  }
-};
-
 const register = async (name, avatar, email, password) => {
   try {
     const res = await fetch(`${BASE_URL}/signup`, {
@@ -22,7 +12,9 @@ const register = async (name, avatar, email, password) => {
       headers: header,
       body: JSON.stringify({ name, avatar, email, password }),
     });
-    handleResponse(res);
+    if (res.status === 201) {
+      return res.json();
+    }
   } catch (err) {
     return err;
   }
@@ -35,7 +27,9 @@ const login = async (email, password) => {
       headers: header,
       body: JSON.stringify({ email, password }),
     });
-    handleResponse(res);
+    if (res.status === 200) {
+      return res.json();
+    }
   } catch (err) {
     return err;
   }
