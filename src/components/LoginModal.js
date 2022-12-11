@@ -1,19 +1,29 @@
 import { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
+import { auth } from "../utils/auth";
 
 function LoginModal({
   isModalOpen,
   setIsModalOpen,
   handleEscClose,
   redirectToRegModal,
+  setIsLoggedIn,
 }) {
+  const [email, setEmail] = useState("");
+  const [password, setPass] = useState("");
+
   function handleSubmit(e) {
     e.preventDefault();
+    auth
+      .login(email, password)
+      .then((res) => {
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     e.target.closest("form").reset();
   }
-
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
 
   return (
     <ModalWithForm

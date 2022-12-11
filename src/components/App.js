@@ -31,6 +31,10 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    console.log(`You are logged in ${isLoggedIn}`);
+  }, [isLoggedIn]);
+
   /// States for Modals:
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isRegModalOpen, setIsRegModalOpen] = useState(false);
@@ -251,12 +255,14 @@ function App() {
           setIsModalOpen={setIsRegModalOpen}
           redirectToLogModal={setIsLogModalOpen}
           handleEscClose={handleEscClose}
+          setIsLoggedIn={setIsLoggedIn}
         />
         <LoginModal
           isModalOpen={isLogModalOpen}
           setIsModalOpen={setIsLogModalOpen}
           redirectToRegModal={setIsRegModalOpen}
           handleEscClose={handleEscClose}
+          setIsLoggedIn={setIsLoggedIn}
         />
         <AddGarmentForm
           isModalOpen={isAddModalOpen}

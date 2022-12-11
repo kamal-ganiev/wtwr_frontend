@@ -1,20 +1,34 @@
 import { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
+import { auth } from "../utils/auth";
 
 function RegisterModal({
   isModalOpen,
   setIsModalOpen,
   handleEscClose,
   redirectToLogModal,
+  setIsLoggedIn,
 }) {
   const [name, setName] = useState("");
-  const [link, setLink] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
   const [passConfirm, setPassConfirm] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (password === passConfirm) {
+      auth
+        .register({ name, avatar, email, password })
+        .then(() => {
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return console.log("Passwords should match!");
+    }
     e.target.closest("form").reset();
   }
 
@@ -60,7 +74,7 @@ function RegisterModal({
           placeholder="Password"
           type="password"
           onChange={(e) => {
-            setPass(e.target.value);
+            setPassword(e.target.value);
           }}
           required
         />
@@ -110,7 +124,7 @@ function RegisterModal({
           placeholder="Avatar URL"
           type="url"
           onChange={(e) => {
-            setLink(e.target.value);
+            setAvatar(e.target.value);
           }}
         />
       </label>
