@@ -21,6 +21,8 @@ import ConfirmationModal from "./ConfirmationModal";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
 import ProtectedRoute from "./ProtectedRoute";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import { auth } from "../utils/auth";
 
 function App() {
   /// Calling Api \\\
@@ -29,11 +31,10 @@ function App() {
 
   /// useState Hook Calls \\\
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  /// States for User:
 
-  useEffect(() => {
-    console.log(`You are logged in ${isLoggedIn}`);
-  }, [isLoggedIn]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState("");
 
   /// States for Modals:
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -66,25 +67,14 @@ function App() {
   /// Checking Token \\\
 
   useEffect(() => {
-    fetch("http://localhost:3002/users/me", {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    })
+    auth
+      .checkToken(token)
       .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        if (res.status === 203) {
-          console.log(res);
-          setIsLoggedIn(true);
-        } else {
-          return Promise.reject(res);
-        }
+        setIsLoggedIn(true);
+        setCurrentUser(res);
       })
       .catch((err) => {
-        console.log(err);
+        return console.log(err);
       });
   }, []);
 
@@ -209,126 +199,128 @@ function App() {
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <Header
-          openLoginModal={() => {
-            setIsLogModalOpen(true);
-          }}
-          openRegistrationModal={() => {
-            setIsRegModalOpen(true);
-          }}
-          currentDate={currentDate}
-          currentLocation={location}
-        >
-          <ToggleSwitch
-            sliderPos={sliderPos}
-            fahrenheitColor={fahrenheitColor}
-            celsiusColor={celsiusColor}
-            handleSlide={handleSlide}
-          />
-        </Header>
-        <Route exact path="/se_project_react">
-          <Main weather={weather} isDay={isDay}>
-            <ItemCards
-              key="ItemCards"
-              cardList={itemList}
-              weatherCondition={weatherTemp(temp)}
-              isItemModalOpen={isItemModalOpen}
-              setIsItemModalOpen={setIsItemModalOpen}
-              setData={setItemModalData}
+        <CurrentUserContext.Provider value={currentUser}>
+          <Header
+            openLoginModal={() => {
+              setIsLogModalOpen(true);
+            }}
+            openRegistrationModal={() => {
+              setIsRegModalOpen(true);
+            }}
+            currentDate={currentDate}
+            currentLocation={location}
+          >
+            <ToggleSwitch
+              sliderPos={sliderPos}
+              fahrenheitColor={fahrenheitColor}
+              celsiusColor={celsiusColor}
+              handleSlide={handleSlide}
             />
-          </Main>
-        </Route>
-        <ProtectedRoute
-          path="/se_project_react/profile"
-          isLoggedIn={isLoggedIn}
-        >
-          <Profile>
-            <ClothesSection
-              openModal={() => {
-                setIsAddModalOpen(true);
-              }}
-            >
+          </Header>
+          <Route exact path="/se_project_react">
+            <Main weather={weather} isDay={isDay}>
               <ItemCards
                 key="ItemCards"
                 cardList={itemList}
+                weatherCondition={weatherTemp(temp)}
                 isItemModalOpen={isItemModalOpen}
                 setIsItemModalOpen={setIsItemModalOpen}
                 setData={setItemModalData}
               />
-            </ClothesSection>
-          </Profile>
-        </ProtectedRoute>
-        <Route path="/se_project_react/profile">
-          <Profile>
-            <ClothesSection
-              openModal={() => {
-                setIsAddModalOpen(true);
-              }}
-            >
-              <ItemCards
-                key="ItemCards"
-                cardList={itemList}
-                isItemModalOpen={isItemModalOpen}
-                setIsItemModalOpen={setIsItemModalOpen}
-                setData={setItemModalData}
-              />
-            </ClothesSection>
-          </Profile>
-        </Route>
-        <RegisterModal
-          isModalOpen={isRegModalOpen}
-          setIsModalOpen={setIsRegModalOpen}
-          redirectToLogModal={setIsLogModalOpen}
-          handleEscClose={handleEscClose}
-          setIsLoggedIn={setIsLoggedIn}
-        />
-        <LoginModal
-          isModalOpen={isLogModalOpen}
-          setIsModalOpen={setIsLogModalOpen}
-          redirectToRegModal={setIsRegModalOpen}
-          handleEscClose={handleEscClose}
-          setIsLoggedIn={setIsLoggedIn}
-        />
-        <AddGarmentForm
-          isModalOpen={isAddModalOpen}
-          setIsModalOpen={setIsAddModalOpen}
-          handleEscClose={handleEscClose}
-          addNewCard={addNewCard}
-        />
-        <ItemModal
-          name="ItemModal"
-          isOpen={isItemModalOpen}
-          onClose={() => {
-            setIsItemModalOpen(false);
-          }}
-          handleEscClose={handleEscClose}
-          data={itemModalData}
-          handleRemove={setIsConfirmationModalOpen}
-          setRemovingCard={setRemovingCard}
-        />
-        <ConfirmationModal
-          name="ConfirmationModal"
-          isOpen={isConfirmationModalOpen}
-          onClose={() => {
-            setIsConfirmationModalOpen(false);
-          }}
-          card={removingCard}
-          handleEscClose={handleEscClose}
-          handleCardDelete={(id) => {
-            api
-              .removeItemCard(id)
-              .then(() => {
-                removeCard(id);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }}
-        />
-        <Footer />
-        <Route exact path="/">
-          <Redirect to="se_project_react" />
-        </Route>
+            </Main>
+          </Route>
+          <ProtectedRoute
+            path="/se_project_react/profile"
+            isLoggedIn={isLoggedIn}
+          >
+            <Profile>
+              <ClothesSection
+                openModal={() => {
+                  setIsAddModalOpen(true);
+                }}
+              >
+                <ItemCards
+                  key="ItemCards"
+                  cardList={itemList}
+                  isItemModalOpen={isItemModalOpen}
+                  setIsItemModalOpen={setIsItemModalOpen}
+                  setData={setItemModalData}
+                />
+              </ClothesSection>
+            </Profile>
+          </ProtectedRoute>
+          <Route path="/se_project_react/profile">
+            <Profile>
+              <ClothesSection
+                openModal={() => {
+                  setIsAddModalOpen(true);
+                }}
+              >
+                <ItemCards
+                  key="ItemCards"
+                  cardList={itemList}
+                  isItemModalOpen={isItemModalOpen}
+                  setIsItemModalOpen={setIsItemModalOpen}
+                  setData={setItemModalData}
+                />
+              </ClothesSection>
+            </Profile>
+          </Route>
+          <RegisterModal
+            isModalOpen={isRegModalOpen}
+            setIsModalOpen={setIsRegModalOpen}
+            redirectToLogModal={setIsLogModalOpen}
+            handleEscClose={handleEscClose}
+            setIsLoggedIn={setIsLoggedIn}
+          />
+          <LoginModal
+            isModalOpen={isLogModalOpen}
+            setIsModalOpen={setIsLogModalOpen}
+            redirectToRegModal={setIsRegModalOpen}
+            handleEscClose={handleEscClose}
+            setIsLoggedIn={setIsLoggedIn}
+          />
+          <AddGarmentForm
+            isModalOpen={isAddModalOpen}
+            setIsModalOpen={setIsAddModalOpen}
+            handleEscClose={handleEscClose}
+            addNewCard={addNewCard}
+          />
+          <ItemModal
+            name="ItemModal"
+            isOpen={isItemModalOpen}
+            onClose={() => {
+              setIsItemModalOpen(false);
+            }}
+            handleEscClose={handleEscClose}
+            data={itemModalData}
+            handleRemove={setIsConfirmationModalOpen}
+            setRemovingCard={setRemovingCard}
+          />
+          <ConfirmationModal
+            name="ConfirmationModal"
+            isOpen={isConfirmationModalOpen}
+            onClose={() => {
+              setIsConfirmationModalOpen(false);
+            }}
+            card={removingCard}
+            handleEscClose={handleEscClose}
+            handleCardDelete={(id) => {
+              api
+                .removeItemCard(id)
+                .then(() => {
+                  removeCard(id);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
+          />
+          <Footer />
+          <Route exact path="/">
+            <Redirect to="se_project_react" />
+          </Route>
+        </CurrentUserContext.Provider>
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );

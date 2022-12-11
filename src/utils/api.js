@@ -1,7 +1,10 @@
+import { token } from "./constants";
+
 const baseUrl = "http://localhost:3002/items";
 
 const header = {
   "Content-type": "application/json",
+  authorization: `Bearer ${token}`,
 };
 
 const handleResponse = (res) => {
