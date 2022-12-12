@@ -238,7 +238,7 @@ function App() {
             path="/se_project_react/profile"
             isLoggedIn={isLoggedIn}
           >
-            <Profile>
+            <Profile setIsLoggedIn={setIsLoggedIn}>
               <ClothesSection
                 openModal={() => {
                   setIsAddModalOpen(true);

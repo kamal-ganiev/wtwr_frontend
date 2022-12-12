@@ -81,6 +81,33 @@
   color: rgba(0, 0, 0, 0.3);
 }
 
+.profile__settings {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 8px;
+  font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.profile__settings-button {
+  margin: 0;
+  width: max-content;
+  border: none;
+  background: none;
+  text-align: start;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.profile__settings-button:hover {
+  color: rgba(0, 0, 0, 0.3);
+}
+
 @media screen and (max-width: 1441px) {
   .profile__card-section {
     max-width: 670px;

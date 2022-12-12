@@ -3,7 +3,7 @@ import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { firstLetter } from "../utils/utils";
 
-function SideBar() {
+function SideBar({ setIsLoggedIn }) {
   const user = React.useContext(CurrentUserContext);
 
   return (
@@ -23,6 +23,21 @@ function SideBar() {
           <p className="profile__name">{user.name}</p>
         </div>
       )}
+      <div className="profile__settings">
+        <button className="profile__settings-button" type="button">
+          Change profile data
+        </button>
+        <button
+          className="profile__settings-button"
+          type="button"
+          onClick={() => {
+            localStorage.removeItem("jwt");
+            setIsLoggedIn(false);
+          }}
+        >
+          Log out
+        </button>
+      </div>
     </div>
   );
 }

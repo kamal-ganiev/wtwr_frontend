@@ -1,9 +1,9 @@
 import SideBar from "./SideBar";
 
-function Profile({ children }) {
+function Profile({ children, setIsLoggedIn }) {
   return (
     <section className="profile">
-      <SideBar />
+      <SideBar setIsLoggedIn={setIsLoggedIn} />
       {children}
     </section>
   );
