@@ -1,14 +1,15 @@
 import "../blocks/profile.css";
-import React from "react";
+import React, { useState } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { firstLetter } from "../utils/utils";
 
 function SideBar({ setIsLoggedIn, setIsModalOpen, setCurrentUser }) {
   const user = React.useContext(CurrentUserContext);
+  const [onError, setOnError] = useState(false);
 
   return (
     <div className="profile__side-bar">
-      {user.avatar === "" ? (
+      {onError ? (
         <div className="profile__side-bar-info">
           <div className="profile__avatar-placeholder">
             <p className="profile__avatar-placeholder-text">
@@ -19,7 +20,13 @@ function SideBar({ setIsLoggedIn, setIsModalOpen, setCurrentUser }) {
         </div>
       ) : (
         <div className="profile__side-bar-info">
-          <img className="profile__avatar" src={user.avatar} />
+          <img
+            className="profile__avatar"
+            src={user.avatar}
+            onError={() => {
+              setOnError(true);
+            }}
+          />
           <p className="profile__name">{user.name}</p>
         </div>
       )}

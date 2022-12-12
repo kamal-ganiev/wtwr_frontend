@@ -1,6 +1,6 @@
 import { token } from "./constants";
 
-const BASE_URL = "http://localhost:3002";
+const BASE_URL = "http://localhost:3001";
 
 const header = {
   Accept: "application/json",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../blocks/Header.css";
 import logo from "../images/Header/__logo.svg";
 import { Link } from "react-router-dom";
@@ -15,6 +15,7 @@ function Header({
   isLoggedIn,
 }) {
   const user = React.useContext(CurrentUserContext);
+  const [onError, setOnError] = useState(false);
 
   return (
     <header className="header">
@@ -37,7 +38,7 @@ function Header({
           <button className="header__button" onClick={openAddModal}>
             + Add clothes
           </button>
-          {user.avatar === "" ? (
+          {onError ? (
             <Link
               to="/se_project_react/profile"
               className="header__profile-link"
@@ -55,7 +56,13 @@ function Header({
               className="header__profile-link"
             >
               <p className="header__user">{user.name}</p>
-              <img className="header__avatar" src={user.avatar} />
+              <img
+                className="header__avatar"
+                src={user.avatar}
+                onError={() => {
+                  setOnError(true);
+                }}
+              />
             </Link>
           )}
         </div>

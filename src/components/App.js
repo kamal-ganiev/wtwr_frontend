@@ -204,7 +204,7 @@ function App() {
   function updateUser(name, avatar) {
     auth
       .updateUserData(name, avatar)
-      .then((res) => {
+      .then(() => {
         console.log("Sent");
       })
       .catch((err) => console.log(err));
@@ -292,6 +292,7 @@ function App() {
             redirectToRegModal={setIsRegModalOpen}
             handleEscClose={handleEscClose}
             setIsLoggedIn={setIsLoggedIn}
+            setCurrentUser={setCurrentUser}
           />
           <AddGarmentForm
             isModalOpen={isAddModalOpen}
