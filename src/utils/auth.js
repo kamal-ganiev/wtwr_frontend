@@ -1,3 +1,5 @@
+import { token } from "./constants";
+
 const BASE_URL = "http://localhost:3002";
 
 const header = {
@@ -29,7 +31,7 @@ const login = (email, password) => {
   }).then((res) => handleResponse(res));
 };
 
-const checkToken = (token) => {
+const checkToken = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
@@ -39,8 +41,22 @@ const checkToken = (token) => {
   }).then((res) => handleResponse(res));
 };
 
+const updateUserData = (name, avatar) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then((res) => {
+    handleResponse(res);
+  });
+};
+
 export const auth = {
   register,
   login,
   checkToken,
+  updateUserData,
 };

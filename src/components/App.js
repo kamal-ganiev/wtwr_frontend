@@ -8,7 +8,7 @@ import ItemCards from "./ItemCards";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
-import { currentDate, coords, token } from "../utils/constants";
+import { currentDate, coords } from "../utils/constants";
 import WeatherApi from "../utils/WeatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
@@ -23,6 +23,7 @@ import RegisterModal from "./RegisterModal";
 import ProtectedRoute from "./ProtectedRoute";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { auth } from "../utils/auth";
+import UpdateUserModal from "./UpdateUserModal";
 
 function App() {
   /// Calling Api \\\
@@ -43,6 +44,7 @@ function App() {
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [itemModalData, setItemModalData] = useState({});
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   /// States for Weather Card:
   const [fahrenheit, setFahrenheit] = useState(75);
@@ -68,7 +70,7 @@ function App() {
 
   useEffect(() => {
     auth
-      .checkToken(token)
+      .checkToken()
       .then((res) => {
         setIsLoggedIn(true);
         setCurrentUser(res);
@@ -137,7 +139,8 @@ function App() {
       isLogModalOpen ||
       isRegModalOpen ||
       isItemModalOpen ||
-      isConfirmationModalOpen
+      isConfirmationModalOpen ||
+      isUpdateModalOpen
     ) {
       document.addEventListener("keydown", handleEscClose);
     }
@@ -148,6 +151,7 @@ function App() {
     isLogModalOpen,
     isItemModalOpen,
     isConfirmationModalOpen,
+    isUpdateModalOpen,
   ]);
 
   /// Closing Modal Fun \\\
@@ -159,6 +163,7 @@ function App() {
       setIsRegModalOpen(false);
       setIsItemModalOpen(false);
       setIsConfirmationModalOpen(false);
+      setIsUpdateModalOpen(false);
     }
   }
 
@@ -192,6 +197,17 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  /// Update User Data \\\
+
+  function updateUser(name, avatar) {
+    auth
+      .updateUserData(name, avatar)
+      .then((res) => {
+        console.log("Sent");
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -238,7 +254,11 @@ function App() {
             path="/se_project_react/profile"
             isLoggedIn={isLoggedIn}
           >
-            <Profile setIsLoggedIn={setIsLoggedIn}>
+            <Profile
+              setIsLoggedIn={setIsLoggedIn}
+              setIsModalOpen={setIsUpdateModalOpen}
+              setCurrentUser={setCurrentUser}
+            >
               <ClothesSection
                 openModal={() => {
                   setIsAddModalOpen(true);
@@ -273,6 +293,12 @@ function App() {
             setIsModalOpen={setIsAddModalOpen}
             handleEscClose={handleEscClose}
             addNewCard={addNewCard}
+          />
+          <UpdateUserModal
+            isModalOpen={isUpdateModalOpen}
+            setIsModalOpen={setIsUpdateModalOpen}
+            handleEscClose={handleEscClose}
+            updateUser={updateUser}
           />
           <ItemModal
             name="ItemModal"

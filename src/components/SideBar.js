@@ -3,7 +3,7 @@ import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { firstLetter } from "../utils/utils";
 
-function SideBar({ setIsLoggedIn }) {
+function SideBar({ setIsLoggedIn, setIsModalOpen, setCurrentUser }) {
   const user = React.useContext(CurrentUserContext);
 
   return (
@@ -24,7 +24,13 @@ function SideBar({ setIsLoggedIn }) {
         </div>
       )}
       <div className="profile__settings">
-        <button className="profile__settings-button" type="button">
+        <button
+          className="profile__settings-button"
+          type="button"
+          onClick={() => {
+            setIsModalOpen(true);
+          }}
+        >
           Change profile data
         </button>
         <button
@@ -33,6 +39,7 @@ function SideBar({ setIsLoggedIn }) {
           onClick={() => {
             localStorage.removeItem("jwt");
             setIsLoggedIn(false);
+            setCurrentUser("");
           }}
         >
           Log out
