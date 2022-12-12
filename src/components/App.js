@@ -246,7 +246,9 @@ function App() {
                 isItemModalOpen={isItemModalOpen}
                 setIsItemModalOpen={setIsItemModalOpen}
                 setData={setItemModalData}
-                isOwn={true}
+                isOwn={(card, user) => {
+                  return true;
+                }}
               />
             </Main>
           </Route>
@@ -270,6 +272,9 @@ function App() {
                   isItemModalOpen={isItemModalOpen}
                   setIsItemModalOpen={setIsItemModalOpen}
                   setData={setItemModalData}
+                  isOwn={(card, user) => {
+                    return card === user;
+                  }}
                 />
               </ClothesSection>
             </Profile>

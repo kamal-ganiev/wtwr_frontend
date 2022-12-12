@@ -13,7 +13,7 @@ function ItemCards(props) {
         if (
           (card.weather === props.weatherCondition ||
             props.weatherCondition === undefined) &&
-          props.isOwn
+          props.isOwn(card.owner, user._id)
         ) {
           return (
             <li
