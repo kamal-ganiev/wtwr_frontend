@@ -17,11 +17,17 @@
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
 }
 
-.card__name {
+.card__info {
   position: absolute;
   top: 26px;
   left: 50%;
   transform: translate(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card__name {
   height: 24px;
   background-color: #fff;
   display: flex;
@@ -36,4 +42,17 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
+}
+
+.card__like-btn {
+  width: 20px;
+  height: 17.5px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card__like-btn:hover {
+  opacity: 0.6;
 }

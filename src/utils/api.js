@@ -44,10 +44,29 @@ const removeItemCard = async (id) => {
   return handleResponse(res);
 };
 
+const addLike = (id) => {
+  return fetch(`${baseUrl}/${id}/likes`, {
+    method: "PUT",
+    headers: header,
+  }).then((res) => {
+    handleResponse(res);
+  });
+};
+
+const removeLike = async (id) => {
+  const res = await fetch(`${baseUrl}/${id}/likes`, {
+    method: "DELETE",
+    headers: header,
+  });
+  handleResponse(res);
+};
+
 const api = {
   getItemCards,
   addItemCard,
   removeItemCard,
+  addLike,
+  removeLike,
 };
 
 export default api;

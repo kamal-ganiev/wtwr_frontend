@@ -30,8 +30,6 @@ function App() {
 
   const weatherApi = new WeatherApi();
 
-  /// useState Hook Calls \\\
-
   /// States for User:
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -204,8 +202,9 @@ function App() {
   function updateUser(name, avatar) {
     auth
       .updateUserData(name, avatar)
-      .then(() => {
-        console.log("Sent");
+      .then((res) => {
+        console.log(res);
+        setCurrentUser(res);
       })
       .catch((err) => console.log(err));
   }
@@ -249,6 +248,8 @@ function App() {
                 isOwn={(card, user) => {
                   return true;
                 }}
+                addLike={api.addLike}
+                removeLike={api.removeLike}
               />
             </Main>
           </Route>
@@ -275,6 +276,8 @@ function App() {
                   isOwn={(card, user) => {
                     return card === user;
                   }}
+                  addLike={api.addLike}
+                  removeLike={api.removeLike}
                 />
               </ClothesSection>
             </Profile>

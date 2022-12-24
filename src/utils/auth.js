@@ -49,9 +49,7 @@ const updateUserData = (name, avatar) => {
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, avatar }),
-  }).then((res) => {
-    handleResponse(res);
-  });
+  }).then((res) => handleResponse(res));
 };
 
 export const auth = {

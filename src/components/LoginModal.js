@@ -19,6 +19,7 @@ function LoginModal({
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setIsLoggedIn(true);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
