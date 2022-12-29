@@ -21,7 +21,16 @@ function RegisterModal({
       auth
         .register({ name, avatar, email, password })
         .then(() => {
-          setIsLoggedIn(true);
+          auth
+            .login(email, password)
+            .then((res) => {
+              localStorage.setItem("jwt", res.token);
+              setIsLoggedIn(true);
+              window.location.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
