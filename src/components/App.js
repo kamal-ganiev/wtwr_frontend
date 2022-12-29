@@ -26,6 +26,10 @@ import { auth } from "../utils/auth";
 import UpdateUserModal from "./UpdateUserModal";
 
 function App() {
+  /// Calling Forms \\\
+
+  const forms = Array.from(document.forms);
+
   /// Calling Api \\\
 
   const weatherApi = new WeatherApi();
@@ -142,7 +146,12 @@ function App() {
     ) {
       document.addEventListener("keydown", handleEscClose);
     }
-    return () => document.removeEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+      forms.forEach((form) => {
+        form.reset();
+      });
+    };
   }, [
     isAddModalOpen,
     isRegModalOpen,
