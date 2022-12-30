@@ -69,7 +69,7 @@ function AddGarmentForm(props) {
           name="name"
           placeholder="Name"
           minLength="2"
-          maxLength="40"
+          maxLength="30"
           onChange={(e) => {
             setName(e.target.value);
           }}
