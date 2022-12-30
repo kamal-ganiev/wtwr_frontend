@@ -3,13 +3,18 @@ import React, { useState } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { firstLetter } from "../utils/utils";
 
-function SideBar({ setIsLoggedIn, setIsModalOpen, setCurrentUser }) {
+function SideBar({
+  setIsLoggedIn,
+  setIsModalOpen,
+  setCurrentUser,
+  onError,
+  setOnError,
+}) {
   const user = React.useContext(CurrentUserContext);
-  const [onError, setOnError] = useState(false);
 
-  return (
-    <div className="profile__side-bar">
-      {onError ? (
+  const imagePlaceholderCheck = () => {
+    if (onError) {
+      return (
         <div className="profile__side-bar-info">
           <div className="profile__avatar-placeholder">
             <p className="profile__avatar-placeholder-text">
@@ -18,7 +23,9 @@ function SideBar({ setIsLoggedIn, setIsModalOpen, setCurrentUser }) {
           </div>
           <p className="profile__name">{user.name}</p>
         </div>
-      ) : (
+      );
+    } else {
+      return (
         <div className="profile__side-bar-info">
           <img
             className="profile__avatar"
@@ -29,7 +36,13 @@ function SideBar({ setIsLoggedIn, setIsModalOpen, setCurrentUser }) {
           />
           <p className="profile__name">{user.name}</p>
         </div>
-      )}
+      );
+    }
+  };
+
+  return (
+    <div className="profile__side-bar">
+      {imagePlaceholderCheck()}
       <div className="profile__settings">
         <button
           className="profile__settings-button"

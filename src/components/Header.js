@@ -13,9 +13,10 @@ function Header({
   currentDate,
   currentLocation,
   isLoggedIn,
+  onError,
+  setOnError,
 }) {
   const user = React.useContext(CurrentUserContext);
-  const [onError, setOnError] = useState(false);
 
   return (
     <header className="header">
@@ -38,7 +39,7 @@ function Header({
           <button className="header__button" onClick={openAddModal}>
             + Add clothes
           </button>
-          {onError ? (
+          {onError || user.avatar === "" ? (
             <Link
               to="/se_project_react/profile"
               className="header__profile-link"

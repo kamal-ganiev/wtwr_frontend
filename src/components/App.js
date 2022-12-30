@@ -38,6 +38,7 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
+  const [onError, setOnError] = useState(false);
 
   /// States for Modals:
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -212,7 +213,6 @@ function App() {
     auth
       .updateUserData(name, avatar)
       .then((res) => {
-        console.log(res);
         setCurrentUser(res);
       })
       .catch((err) => console.log(err));
@@ -237,6 +237,8 @@ function App() {
             currentDate={currentDate}
             currentLocation={location}
             isLoggedIn={isLoggedIn}
+            onError={onError}
+            setOnError={setOnError}
           >
             <ToggleSwitch
               sliderPos={sliderPos}
@@ -270,6 +272,8 @@ function App() {
               setIsLoggedIn={setIsLoggedIn}
               setIsModalOpen={setIsUpdateModalOpen}
               setCurrentUser={setCurrentUser}
+              onError={onError}
+              setOnError={setOnError}
             >
               <ClothesSection
                 openModal={() => {
@@ -317,6 +321,7 @@ function App() {
             setIsModalOpen={setIsUpdateModalOpen}
             handleEscClose={handleEscClose}
             updateUser={updateUser}
+            setOnError={setOnError}
           />
           <ItemModal
             name="ItemModal"

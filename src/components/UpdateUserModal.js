@@ -6,6 +6,7 @@ function UpdateUserModal({
   setIsModalOpen,
   handleEscClose,
   updateUser,
+  setOnError,
 }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -26,6 +27,7 @@ function UpdateUserModal({
       handleSubmit={(e) => {
         handleSubmit(e);
         setIsModalOpen(false);
+        setOnError(false);
       }}
     >
       <label className="form__field modal__label">
