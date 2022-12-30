@@ -1,15 +1,13 @@
 import "../blocks/card.css";
 import "../blocks/cards.css";
 
-import React, { useState } from "react";
+import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import likeActiveSvg from "../images/Card/__button_active.svg";
 import likeInactiveSvg from "../images/Card/__button_inactive.svg";
 
 function ItemCards(props) {
   const user = React.useContext(CurrentUserContext);
-
-  const [likeActive, setLikeActive] = useState(false);
 
   return (
     <ul className="cards__list">
@@ -50,13 +48,11 @@ function ItemCards(props) {
                   }
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (likeActive) {
+                    if (card.likes.includes(user._id)) {
                       props
                         .removeLike(card._id)
-                        .then((res) => {
-                          console.log(res);
+                        .then(() => {
                           e.target.style.backgroundImage = `url(${likeInactiveSvg})`;
-                          setLikeActive(false);
                         })
                         .catch((err) => {
                           console.log(err.message);
@@ -66,7 +62,6 @@ function ItemCards(props) {
                         .addLike(card._id)
                         .then(() => {
                           e.target.style.backgroundImage = `url(${likeActiveSvg})`;
-                          setLikeActive(true);
                         })
                         .catch((err) => {
                           console.log(err.message);
