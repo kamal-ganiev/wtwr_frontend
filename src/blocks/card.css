@@ -28,7 +28,7 @@
 }
 
 .card__name {
-  height: 24px;
+  min-height: 24px;
   background-color: #fff;
   display: flex;
   align-items: center;
