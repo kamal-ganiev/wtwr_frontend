@@ -261,6 +261,7 @@ function App() {
                 }}
                 addLike={api.addLike}
                 removeLike={api.removeLike}
+                isLoggedIn={isLoggedIn}
               />
             </Main>
           </Route>
@@ -291,6 +292,7 @@ function App() {
                   }}
                   addLike={api.addLike}
                   removeLike={api.removeLike}
+                  isLoggedIn={isLoggedIn}
                 />
               </ClothesSection>
             </Profile>

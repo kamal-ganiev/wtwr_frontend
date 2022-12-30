@@ -39,7 +39,9 @@ function ItemCards(props) {
                   <h3 className="card__title">{card.name}</h3>
                 </div>
                 <button
-                  className="card__like-btn"
+                  className={`card__like-btn ${
+                    props.isLoggedIn ? "" : "card__like_hidden"
+                  }`}
                   type="button"
                   style={
                     card.likes.includes(user._id)

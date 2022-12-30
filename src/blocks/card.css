@@ -56,3 +56,7 @@
 .card__like-btn:hover {
   opacity: 0.6;
 }
+
+.card__like_hidden {
+  display: none;
+}
