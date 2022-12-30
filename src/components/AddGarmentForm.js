@@ -64,7 +64,7 @@ function AddGarmentForm(props) {
         </p>
         <input
           className="form__input modal__field"
-          id="name-input"
+          id="name-input card-name"
           type="text"
           name="name"
           placeholder="Name"
@@ -82,7 +82,7 @@ function AddGarmentForm(props) {
         </p>
         <input
           className="form__input modal__field"
-          id="link-input"
+          id="link-input card-link"
           name="link"
           placeholder="Image URL"
           type="url"

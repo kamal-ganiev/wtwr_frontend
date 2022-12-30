@@ -47,7 +47,7 @@ function LoginModal({
         </p>
         <input
           className="form__input modal__field"
-          id="email-input"
+          id="email-input login-email"
           type="email"
           name="name"
           placeholder="Email"
@@ -64,7 +64,7 @@ function LoginModal({
         </p>
         <input
           className="form__input modal__field"
-          id="password-input"
+          id="password-input login-password"
           name="pass"
           placeholder="Password"
           type="password"

@@ -61,7 +61,7 @@ function RegisterModal({
         </p>
         <input
           className="form__input modal__field"
-          id="email-input"
+          id="email-input registration-email"
           type="email"
           name="name"
           placeholder="Email"
@@ -78,7 +78,7 @@ function RegisterModal({
         </p>
         <input
           className="form__input modal__field"
-          id="password-input"
+          id="password-input registration-password"
           name="pass"
           placeholder="Password"
           type="password"
@@ -112,7 +112,7 @@ function RegisterModal({
         </p>
         <input
           className="form__input modal__field"
-          id="name-input"
+          id="name-input registration-name"
           name="name"
           placeholder="Name"
           type="text"
@@ -128,7 +128,7 @@ function RegisterModal({
         </p>
         <input
           className="form__input modal__field"
-          id="url-input"
+          id="url-input registration-url"
           name="avatar"
           placeholder="Avatar URL"
           type="url"

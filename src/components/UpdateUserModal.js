@@ -36,7 +36,7 @@ function UpdateUserModal({
         </p>
         <input
           className="form__input modal__field"
-          id="name-input"
+          id="name-input update-name"
           type="text"
           name="name"
           placeholder="Name"
@@ -53,7 +53,7 @@ function UpdateUserModal({
         </p>
         <input
           className="form__input modal__field"
-          id="Avatar-input"
+          id="avatar-input update-avatar"
           name="avatar"
           placeholder="Avatar URL"
           type="url"
