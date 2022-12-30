@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 import ModalWithForm from "./ModalWithForm";
 
 function AddGarmentForm(props) {
+  /// Calling Current User Context \\\
+
+  const user = React.useContext(CurrentUserContext);
+
   /// Setting Opacity of Checked and Non-checked Radio Buttons \\\
 
   const [hot, setHot] = useState(false);
@@ -26,7 +31,7 @@ function AddGarmentForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.addNewCard({ name, imageUrl, weather });
+    props.addNewCard({ name, imageUrl, weather, likes: [], owner: user._id });
     e.target.closest("form").reset();
     setWarm(false);
     setCold(false);

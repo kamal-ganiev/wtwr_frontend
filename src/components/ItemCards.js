@@ -11,8 +11,6 @@ function ItemCards(props) {
 
   const [likeActive, setLikeActive] = useState(false);
 
-  let like = likeInactiveSvg;
-
   return (
     <ul className="cards__list">
       {props.cardList.map((card) => {
@@ -23,7 +21,7 @@ function ItemCards(props) {
         ) {
           return (
             <li
-              key={card._id}
+              key={card._id ? card._id : Math.random()}
               className="card"
               style={{ backgroundImage: `url(${card.imageUrl})` }}
               onClick={(e) => {

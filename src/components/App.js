@@ -199,7 +199,8 @@ function App() {
     api
       .addItemCard(item)
       .then(() => {
-        setItemList([item, ...itemList]);
+        console.log(item);
+        setItemList([...itemList, item]);
       })
       .catch((err) => {
         console.log(err);
