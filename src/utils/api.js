@@ -36,12 +36,11 @@ const addItemCard = async ({ id, name, imageUrl, weather }) => {
   return handleResponse(res);
 };
 
-const removeItemCard = async (id) => {
-  const res = await fetch(`${baseUrl}/${id}`, {
+const removeItemCard = (id) => {
+  return fetch(`${baseUrl}/${id}`, {
     method: "DELETE",
     headers: header,
-  });
-  return handleResponse(res);
+  }).then((res) => handleResponse(res));
 };
 
 const addLike = (id) => {
@@ -53,12 +52,11 @@ const addLike = (id) => {
   });
 };
 
-const removeLike = async (id) => {
-  const res = await fetch(`${baseUrl}/${id}/likes`, {
+const removeLike = (id) => {
+  return fetch(`${baseUrl}/${id}/likes`, {
     method: "DELETE",
     headers: header,
-  });
-  handleResponse(res);
+  }).then((res) => handleResponse(res));
 };
 
 const api = {

@@ -187,7 +187,7 @@ function App() {
   /// Removing Card Function \\\
 
   function removeCard(id) {
-    const newArray = itemList.filter((card) => card.id !== id);
+    const newArray = itemList.filter((card) => card._id !== id);
 
     setItemList(newArray);
   }
@@ -195,11 +195,10 @@ function App() {
   /// Adding Card To Array \\\
 
   function addNewCard(item) {
-    item.id = itemList.length + 2;
     api
       .addItemCard(item)
-      .then(() => {
-        console.log(item);
+      .then((res) => {
+        item._id = res._id;
         setItemList([...itemList, item]);
       })
       .catch((err) => {
