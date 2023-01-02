@@ -1,7 +1,7 @@
 import "../blocks/card.css";
 import "../blocks/cards.css";
 
-import React from "react";
+import React, { useState } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import likeActiveSvg from "../images/Card/__button_active.svg";
 import likeInactiveSvg from "../images/Card/__button_inactive.svg";
@@ -17,6 +17,12 @@ function ItemCards(props) {
             props.weatherCondition === undefined) &&
           props.isOwn(card.owner, user._id)
         ) {
+          let isLiked;
+
+          if (card.likes.includes(user._id)) {
+            isLiked = true;
+          } else isLiked = false;
+
           return (
             <li
               key={card._id ? card._id : Math.random()}
@@ -50,20 +56,24 @@ function ItemCards(props) {
                   }
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (card.likes.includes(user._id)) {
+                    if (!card.likes.includes(user) && !isLiked) {
                       props
-                        .removeLike(card._id)
-                        .then(() => {
-                          e.target.style.backgroundImage = `url(${likeInactiveSvg})`;
+                        .addLike(card._id)
+                        .then((res) => {
+                          e.target.style.backgroundImage = `url(${likeActiveSvg})`;
+                          card.likes = res.likes;
+                          isLiked = true;
                         })
                         .catch((err) => {
                           console.log(err.message);
                         });
                     } else {
                       props
-                        .addLike(card._id)
-                        .then(() => {
-                          e.target.style.backgroundImage = `url(${likeActiveSvg})`;
+                        .removeLike(card._id)
+                        .then((res) => {
+                          e.target.style.backgroundImage = `url(${likeInactiveSvg})`;
+                          card.likes = res.likes;
+                          isLiked = false;
                         })
                         .catch((err) => {
                           console.log(err.message);

@@ -47,9 +47,7 @@ const addLike = (id) => {
   return fetch(`${baseUrl}/${id}/likes`, {
     method: "PUT",
     headers: header,
-  }).then((res) => {
-    handleResponse(res);
-  });
+  }).then((res) => handleResponse(res));
 };
 
 const removeLike = (id) => {

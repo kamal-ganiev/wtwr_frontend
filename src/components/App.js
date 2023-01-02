@@ -9,7 +9,7 @@ import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
 import { currentDate, coords } from "../utils/constants";
-import WeatherApi from "../utils/WeatherApi";
+import WeatherApi from "../utils/weatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
