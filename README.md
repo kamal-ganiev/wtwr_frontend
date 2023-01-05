@@ -38,23 +38,23 @@ This link of page itself: (page is still in work, images might not be loaded)
 
 5. Sign up to use more fitures:
 
-![Signing Up](./images/demo/Signing%20up.MP4);
+![Signing Up](./images/demo/Signing%20up.gif);
 
 6. Log into your account:
 
-![Logging In](./images/demo/Logging%20In.mp4)
+![Logging In](./images/demo/Logging%20in.gif)
 
 7. Add or remove likes:
 
-![Like](./images/demo/Liking.mp4);
+![Like](./images/demo/Liking.gif);
 
 8. Update your information:
 
-![Update profile](./images/demo/Update%20profile.mp4);
+![Update profile](./images/demo/Update%20profile.gif);
 
 9. Log out easily in your "Profile" page:
 
-![Logging Out](./images/demo/Logging%20out.mp4);
+![Logging Out](./images/demo/Logging%20out.gif);
 
 ## Back-end server
 
