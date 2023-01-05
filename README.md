@@ -35,3 +35,27 @@ This link of page itself: (page is still in work, images might not be loaded)
 4. Easily switch between "Main" and "Profile" with React.Routes:
 
 ![Switching Between Pages](https://i.giphy.com/media/5KO3FnJ53Uu0uXmL0W/giphy.webp);
+
+5. Sign up to use more fitures:
+
+![Signing Up](./images/demo/Signing%20up.MP4);
+
+6. Log into your account:
+
+![Logging In](./images/demo/Logging%20In.mp4)
+
+7. Add or remove likes:
+
+![Like](./images/demo/Liking.mp4);
+
+8. Update your information:
+
+![Update profile](./images/demo/Update%20profile.mp4);
+
+9. Log out easily in your "Profile" page:
+
+![Logging Out](./images/demo/Logging%20out.mp4);
+
+## Back-end server
+
+Back-end server repo is located [here.](https://github.com/kamal-ganiev/se_project_express)
