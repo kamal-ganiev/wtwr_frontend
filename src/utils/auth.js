@@ -1,5 +1,3 @@
-import { token } from "./constants";
-
 const BASE_URL = "http://localhost:3001";
 
 const header = {
@@ -36,7 +34,7 @@ const checkToken = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   }).then((res) => handleResponse(res));
 };
@@ -46,7 +44,7 @@ const updateUserData = (name, avatar) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
     body: JSON.stringify({ name, avatar }),
   }).then((res) => handleResponse(res));

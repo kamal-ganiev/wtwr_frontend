@@ -1,13 +1,12 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalWithForm from "./ModalWithForm";
-import { auth } from "../utils/auth";
 
 function RegisterModal({
   isModalOpen,
   setIsModalOpen,
   handleEscClose,
   redirectToLogModal,
-  setIsLoggedIn,
+  registerHandler,
 }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -15,30 +14,21 @@ function RegisterModal({
   const [password, setPassword] = useState("");
   const [passConfirm, setPassConfirm] = useState("");
 
+  useEffect(() => {
+    setEmail("");
+    setName("");
+    setAvatar("");
+    setPassword("");
+    setPassConfirm("");
+  }, [isModalOpen]);
+
   function handleSubmit(e) {
     e.preventDefault();
     if (password === passConfirm) {
-      auth
-        .register({ name, avatar, email, password })
-        .then(() => {
-          auth
-            .login(email, password)
-            .then((res) => {
-              localStorage.setItem("jwt", res.token);
-              setIsLoggedIn(true);
-              window.location.reload();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      registerHandler({ name, avatar, email, password });
     } else {
       return console.log("Passwords should match!");
     }
-    e.target.closest("form").reset();
   }
 
   return (
@@ -52,7 +42,6 @@ function RegisterModal({
       handleEscClose={handleEscClose}
       handleSubmit={(e) => {
         handleSubmit(e);
-        setIsModalOpen(false);
       }}
     >
       <label className="form__field modal__label">
@@ -68,6 +57,7 @@ function RegisterModal({
           onChange={(e) => {
             setEmail(e.target.value);
           }}
+          value={email}
           required
         />
       </label>
@@ -85,6 +75,7 @@ function RegisterModal({
           onChange={(e) => {
             setPassword(e.target.value);
           }}
+          value={password}
           required
         />
       </label>
@@ -102,6 +93,7 @@ function RegisterModal({
           onChange={(e) => {
             setPassConfirm(e.target.value);
           }}
+          value={passConfirm}
           required
         />
       </label>
@@ -119,6 +111,7 @@ function RegisterModal({
           onChange={(e) => {
             setName(e.target.value);
           }}
+          value={name}
         />
       </label>
       <label className="form__field modal__label">
@@ -135,6 +128,7 @@ function RegisterModal({
           onChange={(e) => {
             setAvatar(e.target.value);
           }}
+          value={avatar}
         />
       </label>
       <div className="form__button-container modal__button-container modal__login-button-container">

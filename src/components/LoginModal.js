@@ -1,30 +1,24 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalWithForm from "./ModalWithForm";
-import { auth } from "../utils/auth";
 
 function LoginModal({
   isModalOpen,
   setIsModalOpen,
   handleEscClose,
   redirectToRegModal,
-  setIsLoggedIn,
+  loginHandler,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
 
+  useEffect(() => {
+    setEmail("");
+    setPass("");
+  }, [isModalOpen]);
+
   function handleSubmit(e) {
     e.preventDefault();
-    auth
-      .login(email, password)
-      .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        setIsLoggedIn(true);
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    e.target.closest("form").reset();
+    loginHandler(email, password);
   }
 
   return (
@@ -38,7 +32,6 @@ function LoginModal({
       handleEscClose={handleEscClose}
       handleSubmit={(e) => {
         handleSubmit(e);
-        setIsModalOpen(false);
       }}
     >
       <label className="form__field modal__label">

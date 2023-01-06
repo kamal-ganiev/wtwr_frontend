@@ -28,7 +28,6 @@ function ModalWithForm({
           name={`${name}`}
           onSubmit={(e) => {
             handleSubmit(e);
-            setIsModalOpen(false);
           }}
         >
           {children}

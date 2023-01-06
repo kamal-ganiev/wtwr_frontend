@@ -1,10 +1,8 @@
-import { token } from "./constants";
-
 const baseUrl = "http://localhost:3001/items";
 
 const header = {
   "Content-type": "application/json",
-  authorization: `Bearer ${token}`,
+  authorization: `Bearer ${localStorage.getItem("jwt")}`,
 };
 
 const handleResponse = (res) => {

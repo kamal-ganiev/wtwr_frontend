@@ -83,6 +83,39 @@ function App() {
       });
   }, []);
 
+  /// Sign in/up Function \\\
+
+  const loginHandler = (email, password) => {
+    auth
+      .login(email, password)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setIsLoggedIn(true);
+        setIsLogModalOpen(false);
+      })
+      .then(() => {
+        auth
+          .checkToken()
+          .then((res) => setCurrentUser(res))
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const registerHandler = ({ name, avatar, email, password }) => {
+    auth
+      .register({ name, avatar, email, password })
+      .then(() => {
+        loginHandler(email, password);
+        setIsRegModalOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   /// Handle Slide Effect \\\
 
   useEffect(() => {
@@ -302,15 +335,14 @@ function App() {
             setIsModalOpen={setIsRegModalOpen}
             redirectToLogModal={setIsLogModalOpen}
             handleEscClose={handleEscClose}
-            setIsLoggedIn={setIsLoggedIn}
+            registerHandler={registerHandler}
           />
           <LoginModal
             isModalOpen={isLogModalOpen}
             setIsModalOpen={setIsLogModalOpen}
             redirectToRegModal={setIsRegModalOpen}
             handleEscClose={handleEscClose}
-            setIsLoggedIn={setIsLoggedIn}
-            setCurrentUser={setCurrentUser}
+            loginHandler={loginHandler}
           />
           <AddGarmentForm
             isModalOpen={isAddModalOpen}
