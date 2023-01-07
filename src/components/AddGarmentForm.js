@@ -36,9 +36,6 @@ function AddGarmentForm({ isOpen, onClose, addNewCard }) {
   function handleSubmit(e) {
     e.preventDefault();
     addNewCard({ name, imageUrl, weather, likes: [], owner: user._id });
-    setWarm(false);
-    setCold(false);
-    setHot(false);
   }
 
   useEffect(() => {
