@@ -24,6 +24,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { auth } from "../utils/auth";
 import UpdateUserModal from "./UpdateUserModal";
+import Modal from "./Modal";
+import ModalWithForm from "./ModalWithForm";
 
 function App() {
   /// Calling Forms \\\
@@ -48,6 +50,9 @@ function App() {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [itemModalData, setItemModalData] = useState({});
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalName, setModalName] = useState("");
 
   /// States for Weather Card:
   const [fahrenheit, setFahrenheit] = useState(75);
@@ -91,6 +96,7 @@ function App() {
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setIsLoggedIn(true);
+        setIsOpen(false);
         setIsLogModalOpen(false);
       })
       .then(() => {
@@ -169,45 +175,6 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
-    if (
-      isAddModalOpen ||
-      isLogModalOpen ||
-      isRegModalOpen ||
-      isItemModalOpen ||
-      isConfirmationModalOpen ||
-      isUpdateModalOpen
-    ) {
-      document.addEventListener("keydown", handleEscClose);
-    }
-    return () => {
-      document.removeEventListener("keydown", handleEscClose);
-      forms.forEach((form) => {
-        form.reset();
-      });
-    };
-  }, [
-    isAddModalOpen,
-    isRegModalOpen,
-    isLogModalOpen,
-    isItemModalOpen,
-    isConfirmationModalOpen,
-    isUpdateModalOpen,
-  ]);
-
-  /// Closing Modal Fun \\\
-
-  function handleEscClose(evt) {
-    if (evt.key === "Escape") {
-      setIsAddModalOpen(false);
-      setIsLogModalOpen(false);
-      setIsRegModalOpen(false);
-      setIsItemModalOpen(false);
-      setIsConfirmationModalOpen(false);
-      setIsUpdateModalOpen(false);
-    }
-  }
-
   /// Handle Toggle Switch Change \\\
 
   function handleToggleSwitchChange(evt) {
@@ -235,6 +202,10 @@ function App() {
         item._id = res._id;
         setItemList([...itemList, item]);
       })
+      .then(() => {
+        setIsOpen(false);
+        setIsAddModalOpen(false);
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -248,6 +219,10 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
       })
+      .then(() => {
+        setIsOpen(false);
+        setIsUpdateModalOpen(false);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -259,12 +234,15 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <Header
             openLoginModal={() => {
+              setIsOpen(true);
               setIsLogModalOpen(true);
             }}
             openRegistrationModal={() => {
+              setIsOpen(true);
               setIsRegModalOpen(true);
             }}
             openAddModal={() => {
+              setIsOpen(true);
               setIsAddModalOpen(true);
             }}
             currentDate={currentDate}
@@ -286,8 +264,10 @@ function App() {
                 key="ItemCards"
                 cardList={itemList}
                 weatherCondition={weatherTemp(temp)}
-                isItemModalOpen={isItemModalOpen}
-                setIsItemModalOpen={setIsItemModalOpen}
+                setIsItemModalOpen={() => {
+                  setIsOpen(true);
+                  setIsItemModalOpen(true);
+                }}
                 setData={setItemModalData}
                 isOwn={(card, user) => {
                   return true;
@@ -304,21 +284,27 @@ function App() {
           >
             <Profile
               setIsLoggedIn={setIsLoggedIn}
-              setIsModalOpen={setIsUpdateModalOpen}
+              setIsModalOpen={() => {
+                setIsOpen(true);
+                setIsUpdateModalOpen(true);
+              }}
               setCurrentUser={setCurrentUser}
               onError={onError}
               setOnError={setOnError}
             >
               <ClothesSection
                 openModal={() => {
+                  setIsOpen(true);
                   setIsAddModalOpen(true);
                 }}
               >
                 <ItemCards
                   key="ItemCards"
                   cardList={itemList}
-                  isItemModalOpen={isItemModalOpen}
-                  setIsItemModalOpen={setIsItemModalOpen}
+                  setIsItemModalOpen={() => {
+                    setIsOpen(true);
+                    setIsItemModalOpen(true);
+                  }}
                   setData={setItemModalData}
                   isOwn={(card, user) => {
                     return card === user;
@@ -331,51 +317,71 @@ function App() {
             </Profile>
           </ProtectedRoute>
           <RegisterModal
-            isModalOpen={isRegModalOpen}
-            setIsModalOpen={setIsRegModalOpen}
-            redirectToLogModal={setIsLogModalOpen}
-            handleEscClose={handleEscClose}
+            isOpen={isOpen && isRegModalOpen}
+            onClose={() => {
+              setIsOpen(false);
+              setIsRegModalOpen(false);
+            }}
+            redirectToLogModal={() => {
+              setIsRegModalOpen(false);
+              setIsLogModalOpen(true);
+            }}
             registerHandler={registerHandler}
           />
           <LoginModal
-            isModalOpen={isLogModalOpen}
-            setIsModalOpen={setIsLogModalOpen}
-            redirectToRegModal={setIsRegModalOpen}
-            handleEscClose={handleEscClose}
+            isOpen={isOpen && isLogModalOpen}
+            onClose={() => {
+              setIsOpen(false);
+              setIsLogModalOpen(false);
+            }}
+            redirectToRegModal={() => {
+              setIsLogModalOpen(false);
+              setIsRegModalOpen(true);
+            }}
             loginHandler={loginHandler}
           />
           <AddGarmentForm
-            isModalOpen={isAddModalOpen}
-            setIsModalOpen={setIsAddModalOpen}
-            handleEscClose={handleEscClose}
+            isOpen={isOpen && isAddModalOpen}
+            onClose={() => {
+              setIsOpen(false);
+              setIsAddModalOpen(false);
+            }}
             addNewCard={addNewCard}
           />
           <UpdateUserModal
-            isModalOpen={isUpdateModalOpen}
-            setIsModalOpen={setIsUpdateModalOpen}
-            handleEscClose={handleEscClose}
+            isOpen={isOpen && isUpdateModalOpen}
+            onClose={() => {
+              setIsOpen(false);
+              setIsUpdateModalOpen(false);
+            }}
             updateUser={updateUser}
             setOnError={setOnError}
           />
           <ItemModal
             name="ItemModal"
-            isOpen={isItemModalOpen}
+            isOpen={isOpen && isItemModalOpen}
             onClose={() => {
+              setIsOpen(false);
               setIsItemModalOpen(false);
             }}
-            handleEscClose={handleEscClose}
+            onRemove={() => {
+              setIsItemModalOpen(false);
+            }}
             data={itemModalData}
-            handleRemove={setIsConfirmationModalOpen}
+            handleRemove={() => {
+              setIsOpen(true);
+              setIsConfirmationModalOpen(true);
+            }}
             setRemovingCard={setRemovingCard}
           />
           <ConfirmationModal
-            name="ConfirmationModal"
-            isOpen={isConfirmationModalOpen}
+            name="confirmation"
+            isOpen={isOpen && isConfirmationModalOpen}
             onClose={() => {
+              setIsOpen(false);
               setIsConfirmationModalOpen(false);
             }}
             card={removingCard}
-            handleEscClose={handleEscClose}
             handleCardDelete={(id) => {
               api
                 .removeItemCard(id)

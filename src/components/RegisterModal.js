@@ -3,10 +3,10 @@ import ModalWithForm from "./ModalWithForm";
 
 function RegisterModal({
   isModalOpen,
-  setIsModalOpen,
-  handleEscClose,
-  redirectToLogModal,
+  isOpen,
+  onClose,
   registerHandler,
+  redirectToLogModal,
 }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -20,7 +20,7 @@ function RegisterModal({
     setAvatar("");
     setPassword("");
     setPassConfirm("");
-  }, [isModalOpen]);
+  }, [isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -36,13 +36,15 @@ function RegisterModal({
       title="Sign Up"
       id="Registration"
       buttonText="Next"
+      redirectButton="or Log in"
+      showRedirectButton={true}
       name="registration"
-      isModalOpen={isModalOpen}
-      setIsModalOpen={setIsModalOpen}
-      handleEscClose={handleEscClose}
+      isOpen={isOpen}
+      onClose={onClose}
       handleSubmit={(e) => {
         handleSubmit(e);
       }}
+      redirectFunction={redirectToLogModal}
     >
       <label className="form__field modal__label">
         <p className="form__input-title name-input">
@@ -131,24 +133,6 @@ function RegisterModal({
           value={avatar}
         />
       </label>
-      <div className="form__button-container modal__button-container modal__login-button-container">
-        <button
-          className="form__button modal__button modal-login-button"
-          type="submit"
-        >
-          Sign Up
-        </button>
-        <button
-          className="modal__login-register-button"
-          onClick={() => {
-            setIsModalOpen(false);
-            redirectToLogModal(true);
-          }}
-          type="button"
-        >
-          or Log In
-        </button>
-      </div>
     </ModalWithForm>
   );
 }

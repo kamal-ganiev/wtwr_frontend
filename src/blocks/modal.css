@@ -70,11 +70,6 @@
   opacity: 0.6;
 }
 
-.modal-login-button {
-  width: 73px;
-  height: 36px;
-}
-
 .modal__button-container {
   display: flex;
   align-items: center;
@@ -82,7 +77,7 @@
 }
 
 .modal__login-button-container {
-  margin-top: 8px;
+  margin-top: 20px;
 }
 
 .modal__login-register-button {
@@ -96,14 +91,4 @@
 
 .modal__login-register-button:hover {
   color: rgba(0, 0, 0, 0.3);
-}
-
-.modal-add-button {
-  width: 124px;
-  height: 36px;
-}
-
-.modal-update-button {
-  width: 128px;
-  height: 36px;
 }

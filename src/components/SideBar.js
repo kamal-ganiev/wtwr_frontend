@@ -47,9 +47,7 @@ function SideBar({
         <button
           className="profile__settings-button"
           type="button"
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
+          onClick={setIsModalOpen}
         >
           Change profile data
         </button>

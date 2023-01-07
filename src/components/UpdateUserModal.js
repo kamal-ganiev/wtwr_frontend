@@ -1,13 +1,10 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 import ModalWithForm from "./ModalWithForm";
 
-function UpdateUserModal({
-  isModalOpen,
-  setIsModalOpen,
-  handleEscClose,
-  updateUser,
-  setOnError,
-}) {
+function UpdateUserModal({ isOpen, onClose, updateUser, setOnError }) {
+  const user = React.useContext(CurrentUserContext);
+
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
 
@@ -16,18 +13,28 @@ function UpdateUserModal({
     updateUser(name, avatar);
   }
 
+  useEffect(() => {
+    setOnError(false);
+
+    if (isOpen === true) {
+      setName(user.name);
+      setAvatar(user.avatar);
+    } else {
+      setName("");
+      setAvatar("");
+    }
+  }, [isOpen]);
+
   return (
     <ModalWithForm
       title="Change profile data"
       id="Update"
       name="update"
-      isModalOpen={isModalOpen}
-      setIsModalOpen={setIsModalOpen}
-      handleEscClose={handleEscClose}
+      buttonText="Save changes"
+      isOpen={isOpen}
+      onClose={onClose}
       handleSubmit={(e) => {
         handleSubmit(e);
-        setIsModalOpen(false);
-        setOnError(false);
       }}
     >
       <label className="form__field modal__label">
@@ -43,6 +50,7 @@ function UpdateUserModal({
           onChange={(e) => {
             setName(e.target.value);
           }}
+          value={name}
           required
         />
       </label>
@@ -60,16 +68,9 @@ function UpdateUserModal({
           onChange={(e) => {
             setAvatar(e.target.value);
           }}
+          value={avatar}
         />
       </label>
-      <div className="form__button-container modal__button-container modal__login-button-container">
-        <button
-          className="form__button modal__button modal-update-button"
-          type="submit"
-        >
-          Save changes
-        </button>
-      </div>
     </ModalWithForm>
   );
 }

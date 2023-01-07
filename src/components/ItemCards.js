@@ -29,7 +29,7 @@ function ItemCards(props) {
               className="card"
               style={{ backgroundImage: `url(${card.imageUrl})` }}
               onClick={(e) => {
-                props.setIsItemModalOpen(true);
+                props.setIsItemModalOpen();
                 props.setData({
                   id: card._id,
                   card: e.target,

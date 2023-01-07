@@ -105,6 +105,8 @@
 }
 
 .form__button {
+  height: 36px;
+  width: fit-content;
   background-color: black;
   color: white;
   border: none;

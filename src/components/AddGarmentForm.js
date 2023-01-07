@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import ModalWithForm from "./ModalWithForm";
 
-function AddGarmentForm(props) {
+function AddGarmentForm({ isOpen, onClose, addNewCard }) {
   /// Calling Current User Context \\\
 
   const user = React.useContext(CurrentUserContext);
@@ -16,6 +16,10 @@ function AddGarmentForm(props) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
+
+  const [hotChecked, setHotChecked] = useState(false);
+  const [coldChecked, setColdChecked] = useState(false);
+  const [warmChecked, setWarmChecked] = useState(false);
 
   const checked = {
     cold: {
@@ -31,8 +35,7 @@ function AddGarmentForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.addNewCard({ name, imageUrl, weather, likes: [], owner: user._id });
-    e.target.closest("form").reset();
+    addNewCard({ name, imageUrl, weather, likes: [], owner: user._id });
     setWarm(false);
     setCold(false);
     setHot(false);
@@ -42,7 +45,14 @@ function AddGarmentForm(props) {
     setWarm(false);
     setCold(false);
     setHot(false);
-  }, [props.isModalOpen]);
+
+    setName("");
+    setImageUrl("");
+
+    setColdChecked(false);
+    setWarmChecked(false);
+    setHotChecked(false);
+  }, [isOpen]);
 
   return (
     <ModalWithForm
@@ -50,12 +60,10 @@ function AddGarmentForm(props) {
       id="AddingGarment"
       buttonText="Add garment"
       name="add"
-      isModalOpen={props.isModalOpen}
-      setIsModalOpen={props.setIsModalOpen}
-      handleEscClose={props.handleEscClose}
+      isOpen={isOpen}
+      onClose={onClose}
       handleSubmit={(e) => {
         handleSubmit(e);
-        props.setIsModalOpen(false);
       }}
     >
       <label className="form__field modal__label">
@@ -73,6 +81,7 @@ function AddGarmentForm(props) {
           onChange={(e) => {
             setName(e.target.value);
           }}
+          value={name}
           required
         />
       </label>
@@ -89,6 +98,7 @@ function AddGarmentForm(props) {
           onChange={(e) => {
             setImageUrl(e.target.value);
           }}
+          value={imageUrl}
           required
         />
       </label>
@@ -105,6 +115,7 @@ function AddGarmentForm(props) {
                 id="hot"
                 value="hot"
                 name="weather"
+                checked={hotChecked}
                 onClick={(e) => {
                   setWeather(e.target.value);
                 }}
@@ -112,6 +123,10 @@ function AddGarmentForm(props) {
                   setHot(!hot);
                   setCold(false);
                   setWarm(false);
+
+                  setColdChecked(false);
+                  setWarmChecked(false);
+                  setHotChecked(true);
                 }}
                 required
               />
@@ -127,6 +142,7 @@ function AddGarmentForm(props) {
                 id="warm"
                 value="warm"
                 name="weather"
+                checked={warmChecked}
                 onClick={(e) => {
                   setWeather(e.target.value);
                 }}
@@ -134,6 +150,10 @@ function AddGarmentForm(props) {
                   setWarm(!warm);
                   setCold(false);
                   setHot(false);
+
+                  setColdChecked(false);
+                  setWarmChecked(true);
+                  setHotChecked(false);
                 }}
                 required
               />
@@ -149,6 +169,7 @@ function AddGarmentForm(props) {
                 id="cold"
                 value="cold"
                 name="weather"
+                checked={coldChecked}
                 onClick={(e) => {
                   setWeather(e.target.value);
                 }}
@@ -156,6 +177,10 @@ function AddGarmentForm(props) {
                   setCold(!cold);
                   setWarm(false);
                   setHot(false);
+
+                  setColdChecked(true);
+                  setWarmChecked(false);
+                  setHotChecked(false);
                 }}
                 required
               />
@@ -165,12 +190,6 @@ function AddGarmentForm(props) {
           </li>
         </ul>
       </div>
-      <button
-        className="form__button modal__button modal-add-button"
-        type="submit"
-      >
-        Add garment
-      </button>
     </ModalWithForm>
   );
 }

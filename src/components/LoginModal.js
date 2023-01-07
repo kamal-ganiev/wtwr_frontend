@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 
-function LoginModal({
-  isModalOpen,
-  setIsModalOpen,
-  handleEscClose,
-  redirectToRegModal,
-  loginHandler,
-}) {
+function LoginModal({ isOpen, onClose, redirectToRegModal, loginHandler }) {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
 
   useEffect(() => {
     setEmail("");
     setPass("");
-  }, [isModalOpen]);
+  }, [isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,13 +20,15 @@ function LoginModal({
       title="Log in"
       id="Login"
       buttonText="Log in"
+      redirectButton="or Register"
+      showRedirectButton={true}
       name="login"
-      isModalOpen={isModalOpen}
-      setIsModalOpen={setIsModalOpen}
-      handleEscClose={handleEscClose}
+      isOpen={isOpen}
+      onClose={onClose}
       handleSubmit={(e) => {
         handleSubmit(e);
       }}
+      redirectFunction={redirectToRegModal}
     >
       <label className="form__field modal__label">
         <p className="form__input-title name-input">
@@ -47,6 +43,7 @@ function LoginModal({
           onChange={(e) => {
             setEmail(e.target.value);
           }}
+          value={email}
           required
         />
       </label>
@@ -64,27 +61,10 @@ function LoginModal({
           onChange={(e) => {
             setPass(e.target.value);
           }}
+          value={password}
           required
         />
       </label>
-      <div className="form__button-container modal__button-container modal__login-button-container">
-        <button
-          className="form__button modal__button modal-login-button"
-          type="submit"
-        >
-          Log in
-        </button>
-        <button
-          className="modal__login-register-button"
-          onClick={() => {
-            setIsModalOpen(false);
-            redirectToRegModal(true);
-          }}
-          type="button"
-        >
-          or Register
-        </button>
-      </div>
     </ModalWithForm>
   );
 }
