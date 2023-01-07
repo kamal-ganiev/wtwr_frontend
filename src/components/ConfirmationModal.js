@@ -16,25 +16,17 @@ function ConfirmationModal({ name, isOpen, onClose, card, handleCardDelete }) {
         className="confirmation__accept-button"
         onClick={() => {
           handleCardDelete(card.id);
-          onClose();
         }}
       >
         Yes, delete item
       </button>
-      <button
-        className="confirmation__deny-button"
-        onClick={() => {
-          onClose();
-        }}
-      >
+      <button className="confirmation__deny-button" onClick={onClose}>
         Cancel
       </button>
       <button
         className="confirmation__close-button"
         type="button"
-        onClick={() => {
-          onClose();
-        }}
+        onClick={onClose}
       />
     </Modal>
   );

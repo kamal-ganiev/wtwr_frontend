@@ -24,8 +24,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { auth } from "../utils/auth";
 import UpdateUserModal from "./UpdateUserModal";
-import Modal from "./Modal";
-import ModalWithForm from "./ModalWithForm";
 
 function App() {
   /// Calling Forms \\\
@@ -52,7 +50,6 @@ function App() {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [modalName, setModalName] = useState("");
 
   /// States for Weather Card:
   const [fahrenheit, setFahrenheit] = useState(75);
@@ -205,6 +202,23 @@ function App() {
       .then(() => {
         setIsOpen(false);
         setIsAddModalOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  /// Deleting Card \\\
+
+  function handleCardDelete(id) {
+    api
+      .removeItemCard(id)
+      .then(() => {
+        removeCard(id);
+      })
+      .then(() => {
+        setIsOpen(false);
+        setIsConfirmationModalOpen(false);
       })
       .catch((err) => {
         console.log(err);
@@ -382,16 +396,7 @@ function App() {
               setIsConfirmationModalOpen(false);
             }}
             card={removingCard}
-            handleCardDelete={(id) => {
-              api
-                .removeItemCard(id)
-                .then(() => {
-                  removeCard(id);
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
-            }}
+            handleCardDelete={handleCardDelete}
           />
           <Footer />
           <Route exact path="/">
