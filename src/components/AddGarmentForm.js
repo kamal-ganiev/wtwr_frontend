@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import ModalWithForm from "./ModalWithForm";
 
-function AddGarmentForm({ isOpen, onClose, addNewCard }) {
+function AddGarmentForm({ isOpen, onClose, addNewCard, isLoading }) {
   /// Calling Current User Context \\\
 
   const user = React.useContext(CurrentUserContext);
@@ -55,7 +55,7 @@ function AddGarmentForm({ isOpen, onClose, addNewCard }) {
     <ModalWithForm
       title="New garment"
       id="AddingGarment"
-      buttonText="Add garment"
+      buttonText={`${isLoading ? "Save..." : "Add garment"} `}
       name="add"
       isOpen={isOpen}
       onClose={onClose}

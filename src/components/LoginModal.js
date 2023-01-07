@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 
-function LoginModal({ isOpen, onClose, redirectToRegModal, loginHandler }) {
+function LoginModal({
+  isOpen,
+  onClose,
+  redirectToRegModal,
+  loginHandler,
+  isLoading,
+}) {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
 
@@ -19,7 +25,7 @@ function LoginModal({ isOpen, onClose, redirectToRegModal, loginHandler }) {
     <ModalWithForm
       title="Log in"
       id="Login"
-      buttonText="Log in"
+      buttonText={`${isLoading ? "Save..." : "Log in"}`}
       redirectButton="or Register"
       showRedirectButton={true}
       name="login"

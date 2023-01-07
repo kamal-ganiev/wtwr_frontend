@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 
 function RegisterModal({
-  isModalOpen,
   isOpen,
   onClose,
   registerHandler,
   redirectToLogModal,
+  isLoading,
 }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -35,7 +35,7 @@ function RegisterModal({
     <ModalWithForm
       title="Sign Up"
       id="Registration"
-      buttonText="Next"
+      buttonText={`${isLoading ? "Save..." : "Next"}`}
       redirectButton="or Log in"
       showRedirectButton={true}
       name="registration"

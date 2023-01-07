@@ -4,7 +4,7 @@ import "../blocks/App.css";
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
-import ItemCards from "./ItemCards";
+import ItemCard from "./ItemCard";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
@@ -34,10 +34,14 @@ function App() {
 
   const weatherApi = new WeatherApi();
 
+  /// Loading handle:
+
+  const [isLoading, setIsLoading] = useState(false);
+
   /// States for User:
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
   const [onError, setOnError] = useState(false);
 
   /// States for Modals:
@@ -88,6 +92,7 @@ function App() {
   /// Sign in/up Function \\\
 
   const loginHandler = (email, password) => {
+    setIsLoading(true);
     auth
       .login(email, password)
       .then((res) => {
@@ -101,6 +106,7 @@ function App() {
           .checkToken()
           .then((res) => setCurrentUser(res))
           .catch((err) => console.log(err));
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -108,11 +114,15 @@ function App() {
   };
 
   const registerHandler = ({ name, avatar, email, password }) => {
+    setIsLoading(true);
     auth
       .register({ name, avatar, email, password })
       .then(() => {
         loginHandler(email, password);
         setIsRegModalOpen(false);
+      })
+      .then(() => {
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -148,9 +158,14 @@ function App() {
   /// useEfect Hook Calls \\\
 
   useEffect(() => {
-    api.getItemCards().then((cardsList) => {
-      setItemList(cardsList);
-    });
+    api
+      .getItemCards()
+      .then((cardsList) => {
+        setItemList(cardsList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
@@ -193,6 +208,7 @@ function App() {
   /// Adding Card To Array \\\
 
   function addNewCard(item) {
+    setIsLoading(true);
     api
       .addItemCard(item)
       .then((res) => {
@@ -202,6 +218,9 @@ function App() {
       .then(() => {
         setIsOpen(false);
         setIsAddModalOpen(false);
+      })
+      .then(() => {
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -228,6 +247,7 @@ function App() {
   /// Update User Data \\\
 
   function updateUser(name, avatar) {
+    setIsLoading(true);
     auth
       .updateUserData(name, avatar)
       .then((res) => {
@@ -237,7 +257,24 @@ function App() {
         setIsOpen(false);
         setIsUpdateModalOpen(false);
       })
+      .then(() => {
+        setIsLoading(false);
+      })
       .catch((err) => console.log(err));
+  }
+
+  /// Add/remove likes functions \\\
+
+  function addLike(id) {
+    api.addLike(id).catch((err) => {
+      console.log(err.message);
+    });
+  }
+
+  function removeLike(id) {
+    api.removeLike(id).catch((err) => {
+      console.log(err.message);
+    });
   }
 
   return (
@@ -274,8 +311,8 @@ function App() {
           </Header>
           <Route exact path="/se_project_react">
             <Main weather={weather} isDay={isDay}>
-              <ItemCards
-                key="ItemCards"
+              <ItemCard
+                key="ItemCard"
                 cardList={itemList}
                 weatherCondition={weatherTemp(temp)}
                 setIsItemModalOpen={() => {
@@ -286,8 +323,8 @@ function App() {
                 isOwn={(card, user) => {
                   return true;
                 }}
-                addLike={api.addLike}
-                removeLike={api.removeLike}
+                addLike={addLike}
+                removeLike={removeLike}
                 isLoggedIn={isLoggedIn}
               />
             </Main>
@@ -312,8 +349,8 @@ function App() {
                   setIsAddModalOpen(true);
                 }}
               >
-                <ItemCards
-                  key="ItemCards"
+                <ItemCard
+                  key="ItemCard"
                   cardList={itemList}
                   setIsItemModalOpen={() => {
                     setIsOpen(true);
@@ -323,8 +360,8 @@ function App() {
                   isOwn={(card, user) => {
                     return card === user;
                   }}
-                  addLike={api.addLike}
-                  removeLike={api.removeLike}
+                  addLike={addLike}
+                  removeLike={removeLike}
                   isLoggedIn={isLoggedIn}
                 />
               </ClothesSection>
@@ -341,6 +378,7 @@ function App() {
               setIsLogModalOpen(true);
             }}
             registerHandler={registerHandler}
+            isLoading={isLoading}
           />
           <LoginModal
             isOpen={isOpen && isLogModalOpen}
@@ -353,6 +391,7 @@ function App() {
               setIsRegModalOpen(true);
             }}
             loginHandler={loginHandler}
+            isLoading={isLoading}
           />
           <AddGarmentForm
             isOpen={isOpen && isAddModalOpen}
@@ -361,6 +400,7 @@ function App() {
               setIsAddModalOpen(false);
             }}
             addNewCard={addNewCard}
+            isLoading={isLoading}
           />
           <UpdateUserModal
             isOpen={isOpen && isUpdateModalOpen}
@@ -370,6 +410,7 @@ function App() {
             }}
             updateUser={updateUser}
             setOnError={setOnError}
+            isLoading={isLoading}
           />
           <ItemModal
             name="ItemModal"

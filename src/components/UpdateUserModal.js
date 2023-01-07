@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import ModalWithForm from "./ModalWithForm";
 
-function UpdateUserModal({ isOpen, onClose, updateUser, setOnError }) {
+function UpdateUserModal({
+  isOpen,
+  onClose,
+  updateUser,
+  setOnError,
+  isLoading,
+}) {
   const user = React.useContext(CurrentUserContext);
 
   const [name, setName] = useState("");
@@ -30,7 +36,7 @@ function UpdateUserModal({ isOpen, onClose, updateUser, setOnError }) {
       title="Change profile data"
       id="Update"
       name="update"
-      buttonText="Save changes"
+      buttonText={isLoading ? "Save..." : "Save changes"}
       isOpen={isOpen}
       onClose={onClose}
       handleSubmit={(e) => {
