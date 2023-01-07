@@ -30,6 +30,7 @@ function SideBar({
           <img
             className="profile__avatar"
             src={user.avatar}
+            alt="Profile avatar"
             onError={() => {
               setOnError(true);
             }}
@@ -57,7 +58,7 @@ function SideBar({
           onClick={() => {
             localStorage.removeItem("jwt");
             setIsLoggedIn(false);
-            setCurrentUser("");
+            setCurrentUser({});
           }}
         >
           Log out
