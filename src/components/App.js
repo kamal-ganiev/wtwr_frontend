@@ -134,10 +134,6 @@ function App() {
   /// Handle Slide Effect \\\
 
   useEffect(() => {
-    console.log(onError);
-  }, [onError]);
-
-  useEffect(() => {
     if (sliderPos === 0) {
       setFahrenheitColor("white");
     } else {
