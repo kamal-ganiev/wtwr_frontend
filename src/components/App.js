@@ -272,13 +272,13 @@ function App() {
   /// Add/remove likes functions \\\
 
   function addLike(id) {
-    api.addLike(id).catch((err) => {
+    return api.addLike(id).catch((err) => {
       console.log(err.message);
     });
   }
 
   function removeLike(id) {
-    api.removeLike(id).catch((err) => {
+    return api.removeLike(id).catch((err) => {
       console.log(err.message);
     });
   }

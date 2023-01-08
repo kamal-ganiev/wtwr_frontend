@@ -3,11 +3,9 @@ import "../blocks/cards.css";
 
 import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
-import likeActiveSvg from "../images/Card/__button_active.svg";
-import likeInactiveSvg from "../images/Card/__button_inactive.svg";
 
 function ItemCard({ addLike, removeLike, ...props }) {
-  const user = React.useContext(CurrentUserContext);
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <ul className="cards__list">
@@ -15,13 +13,13 @@ function ItemCard({ addLike, removeLike, ...props }) {
         if (
           (card.weather === props.weatherCondition ||
             props.weatherCondition === undefined) &&
-          props.isOwn(card.owner, user._id)
+          props.isOwn(card.owner, currentUser._id)
         ) {
-          let isLiked;
+          const isLiked = card.likes.some((like) => like === currentUser._id);
 
-          if (card.likes.includes(user._id)) {
-            isLiked = true;
-          } else isLiked = false;
+          const itemLikeButtonClassName = `${
+            isLiked ? "card__like-btn_active" : "card__like-btn"
+          }`;
 
           return (
             <li
@@ -45,28 +43,19 @@ function ItemCard({ addLike, removeLike, ...props }) {
                   <h3 className="card__title">{card.name}</h3>
                 </div>
                 <button
-                  className={`card__like-btn ${
-                    props.isLoggedIn ? "" : "card__like_hidden"
-                  }`}
+                  className={itemLikeButtonClassName}
                   type="button"
-                  style={
-                    card.likes.includes(user._id)
-                      ? { backgroundImage: `url(${likeActiveSvg})` }
-                      : { backgroundImage: `url(${likeInactiveSvg})` }
-                  }
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (!card.likes.includes(user) && !isLiked) {
+                    if (!card.likes.includes(currentUser._id)) {
                       addLike(card._id).then((res) => {
-                        e.target.style.backgroundImage = `url(${likeActiveSvg})`;
                         card.likes = res.likes;
-                        isLiked = true;
+                        e.target.className = "card__like-btn_active";
                       });
                     } else {
                       removeLike(card._id).then((res) => {
-                        e.target.style.backgroundImage = `url(${likeInactiveSvg})`;
                         card.likes = res.likes;
-                        isLiked = false;
+                        e.target.className = "card__like-btn";
                       });
                     }
                   }}

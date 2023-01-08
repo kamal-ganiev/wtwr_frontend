@@ -49,11 +49,23 @@
   height: 17.5px;
   border: none;
   background-color: rgba(0, 0, 0, 0);
+  background-image: url("../images/Card/__button_inactive.svg");
   cursor: pointer;
   transition: 0.3s;
 }
 
-.card__like-btn:hover {
+.card__like-btn_active {
+  width: 20px;
+  height: 17.5px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("../images/Card/__button_active.svg");
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card__like-btn:hover,
+.card__like-btn_active:hover {
   opacity: 0.6;
 }
 
