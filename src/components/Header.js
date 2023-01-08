@@ -18,6 +18,35 @@ function Header({
 }) {
   const user = React.useContext(CurrentUserContext);
 
+  const imagePlaceholderCheck = () => {
+    if (onError) {
+      return (
+        <Link to="/se_project_react/profile" className="header__profile-link">
+          <p className="header__user">{user.name}</p>
+          <div className="header__image-placeholder">
+            <p className="header__image-placeholder-text">
+              {firstLetter(user.name)}
+            </p>
+          </div>
+        </Link>
+      );
+    } else {
+      return (
+        <Link to="/se_project_react/profile" className="header__profile-link">
+          <p className="header__user">{user.name}</p>
+          <img
+            className="header__avatar"
+            src={user.avatar}
+            onError={(e) => {
+              e.target.style.display = "none";
+              setOnError(true);
+            }}
+          />
+        </Link>
+      );
+    }
+  };
+
   return (
     <header className="header">
       <div className="header__left-side">
@@ -39,33 +68,7 @@ function Header({
           <button className="header__button" onClick={openAddModal}>
             + Add clothes
           </button>
-          {onError || user.avatar === "" ? (
-            <Link
-              to="/se_project_react/profile"
-              className="header__profile-link"
-            >
-              <p className="header__user">{user.name}</p>
-              <div className="header__image-placeholder">
-                <p className="header__image-placeholder-text">
-                  {firstLetter(user.name)}
-                </p>
-              </div>
-            </Link>
-          ) : (
-            <Link
-              to="/se_project_react/profile"
-              className="header__profile-link"
-            >
-              <p className="header__user">{user.name}</p>
-              <img
-                className="header__avatar"
-                src={user.avatar}
-                onError={() => {
-                  setOnError(true);
-                }}
-              />
-            </Link>
-          )}
+          {imagePlaceholderCheck()}
         </div>
       )}
       {!isLoggedIn && (

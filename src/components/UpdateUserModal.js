@@ -16,12 +16,11 @@ function UpdateUserModal({
 
   function handleSubmit(e) {
     e.preventDefault();
+    setOnError(false);
     updateUser(name, avatar);
   }
 
   useEffect(() => {
-    setOnError(false);
-
     if (isOpen === true) {
       setName(user.name);
       setAvatar(user.avatar);

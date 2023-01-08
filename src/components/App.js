@@ -77,7 +77,7 @@ function App() {
 
   /// Checking Token \\\
 
-  useEffect(() => {
+  const checkToken = () => {
     auth
       .checkToken()
       .then((res) => {
@@ -87,6 +87,10 @@ function App() {
       .catch((err) => {
         return console.log(err);
       });
+  };
+
+  useEffect(() => {
+    checkToken();
   }, []);
 
   /// Sign in/up Function \\\
@@ -97,15 +101,11 @@ function App() {
       .login(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        setIsLoggedIn(true);
         setIsOpen(false);
         setIsLogModalOpen(false);
       })
       .then(() => {
-        auth
-          .checkToken()
-          .then((res) => setCurrentUser(res))
-          .catch((err) => console.log(err));
+        checkToken();
         setIsLoading(false);
       })
       .catch((err) => {
@@ -132,6 +132,10 @@ function App() {
   };
 
   /// Handle Slide Effect \\\
+
+  useEffect(() => {
+    console.log(onError);
+  }, [onError]);
 
   useEffect(() => {
     if (sliderPos === 0) {

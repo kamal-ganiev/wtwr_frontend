@@ -31,7 +31,8 @@ function SideBar({
             className="profile__avatar"
             src={user.avatar}
             alt="Profile avatar"
-            onError={() => {
+            onError={(e) => {
+              e.target.style.display = "none";
               setOnError(true);
             }}
           />
