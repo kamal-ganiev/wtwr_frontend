@@ -109,6 +109,7 @@ function App() {
         setIsLoading(false);
       })
       .catch((err) => {
+        setIsLogModalOpen(false);
         console.log(err);
       });
   };
@@ -125,6 +126,7 @@ function App() {
         setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
   };
@@ -223,6 +225,7 @@ function App() {
         setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
   }
@@ -260,7 +263,10 @@ function App() {
       .then(() => {
         setIsLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   }
 
   /// Add/remove likes functions \\\
