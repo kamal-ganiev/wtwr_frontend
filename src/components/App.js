@@ -337,6 +337,7 @@ function App() {
               }}
               setData={setItemModalData}
               handleLikeClick={handleLikeClick}
+              isLoggedIn={isLoggedIn}
             />
           </Route>
           <ProtectedRoute
@@ -365,6 +366,7 @@ function App() {
                 }}
                 setData={setItemModalData}
                 handleLikeClick={handleLikeClick}
+                isLoggedIn={isLoggedIn}
               />
             </Profile>
           </ProtectedRoute>

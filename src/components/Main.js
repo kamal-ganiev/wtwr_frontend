@@ -13,6 +13,7 @@ function Main({
   setIsItemModalOpen,
   setData,
   handleLikeClick,
+  isLoggedIn,
 }) {
   const temp = React.useContext(CurrentTemperatureUnitContext);
 
@@ -55,6 +56,7 @@ function Main({
                     setIsItemModalOpen={setIsItemModalOpen}
                     setData={setData}
                     handleLikeClick={handleLikeClick}
+                    isLoggedIn={isLoggedIn}
                   />
                 </li>
               );

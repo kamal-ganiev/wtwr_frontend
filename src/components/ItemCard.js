@@ -4,14 +4,14 @@ import "../blocks/cards.css";
 import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function ItemCard({ cardData, handleLikeClick }) {
+function ItemCard({ cardData, handleLikeClick, isLoggedIn }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const isLiked = cardData.likes.some((like) => like === currentUser._id);
 
-  const itemLikeButtonClassName = `${
-    isLiked ? "card__like-btn_active" : "card__like-btn"
-  }`;
+  const itemLikeButtonClassName = isLoggedIn
+    ? `${isLiked ? "card__like-btn_active" : "card__like-btn"}`
+    : "card__like_hidden";
 
   return (
     <div className="card__info">

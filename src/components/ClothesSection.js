@@ -8,6 +8,7 @@ function ClothesSection({
   setIsItemModalOpen,
   setData,
   handleLikeClick,
+  isLoggedIn,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -45,6 +46,7 @@ function ClothesSection({
                   setIsItemModalOpen={setIsItemModalOpen}
                   setData={setData}
                   handleLikeClick={handleLikeClick}
+                  isLoggedIn={isLoggedIn}
                 />
               </li>
             );
