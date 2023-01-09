@@ -26,10 +26,6 @@ import { auth } from "../utils/auth";
 import UpdateUserModal from "./UpdateUserModal";
 
 function App() {
-  /// Calling Forms \\\
-
-  const forms = Array.from(document.forms);
-
   /// Calling Api \\\
 
   const weatherApi = new WeatherApi();
@@ -271,17 +267,31 @@ function App() {
 
   /// Add/remove likes functions \\\
 
-  function addLike(id) {
-    return api.addLike(id).catch((err) => {
-      console.log(err.message);
-    });
-  }
-
-  function removeLike(id) {
-    return api.removeLike(id).catch((err) => {
-      console.log(err.message);
-    });
-  }
+  const handleLikeClick = (cardId, isLiked) => {
+    isLiked
+      ? api
+          .removeLike(cardId)
+          .then((updatedCard) => {
+            setItemList((cards) => {
+              const newList = cards.map((card) =>
+                card._id === cardId ? updatedCard : card
+              );
+              return newList;
+            });
+          })
+          .catch((err) => console.log(err))
+      : api
+          .addLike(cardId)
+          .then((updatedCard) => {
+            setItemList((cards) => {
+              const newList = cards.map((card) =>
+                card._id === cardId ? updatedCard : card
+              );
+              return newList;
+            });
+          })
+          .catch((err) => console.log(err));
+  };
 
   return (
     <div className="page">
@@ -316,24 +326,18 @@ function App() {
             />
           </Header>
           <Route exact path="/se_project_react">
-            <Main weather={weather} isDay={isDay}>
-              <ItemCard
-                key="ItemCard"
-                cardList={itemList}
-                weatherCondition={weatherTemp(temp)}
-                setIsItemModalOpen={() => {
-                  setIsOpen(true);
-                  setIsItemModalOpen(true);
-                }}
-                setData={setItemModalData}
-                isOwn={(card, user) => {
-                  return true;
-                }}
-                addLike={addLike}
-                removeLike={removeLike}
-                isLoggedIn={isLoggedIn}
-              />
-            </Main>
+            <Main
+              weather={weather}
+              isDay={isDay}
+              cardList={itemList}
+              weatherCondition={weatherTemp(temp)}
+              setIsItemModalOpen={() => {
+                setIsOpen(true);
+                setIsItemModalOpen(true);
+              }}
+              setData={setItemModalData}
+              handleLikeClick={handleLikeClick}
+            />
           </Route>
           <ProtectedRoute
             path="/se_project_react/profile"
@@ -354,23 +358,14 @@ function App() {
                   setIsOpen(true);
                   setIsAddModalOpen(true);
                 }}
-              >
-                <ItemCard
-                  key="ItemCard"
-                  cardList={itemList}
-                  setIsItemModalOpen={() => {
-                    setIsOpen(true);
-                    setIsItemModalOpen(true);
-                  }}
-                  setData={setItemModalData}
-                  isOwn={(card, user) => {
-                    return card === user;
-                  }}
-                  addLike={addLike}
-                  removeLike={removeLike}
-                  isLoggedIn={isLoggedIn}
-                />
-              </ClothesSection>
+                cardList={itemList}
+                setIsItemModalOpen={() => {
+                  setIsOpen(true);
+                  setIsItemModalOpen(true);
+                }}
+                setData={setItemModalData}
+                handleLikeClick={handleLikeClick}
+              />
             </Profile>
           </ProtectedRoute>
           <RegisterModal
