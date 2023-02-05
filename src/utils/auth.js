@@ -9,7 +9,7 @@ const handleResponse = (res) => {
   if (res.status === 201 || res.status === 200) {
     return res.json();
   } else {
-    return Promise.reject(res.status);
+    return Promise.reject(res);
   }
 };
 

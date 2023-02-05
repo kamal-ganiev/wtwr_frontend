@@ -4,7 +4,6 @@ import "../blocks/App.css";
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
-import ItemCard from "./ItemCard";
 import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
@@ -107,6 +106,7 @@ function App() {
       .catch((err) => {
         setIsLogModalOpen(false);
         console.log(err);
+        setIsLoading(false);
       });
   };
 
