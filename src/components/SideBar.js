@@ -1,5 +1,5 @@
 import "../blocks/profile.css";
-import React, { useState } from "react";
+import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { firstLetter } from "../utils/utils";
 

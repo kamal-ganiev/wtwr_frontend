@@ -36,6 +36,7 @@ function Header({
           <p className="header__user">{user.name}</p>
           <img
             className="header__avatar"
+            alt="Profile Avatar"
             src={user.avatar}
             onError={(e) => {
               e.target.style.display = "none";
