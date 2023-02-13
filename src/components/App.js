@@ -325,7 +325,7 @@ function App() {
               handleSlide={handleSlide}
             />
           </Header>
-          <Route exact path="/se_project_react">
+          <Route exact path="/">
             <Main
               weather={weather}
               isDay={isDay}
@@ -340,10 +340,7 @@ function App() {
               isLoggedIn={isLoggedIn}
             />
           </Route>
-          <ProtectedRoute
-            path="/se_project_react/profile"
-            isLoggedIn={isLoggedIn}
-          >
+          <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
             <Profile
               setIsLoggedIn={setIsLoggedIn}
               setIsModalOpen={() => {
@@ -443,9 +440,6 @@ function App() {
             handleCardDelete={handleCardDelete}
           />
           <Footer />
-          <Route exact path="/">
-            <Redirect to="se_project_react" />
-          </Route>
         </CurrentUserContext.Provider>
       </CurrentTemperatureUnitContext.Provider>
     </div>
