@@ -1,4 +1,7 @@
-const BASE_URL = "http://localhost:3002";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "deployed-backend-url"
+    : "http://localhost:3001";
 
 const header = {
   Accept: "application/json",
