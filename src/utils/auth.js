@@ -1,6 +1,6 @@
 const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "deployed-backend-url"
+    ? "api.wtwr-kamal-ganiev.students.nomoredomainssbs.ru"
     : "http://localhost:3001";
 
 const header = {
