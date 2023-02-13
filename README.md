@@ -16,7 +16,7 @@ This link of design of the WTWR website. It was made on Figma:
 
 This link of page itself: (page is still in work, images might not be loaded)
 
-- [What to Wear?](https://kamal-ganiev.github.io/se_project_react/)
+- [What to Wear?](https://wtwr-kamal-ganiev.students.nomoredomainssbs.ru/)
 
 ### Features
 
