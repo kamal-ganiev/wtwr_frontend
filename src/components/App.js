@@ -12,7 +12,7 @@ import WeatherApi from "../utils/weatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Profile from "./Profile";
 import ClothesSection from "./ClothesSection";
 import api from "../utils/api";

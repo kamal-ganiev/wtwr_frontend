@@ -1,7 +1,7 @@
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "api.wtwr-kamal-ganiev.students.nomoredomainssbs.ru"
-    : "http://localhost:3001";
+    ? "https://api.wtwr-kamal-ganiev.students.nomoredomainssbs.ru/items"
+    : "http://localhost:3001/items";
 
 const header = {
   "Content-type": "application/json",

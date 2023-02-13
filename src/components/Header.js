@@ -21,7 +21,7 @@ function Header({
   const imagePlaceholderCheck = () => {
     if (onError) {
       return (
-        <Link to="/se_project_react/profile" className="header__profile-link">
+        <Link to="/profile" className="header__profile-link">
           <p className="header__user">{user.name}</p>
           <div className="header__image-placeholder">
             <p className="header__image-placeholder-text">
@@ -32,7 +32,7 @@ function Header({
       );
     } else {
       return (
-        <Link to="/se_project_react/profile" className="header__profile-link">
+        <Link to="/profile" className="header__profile-link">
           <p className="header__user">{user.name}</p>
           <img
             className="header__avatar"
@@ -51,7 +51,7 @@ function Header({
   return (
     <header className="header">
       <div className="header__left-side">
-        <Link to="/se_project_react" className="header__info-link">
+        <Link to="/" className="header__info-link">
           <img
             className="header__logo"
             src={logo}
