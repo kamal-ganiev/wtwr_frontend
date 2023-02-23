@@ -3,22 +3,25 @@ const baseUrl =
     ? "https://api.wtwr-kamal-ganiev.students.nomoredomainssbs.ru/items"
     : "http://localhost:3000/items";
 
-const header = {
-  "Content-type": "application/json",
-  authorization: `Bearer ${localStorage.getItem("jwt")}`,
-};
+function header() {
+  return {
+    Accept: "application/json",
+    "Content-type": "application/json",
+    authorization: `Bearer ${localStorage.getItem("jwt")}`,
+  };
+}
 
 const handleResponse = (res) => {
   if (res.ok) {
     return res.json();
   } else {
-    return Promise.reject(`Error: ${res.status}`);
+    return Promise.reject(`Error: ${res.statusText}`);
   }
 };
 
 const getItemCards = async () => {
   const res = await fetch(`${baseUrl}`, {
-    headers: header,
+    headers: header(),
   });
   return handleResponse(res);
 };
@@ -26,7 +29,7 @@ const getItemCards = async () => {
 const addItemCard = async ({ id, name, imageUrl, weather }) => {
   const res = await fetch(`${baseUrl}`, {
     method: "POST",
-    headers: header,
+    headers: header(),
     body: JSON.stringify({
       id,
       name,
@@ -40,21 +43,21 @@ const addItemCard = async ({ id, name, imageUrl, weather }) => {
 const removeItemCard = (id) => {
   return fetch(`${baseUrl}/${id}`, {
     method: "DELETE",
-    headers: header,
+    headers: header(),
   }).then((res) => handleResponse(res));
 };
 
 const addLike = (id) => {
   return fetch(`${baseUrl}/${id}/likes`, {
     method: "PUT",
-    headers: header,
+    headers: header(),
   }).then((res) => handleResponse(res));
 };
 
 const removeLike = (id) => {
   return fetch(`${baseUrl}/${id}/likes`, {
     method: "DELETE",
-    headers: header,
+    headers: header(),
   }).then((res) => handleResponse(res));
 };
 
