@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../blocks/Header.css";
 import logo from "../images/Header/__logo.svg";
 import { Link } from "react-router-dom";
@@ -17,40 +17,6 @@ function Header({
   setOnError,
 }) {
   const user = React.useContext(CurrentUserContext);
-
-  const imagePlaceholderCheck = () => {
-    if (onError) {
-      return (
-        <Link to="/profile" className="header__profile-link">
-          <p className="header__user">{user.name}</p>
-          <div className="header__image-placeholder">
-            <p className="header__image-placeholder-text">
-              {firstLetter(user.name)}
-            </p>
-          </div>
-        </Link>
-      );
-    } else {
-      return (
-        <Link to="/profile" className="header__profile-link">
-          <p className="header__user">{user.name}</p>
-          <img
-            className="header__avatar"
-            alt="Profile Avatar"
-            src={user.avatar}
-            onError={(e) => {
-              e.target.style.display = "none";
-              setOnError(true);
-            }}
-          />
-        </Link>
-      );
-    }
-  };
-
-  useEffect(() => {
-    imagePlaceholderCheck();
-  }, [user]);
 
   return (
     <header className="header">
@@ -73,7 +39,29 @@ function Header({
           <button className="header__button" onClick={openAddModal}>
             + Add clothes
           </button>
-          {imagePlaceholderCheck()}
+          {onError && user.name ? (
+            <Link to="/profile" className="header__profile-link">
+              <p className="header__user">{user.name}</p>
+              <div className="header__image-placeholder">
+                <p className="header__image-placeholder-text">
+                  {firstLetter(user.name)}
+                </p>
+              </div>
+            </Link>
+          ) : (
+            <Link to="/profile" className="header__profile-link">
+              <p className="header__user">{user.name}</p>
+              <img
+                className="header__avatar"
+                alt="Profile Avatar"
+                src={user.avatar}
+                onError={(e) => {
+                  e.target.style.display = "none";
+                  setOnError(true);
+                }}
+              />
+            </Link>
+          )}
         </div>
       )}
       {!isLoggedIn && (

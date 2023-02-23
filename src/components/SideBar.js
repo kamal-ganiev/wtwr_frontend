@@ -12,9 +12,9 @@ function SideBar({
 }) {
   const user = React.useContext(CurrentUserContext);
 
-  const imagePlaceholderCheck = () => {
-    if (onError) {
-      return (
+  return (
+    <div className="profile__side-bar">
+      {onError && user.name ? (
         <div className="profile__side-bar-info">
           <div className="profile__avatar-placeholder">
             <p className="profile__avatar-placeholder-text">
@@ -23,9 +23,7 @@ function SideBar({
           </div>
           <p className="profile__name">{user.name}</p>
         </div>
-      );
-    } else {
-      return (
+      ) : (
         <div className="profile__side-bar-info">
           <img
             className="profile__avatar"
@@ -38,13 +36,7 @@ function SideBar({
           />
           <p className="profile__name">{user.name}</p>
         </div>
-      );
-    }
-  };
-
-  return (
-    <div className="profile__side-bar">
-      {imagePlaceholderCheck()}
+      )}
       <div className="profile__settings">
         <button
           className="profile__settings-button"
