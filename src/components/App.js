@@ -267,7 +267,6 @@ function App() {
   /// Add/remove likes functions \\\
 
   const handleLikeClick = (cardId, isLiked) => {
-    console.log("Like");
     isLiked
       ? api
           .removeLike(cardId)

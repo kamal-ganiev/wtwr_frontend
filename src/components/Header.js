@@ -16,7 +16,37 @@ function Header({
   onError,
   setOnError,
 }) {
-  const user = React.useContext(CurrentUserContext);
+  let user = React.useContext(CurrentUserContext);
+
+  function setAvatar() {
+    if (onError && user.name) {
+      return (
+        <Link to="/profile" className="header__profile-link">
+          <p className="header__user">{user.name}</p>
+          <div className="header__image-placeholder">
+            <p className="header__image-placeholder-text">
+              {firstLetter(user.name)}
+            </p>
+          </div>
+        </Link>
+      );
+    } else {
+      return (
+        <Link to="/profile" className="header__profile-link">
+          <p className="header__user">{user.name}</p>
+          <img
+            className="header__avatar"
+            alt="Profile Avatar"
+            src={user.avatar}
+            onError={(e) => {
+              e.target.style.display = "none";
+              setOnError(true);
+            }}
+          />
+        </Link>
+      );
+    }
+  }
 
   return (
     <header className="header">
@@ -39,29 +69,7 @@ function Header({
           <button className="header__button" onClick={openAddModal}>
             + Add clothes
           </button>
-          {onError && user.name ? (
-            <Link to="/profile" className="header__profile-link">
-              <p className="header__user">{user.name}</p>
-              <div className="header__image-placeholder">
-                <p className="header__image-placeholder-text">
-                  {firstLetter(user.name)}
-                </p>
-              </div>
-            </Link>
-          ) : (
-            <Link to="/profile" className="header__profile-link">
-              <p className="header__user">{user.name}</p>
-              <img
-                className="header__avatar"
-                alt="Profile Avatar"
-                src={user.avatar}
-                onError={(e) => {
-                  e.target.style.display = "none";
-                  setOnError(true);
-                }}
-              />
-            </Link>
-          )}
+          {setAvatar()}
         </div>
       )}
       {!isLoggedIn && (
