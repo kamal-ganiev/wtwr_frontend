@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../blocks/Header.css";
 import logo from "../images/Header/__logo.svg";
 import { Link } from "react-router-dom";
@@ -47,6 +47,10 @@ function Header({
       );
     }
   };
+
+  useEffect(() => {
+    imagePlaceholderCheck();
+  }, [user]);
 
   return (
     <header className="header">

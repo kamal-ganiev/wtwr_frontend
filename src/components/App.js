@@ -80,7 +80,7 @@ function App() {
         setCurrentUser(res);
       })
       .catch((err) => {
-        return console.log(err);
+        console.log(err);
       });
   };
 
@@ -104,9 +104,8 @@ function App() {
         setIsLoading(false);
       })
       .catch((err) => {
-        setIsLogModalOpen(false);
-        console.log(err);
         setIsLoading(false);
+        console.log(err);
       });
   };
 
