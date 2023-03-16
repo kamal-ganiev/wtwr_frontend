@@ -1,7 +1,4 @@
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://api.wtwr-kamal-ganiev.students.nomoredomainssbs.ru/items"
-    : "http://localhost:3000/items";
+const baseUrl = "http://localhost:3000/items";
 
 function header() {
   return {
