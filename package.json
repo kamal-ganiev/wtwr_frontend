@@ -19,7 +19,7 @@
     "test": "jest",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "npm run build && scp -r ./build/* kamal.ganiev999@wtwr-kamal-ganiev.students.nomoredomainssbs.ru:/home/kamal.ganiev999/frontend"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
