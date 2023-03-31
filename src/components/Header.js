@@ -1,6 +1,6 @@
 import React from "react";
 import "../blocks/Header.css";
-import logo from "../images/Header/__logo.svg";
+import logo from "../images/Header/logo.svg";
 import { Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { firstLetter } from "../utils/utils";

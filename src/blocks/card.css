@@ -49,7 +49,7 @@
   height: 17.5px;
   border: none;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url("../images/Card/__button_inactive.svg");
+  background-image: url("../images/Card/button_inactive.svg");
   cursor: pointer;
   transition: 0.3s;
 }
@@ -59,7 +59,7 @@
   height: 17.5px;
   border: none;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url("../images/Card/__button_active.svg");
+  background-image: url("../images/Card/button_active.svg");
   cursor: pointer;
   transition: 0.3s;
 }

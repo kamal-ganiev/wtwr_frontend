@@ -325,7 +325,7 @@ function App() {
               handleSlide={handleSlide}
             />
           </Header>
-          <Route exact path="/">
+          <Route exact path="/wtwr_frontend">
             <Main
               weather={weather}
               isDay={isDay}

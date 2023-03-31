@@ -1,20 +1,20 @@
 /// Importing Daytime Backgrounds \\\
 
-import clearDay from "../images/WeatherCard/Daytime/__clear.jpg";
-import cloudyDay from "../images/WeatherCard/Daytime/__cloudy.jpg";
-import rainDay from "../images/WeatherCard/Daytime/__rain.jpg";
-import snowDay from "../images/WeatherCard/Daytime/__snow.jpg";
-import stormDay from "../images/WeatherCard/Daytime/__storm.jpg";
-import fogDay from "../images/WeatherCard/Daytime/__fog.jpg";
+import clearDay from "../images/WeatherCard/Daytime/clear.jpg";
+import cloudyDay from "../images/WeatherCard/Daytime/cloudy.jpg";
+import rainDay from "../images/WeatherCard/Daytime/rain.jpg";
+import snowDay from "../images/WeatherCard/Daytime/snow.jpg";
+import stormDay from "../images/WeatherCard/Daytime/storm.jpg";
+import fogDay from "../images/WeatherCard/Daytime/fog.jpg";
 
 /// Importing Nighttime Backgrounds \\\
 
-import clearNight from "../images/WeatherCard/Nighttime/__clear.jpg";
-import cloudyNight from "../images/WeatherCard/Nighttime/__cloudy.jpg";
-import rainNight from "../images/WeatherCard/Nighttime/__rain.jpg";
-import snowNight from "../images/WeatherCard/Nighttime/__snow.jpg";
-import stormNight from "../images/WeatherCard/Nighttime/__storm.jpg";
-import fogNight from "../images/WeatherCard/Nighttime/__fog.jpg";
+import clearNight from "../images/WeatherCard/Nighttime/clear.jpg";
+import cloudyNight from "../images/WeatherCard/Nighttime/cloudy.jpg";
+import rainNight from "../images/WeatherCard/Nighttime/rain.jpg";
+import snowNight from "../images/WeatherCard/Nighttime/snow.jpg";
+import stormNight from "../images/WeatherCard/Nighttime/storm.jpg";
+import fogNight from "../images/WeatherCard/Nighttime/fog.jpg";
 
 /// Night Time Background Object \\\
 
