@@ -1,4 +1,7 @@
-const baseUrl = "http://localhost:3000/items";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr-server.mooo.com"
+    : "http://localhost:3000";
 
 function header() {
   return {

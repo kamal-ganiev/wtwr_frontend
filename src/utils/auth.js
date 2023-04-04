@@ -1,4 +1,7 @@
-const BASE_URL = "http://localhost:3000";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr-server.mooo.com"
+    : "http://localhost:3000";
 
 const header = {
   Accept: "application/json",
