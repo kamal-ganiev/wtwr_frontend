@@ -51,7 +51,7 @@ function Header({
   return (
     <header className="header">
       <div className="header__left-side">
-        <Link to="/" className="header__info-link">
+        <Link to="/wtwr_frontend" className="header__info-link">
           <img
             className="header__logo"
             src={logo}

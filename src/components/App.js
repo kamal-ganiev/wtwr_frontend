@@ -8,7 +8,6 @@ import AddGarmentForm from "./AddGarmentForm";
 import ItemModal from "./ItemModal";
 import Footer from "./Footer";
 import { currentDate, coords } from "../utils/constants";
-import defaultClothingItems from "../utils/defaultClothings.json";
 import WeatherApi from "../utils/weatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
@@ -163,7 +162,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        setItemList(defaultClothingItems);
       });
   }, []);
 

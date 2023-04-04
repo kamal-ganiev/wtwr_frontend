@@ -14,7 +14,7 @@ function ItemModal({
   setRemovingCard,
 }) {
   const user = React.useContext(CurrentUserContext);
-  const isOwn = data.owner === user._id;
+  const isOwn = data.owner && data.owner === user._id;
 
   return (
     <Modal
