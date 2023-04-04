@@ -17,7 +17,7 @@ const handleResponse = (res) => {
 };
 
 const register = ({ name, avatar, email, password }) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: header,
     body: JSON.stringify({ name, avatar, email, password }),
@@ -25,7 +25,7 @@ const register = ({ name, avatar, email, password }) => {
 };
 
 const login = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: header,
     body: JSON.stringify({ email, password }),
@@ -33,7 +33,7 @@ const login = (email, password) => {
 };
 
 const checkToken = () => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const checkToken = () => {
 };
 
 const updateUserData = (name, avatar) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
