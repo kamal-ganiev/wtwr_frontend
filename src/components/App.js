@@ -23,6 +23,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import { auth } from "../utils/auth";
 import UpdateUserModal from "./UpdateUserModal";
+import LoadingPage from "./LoadingPage";
 
 function App() {
   /// Calling Api \\\
@@ -70,6 +71,13 @@ function App() {
   const [itemList, setItemList] = useState([]);
   const [removingCard, setRemovingCard] = useState(0);
 
+  /// States for Loading Page:
+  const [isVisible, setIsVisible] = useState(true);
+
+  const [fetchToken, setFetchToken] = useState(false);
+  const [fetchCards, setFetchCards] = useState(false);
+  const [fetchWeather, setFetchWeather] = useState(false);
+
   /// Checking Token \\\
 
   const checkToken = () => {
@@ -81,6 +89,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setFetchToken(true);
       });
   };
 
@@ -162,6 +173,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setFetchCards(true);
       });
   }, []);
 
@@ -181,6 +195,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setFetchWeather(true);
       });
   }, []);
 
@@ -292,8 +309,17 @@ function App() {
           .catch((err) => console.log(err));
   };
 
+  /// Remove Loading Screen \\\
+
+  useEffect(() => {
+    if (fetchCards && fetchToken && fetchWeather) {
+      setIsVisible(false);
+    }
+  }, [fetchCards, fetchToken, fetchWeather]);
+
   return (
     <div className="page">
+      <LoadingPage visibility={isVisible} />
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
