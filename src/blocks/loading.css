@@ -16,7 +16,7 @@
 }
 
 .loading_invisible {
-  opacity: 0;
+  display: none;
 }
 
 @keyframes pulse {
