@@ -12,6 +12,7 @@ import WeatherApi from "../utils/weatherApi";
 import { weatherTemp } from "../utils/utils";
 import ToggleSwitch from "./ToggleSwitch";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import CurrentModeContext from "../contexts/CurrentModeContext";
 import { Route } from "react-router-dom";
 import Profile from "./Profile";
 import ClothesSection from "./ClothesSection";
@@ -69,6 +70,7 @@ function App() {
   const [fahrenheitColor, setFahrenheitColor] = useState("");
   const [celsiusColor, setCelsiusColor] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("");
+  const [currentMode, setCurrentMode] = useState(true);
 
   /// States for Cards:
   const [itemList, setItemList] = useState([]);
@@ -238,6 +240,14 @@ function App() {
     }
   }
 
+  function handleModeSwitchChange(evt) {
+    if (evt.target.checked) {
+      setCurrentMode(false);
+    } else {
+      setCurrentMode(true);
+    }
+  }
+
   /// Removing Card Function \\\
 
   function removeCard(id) {
@@ -350,80 +360,56 @@ function App() {
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <CurrentUserContext.Provider value={currentUser}>
-          <Header
-            openLoginModal={() => {
-              setIsOpen(true);
-              setIsLogModalOpen(true);
-            }}
-            openRegistrationModal={() => {
-              setIsOpen(true);
-              setIsRegModalOpen(true);
-            }}
-            openAddModal={() => {
-              setIsOpen(true);
-              setIsAddModalOpen(true);
-            }}
-            currentDate={currentDate}
-            currentLocation={location}
-            isLoggedIn={isLoggedIn}
-            onError={onError}
-            setOnError={setOnError}
-          >
-            <ToggleSwitch
-              sliderPos={modeSliderPos}
-              leftColor={moonColor}
-              rightColor={sunColor}
-              leftImageClass={"toggle-switch__moon"}
-              rightImageClass={"toggle-switch__sun"}
-              left="☾"
-              right="☀"
-              handleSlide={handleModeSlide}
-            />
-            <ToggleSwitch
-              switchFun={handleToggleSwitchChange}
-              sliderPos={tempSliderPos}
-              leftColor={fahrenheitColor}
-              rightColor={celsiusColor}
-              leftImageClass={"toggle-switch__fahrenheit"}
-              rightImageClass={"toggle-switch__celsius"}
-              left="F"
-              right="C"
-              handleSlide={handleTempSlide}
-            />
-          </Header>
-          <Route exact path="/wtwr_frontend">
-            <Main
-              weather={weather}
-              isDay={isDay}
-              cardList={itemList}
-              weatherCondition={weatherTemp(temp)}
-              setIsItemModalOpen={() => {
+        <CurrentModeContext.Provider value={currentMode}>
+          <CurrentUserContext.Provider value={currentUser}>
+            <Header
+              openLoginModal={() => {
                 setIsOpen(true);
-                setIsItemModalOpen(true);
+                setIsLogModalOpen(true);
               }}
-              setData={setItemModalData}
-              handleLikeClick={handleLikeClick}
+              openRegistrationModal={() => {
+                setIsOpen(true);
+                setIsRegModalOpen(true);
+              }}
+              openAddModal={() => {
+                setIsOpen(true);
+                setIsAddModalOpen(true);
+              }}
+              currentDate={currentDate}
+              currentLocation={location}
               isLoggedIn={isLoggedIn}
-            />
-          </Route>
-          <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
-            <Profile
-              setIsLoggedIn={setIsLoggedIn}
-              setIsModalOpen={() => {
-                setIsOpen(true);
-                setIsUpdateModalOpen(true);
-              }}
-              setCurrentUser={setCurrentUser}
               onError={onError}
               setOnError={setOnError}
             >
-              <ClothesSection
-                openModal={() => {
-                  setIsOpen(true);
-                  setIsAddModalOpen(true);
-                }}
+              <ToggleSwitch
+                switchFun={handleModeSwitchChange}
+                sliderPos={modeSliderPos}
+                leftColor={moonColor}
+                rightColor={sunColor}
+                leftImageClass={"toggle-switch__moon"}
+                rightImageClass={"toggle-switch__sun"}
+                left="☾"
+                right="☀"
+                handleSlide={handleModeSlide}
+              />
+              <ToggleSwitch
+                switchFun={handleToggleSwitchChange}
+                sliderPos={tempSliderPos}
+                leftColor={fahrenheitColor}
+                rightColor={celsiusColor}
+                leftImageClass={"toggle-switch__fahrenheit"}
+                rightImageClass={"toggle-switch__celsius"}
+                left="F"
+                right="C"
+                handleSlide={handleTempSlide}
+              />
+            </Header>
+            <Route exact path="/wtwr_frontend">
+              <Main
+                weather={weather}
+                isDay={isDay}
                 cardList={itemList}
+                weatherCondition={weatherTemp(temp)}
                 setIsItemModalOpen={() => {
                   setIsOpen(true);
                   setIsItemModalOpen(true);
@@ -432,82 +418,109 @@ function App() {
                 handleLikeClick={handleLikeClick}
                 isLoggedIn={isLoggedIn}
               />
-            </Profile>
-          </ProtectedRoute>
-          <RegisterModal
-            isOpen={isOpen && isRegModalOpen}
-            onClose={() => {
-              setIsOpen(false);
-              setIsRegModalOpen(false);
-            }}
-            redirectToLogModal={() => {
-              setIsRegModalOpen(false);
-              setIsLogModalOpen(true);
-            }}
-            registerHandler={registerHandler}
-            isLoading={isLoading}
-          />
-          <LoginModal
-            isOpen={isOpen && isLogModalOpen}
-            onClose={() => {
-              setIsOpen(false);
-              setIsLogModalOpen(false);
-            }}
-            redirectToRegModal={() => {
-              setIsLogModalOpen(false);
-              setIsRegModalOpen(true);
-            }}
-            loginHandler={loginHandler}
-            isLoading={isLoading}
-          />
-          <AddGarmentForm
-            isOpen={isOpen && isAddModalOpen}
-            onClose={() => {
-              setIsOpen(false);
-              setIsAddModalOpen(false);
-            }}
-            addNewCard={addNewCard}
-            isLoading={isLoading}
-          />
-          <UpdateUserModal
-            isOpen={isOpen && isUpdateModalOpen}
-            onClose={() => {
-              setIsOpen(false);
-              setIsUpdateModalOpen(false);
-            }}
-            updateUser={updateUser}
-            setOnError={setOnError}
-            isLoading={isLoading}
-          />
-          <ItemModal
-            name="ItemModal"
-            isOpen={isOpen && isItemModalOpen}
-            onClose={() => {
-              setIsOpen(false);
-              setIsItemModalOpen(false);
-            }}
-            onRemove={() => {
-              setIsItemModalOpen(false);
-            }}
-            data={itemModalData}
-            handleRemove={() => {
-              setIsOpen(true);
-              setIsConfirmationModalOpen(true);
-            }}
-            setRemovingCard={setRemovingCard}
-          />
-          <ConfirmationModal
-            name="confirmation"
-            isOpen={isOpen && isConfirmationModalOpen}
-            onClose={() => {
-              setIsOpen(false);
-              setIsConfirmationModalOpen(false);
-            }}
-            card={removingCard}
-            handleCardDelete={handleCardDelete}
-          />
-          <Footer />
-        </CurrentUserContext.Provider>
+            </Route>
+            <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
+              <Profile
+                setIsLoggedIn={setIsLoggedIn}
+                setIsModalOpen={() => {
+                  setIsOpen(true);
+                  setIsUpdateModalOpen(true);
+                }}
+                setCurrentUser={setCurrentUser}
+                onError={onError}
+                setOnError={setOnError}
+              >
+                <ClothesSection
+                  openModal={() => {
+                    setIsOpen(true);
+                    setIsAddModalOpen(true);
+                  }}
+                  cardList={itemList}
+                  setIsItemModalOpen={() => {
+                    setIsOpen(true);
+                    setIsItemModalOpen(true);
+                  }}
+                  setData={setItemModalData}
+                  handleLikeClick={handleLikeClick}
+                  isLoggedIn={isLoggedIn}
+                />
+              </Profile>
+            </ProtectedRoute>
+            <RegisterModal
+              isOpen={isOpen && isRegModalOpen}
+              onClose={() => {
+                setIsOpen(false);
+                setIsRegModalOpen(false);
+              }}
+              redirectToLogModal={() => {
+                setIsRegModalOpen(false);
+                setIsLogModalOpen(true);
+              }}
+              registerHandler={registerHandler}
+              isLoading={isLoading}
+            />
+            <LoginModal
+              isOpen={isOpen && isLogModalOpen}
+              onClose={() => {
+                setIsOpen(false);
+                setIsLogModalOpen(false);
+              }}
+              redirectToRegModal={() => {
+                setIsLogModalOpen(false);
+                setIsRegModalOpen(true);
+              }}
+              loginHandler={loginHandler}
+              isLoading={isLoading}
+            />
+            <AddGarmentForm
+              isOpen={isOpen && isAddModalOpen}
+              onClose={() => {
+                setIsOpen(false);
+                setIsAddModalOpen(false);
+              }}
+              addNewCard={addNewCard}
+              isLoading={isLoading}
+            />
+            <UpdateUserModal
+              isOpen={isOpen && isUpdateModalOpen}
+              onClose={() => {
+                setIsOpen(false);
+                setIsUpdateModalOpen(false);
+              }}
+              updateUser={updateUser}
+              setOnError={setOnError}
+              isLoading={isLoading}
+            />
+            <ItemModal
+              name="ItemModal"
+              isOpen={isOpen && isItemModalOpen}
+              onClose={() => {
+                setIsOpen(false);
+                setIsItemModalOpen(false);
+              }}
+              onRemove={() => {
+                setIsItemModalOpen(false);
+              }}
+              data={itemModalData}
+              handleRemove={() => {
+                setIsOpen(true);
+                setIsConfirmationModalOpen(true);
+              }}
+              setRemovingCard={setRemovingCard}
+            />
+            <ConfirmationModal
+              name="confirmation"
+              isOpen={isOpen && isConfirmationModalOpen}
+              onClose={() => {
+                setIsOpen(false);
+                setIsConfirmationModalOpen(false);
+              }}
+              card={removingCard}
+              handleCardDelete={handleCardDelete}
+            />
+            <Footer />
+          </CurrentUserContext.Provider>
+        </CurrentModeContext.Provider>
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );
