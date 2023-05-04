@@ -62,7 +62,10 @@ function App() {
   const [isDay, setIsDay] = useState(true);
 
   /// States for Temperature Slider:
-  const [sliderPos, setSliderPos] = useState(0);
+  const [tempSliderPos, setTempSliderPos] = useState(0);
+  const [modeSliderPos, setModeSliderPos] = useState(0);
+  const [moonColor, setMoonColor] = useState("");
+  const [sunColor, setSunColor] = useState("");
   const [fahrenheitColor, setFahrenheitColor] = useState("");
   const [celsiusColor, setCelsiusColor] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("");
@@ -140,26 +143,50 @@ function App() {
   /// Handle Slide Effect \\\
 
   useEffect(() => {
-    if (sliderPos === 0) {
+    if (tempSliderPos === 0) {
       setFahrenheitColor("white");
     } else {
       setFahrenheitColor("");
     }
-  }, [sliderPos]);
+  }, [tempSliderPos]);
 
   useEffect(() => {
-    if (sliderPos === 28) {
+    if (modeSliderPos === 0) {
+      setMoonColor("white");
+    } else {
+      setMoonColor("");
+    }
+  }, [modeSliderPos]);
+
+  useEffect(() => {
+    if (tempSliderPos === 28) {
       setCelsiusColor("white");
     } else {
       setCelsiusColor("");
     }
-  }, [sliderPos]);
+  }, [tempSliderPos]);
 
-  function handleSlide() {
-    if (sliderPos === 0) {
-      setSliderPos(28);
+  useEffect(() => {
+    if (modeSliderPos === 28) {
+      setSunColor("white");
     } else {
-      setSliderPos(0);
+      setSunColor("");
+    }
+  }, [modeSliderPos]);
+
+  function handleTempSlide() {
+    if (tempSliderPos === 0) {
+      setTempSliderPos(28);
+    } else {
+      setTempSliderPos(0);
+    }
+  }
+
+  function handleModeSlide() {
+    if (modeSliderPos === 0) {
+      setModeSliderPos(28);
+    } else {
+      setModeSliderPos(0);
     }
   }
 
@@ -344,10 +371,25 @@ function App() {
             setOnError={setOnError}
           >
             <ToggleSwitch
-              sliderPos={sliderPos}
-              fahrenheitColor={fahrenheitColor}
-              celsiusColor={celsiusColor}
-              handleSlide={handleSlide}
+              sliderPos={modeSliderPos}
+              leftColor={moonColor}
+              rightColor={sunColor}
+              leftImageClass={"toggle-switch__moon"}
+              rightImageClass={"toggle-switch__sun"}
+              left="☾"
+              right="☀"
+              handleSlide={handleModeSlide}
+            />
+            <ToggleSwitch
+              switchFun={handleToggleSwitchChange}
+              sliderPos={tempSliderPos}
+              leftColor={fahrenheitColor}
+              rightColor={celsiusColor}
+              leftImageClass={"toggle-switch__fahrenheit"}
+              rightImageClass={"toggle-switch__celsius"}
+              left="F"
+              right="C"
+              handleSlide={handleTempSlide}
             />
           </Header>
           <Route exact path="/wtwr_frontend">

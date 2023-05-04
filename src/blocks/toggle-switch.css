@@ -5,13 +5,15 @@
 }
 
 .toggle-switch__fahrenheit,
-.toggle-switch__celsius {
+.toggle-switch__celsius,
+.toggle-switch__moon,
+.toggle-switch__sun {
   position: absolute;
   margin: 0;
   font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 14px;
+
   line-height: 17px;
   z-index: 3;
   width: 28px;
@@ -24,12 +26,26 @@
 }
 
 .toggle-switch__fahrenheit {
+  font-size: 14px;
   top: -2px;
   left: -2px;
 }
 
 .toggle-switch__celsius {
+  font-size: 14px;
   top: -2px;
+  right: -2px;
+}
+
+.toggle-switch__moon {
+  font-size: 16px;
+  top: -1px;
+  left: -1px;
+}
+
+.toggle-switch__sun {
+  font-size: 16px;
+  top: -1px;
   right: -2px;
 }
 
@@ -75,6 +91,8 @@
 }
 
 .toggle-switch__label:hover .toggle-switch__fahrenheit,
-.toggle-switch__label:hover .toggle-switch__celsius {
+.toggle-switch__label:hover .toggle-switch__celsius,
+.toggle-switch__label:hover .toggle-switch__sun,
+.toggle-switch__label:hover .toggle-switch__moon {
   color: black;
 }

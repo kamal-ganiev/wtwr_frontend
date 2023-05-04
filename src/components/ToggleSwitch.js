@@ -1,33 +1,32 @@
 import React from "react";
-import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import "../blocks/toggle-switch.css";
 
 function ToggleSwitch({
+  switchFun,
   sliderPos,
   handleSlide,
-  fahrenheitColor,
-  celsiusColor,
+  leftColor,
+  rightColor,
+  leftImageClass,
+  rightImageClass,
+  left,
+  right,
 }) {
-  const switchContext = React.useContext(CurrentTemperatureUnitContext);
-
   return (
     <div className="toggle-switch">
       <label className="toggle-switch__label" htmlFor="emperature-switch">
-        <p
-          className="toggle-switch__fahrenheit"
-          style={{ color: fahrenheitColor }}
-        >
-          F
+        <p className={leftImageClass} style={{ color: leftColor }}>
+          {left}
         </p>
-        <p className="toggle-switch__celsius" style={{ color: celsiusColor }}>
-          C
+        <p className={rightImageClass} style={{ color: rightColor }}>
+          {right}
         </p>
         <input
           type="checkbox"
           className="toggle-switch__checkbox"
           id="temperature-switch"
           onClick={handleSlide}
-          onChange={switchContext.handleToggleSwitchChange}
+          onChange={switchFun}
         />
       </label>
       <div
