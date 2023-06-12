@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/wtwr_frontend/static/css/main.163bad5c.css",
+    "main.js": "/wtwr_frontend/static/js/main.ad6d3d5f.js",
+    "static/media/CabinetGrotesk-Bold.otf": "/wtwr_frontend/static/media/CabinetGrotesk-Bold.2619526040c3adf53b83.otf",
+    "static/media/CabinetGrotesk-Medium.otf": "/wtwr_frontend/static/media/CabinetGrotesk-Medium.b8b578586abc9d55dcda.otf",
+    "static/media/snow.jpg": "/wtwr_frontend/static/media/snow.727e462dad260efdc935.jpg",
+    "static/media/fog.jpg": "/wtwr_frontend/static/media/fog.ee8fb9e3b5df4c4ffaa0.jpg",
+    "static/media/storm.jpg": "/wtwr_frontend/static/media/storm.d7e2477bbd8363eb36d4.jpg",
+    "static/media/rain.jpg": "/wtwr_frontend/static/media/rain.8df10a1bc9b44c5c3fa5.jpg",
+    "static/media/cloudy.jpg": "/wtwr_frontend/static/media/cloudy.8485de6be73509db6ec0.jpg",
+    "static/media/clear.jpg": "/wtwr_frontend/static/media/clear.13f41a10b93b8ae9a97b.jpg",
+    "static/media/button_active.svg": "/wtwr_frontend/static/media/button_active.ea27b1263dbe4a4cb95b.svg",
+    "static/media/logo.svg": "/wtwr_frontend/static/media/logo.2e52a3b54443b649938df0a9b3d231e2.svg",
+    "static/media/button_inactive.svg": "/wtwr_frontend/static/media/button_inactive.13dc767d9f4d279e5b84.svg",
+    "static/media/close-button.svg": "/wtwr_frontend/static/media/close-button.41654df85174806f9922.svg",
+    "static/media/close-modal.svg": "/wtwr_frontend/static/media/close-modal.34bff1eb1ed0331b4c52.svg",
+    "index.html": "/wtwr_frontend/index.html",
+    "main.163bad5c.css.map": "/wtwr_frontend/static/css/main.163bad5c.css.map",
+    "main.ad6d3d5f.js.map": "/wtwr_frontend/static/js/main.ad6d3d5f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.163bad5c.css",
+    "static/js/main.ad6d3d5f.js"
+  ]
+}
