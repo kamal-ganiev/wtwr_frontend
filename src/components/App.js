@@ -381,7 +381,8 @@ function App() {
               onError={onError}
               setOnError={setOnError}
             >
-              <ToggleSwitch
+              {/* This component will be added after dark mode will be implemented */}
+              {/* <ToggleSwitch
                 switchFun={handleModeSwitchChange}
                 sliderPos={modeSliderPos}
                 leftColor={moonColor}
@@ -391,7 +392,7 @@ function App() {
                 left="☾"
                 right="☀"
                 handleSlide={handleModeSlide}
-              />
+              /> */}
               <ToggleSwitch
                 switchFun={handleToggleSwitchChange}
                 sliderPos={tempSliderPos}
