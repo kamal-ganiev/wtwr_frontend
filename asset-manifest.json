@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/wtwr_frontend/static/css/main.163bad5c.css",
-    "main.js": "/wtwr_frontend/static/js/main.ad6d3d5f.js",
+    "main.js": "/wtwr_frontend/static/js/main.3269f69d.js",
     "static/media/CabinetGrotesk-Bold.otf": "/wtwr_frontend/static/media/CabinetGrotesk-Bold.2619526040c3adf53b83.otf",
     "static/media/CabinetGrotesk-Medium.otf": "/wtwr_frontend/static/media/CabinetGrotesk-Medium.b8b578586abc9d55dcda.otf",
     "static/media/snow.jpg": "/wtwr_frontend/static/media/snow.727e462dad260efdc935.jpg",
@@ -17,10 +17,10 @@
     "static/media/close-modal.svg": "/wtwr_frontend/static/media/close-modal.34bff1eb1ed0331b4c52.svg",
     "index.html": "/wtwr_frontend/index.html",
     "main.163bad5c.css.map": "/wtwr_frontend/static/css/main.163bad5c.css.map",
-    "main.ad6d3d5f.js.map": "/wtwr_frontend/static/js/main.ad6d3d5f.js.map"
+    "main.3269f69d.js.map": "/wtwr_frontend/static/js/main.3269f69d.js.map"
   },
   "entrypoints": [
     "static/css/main.163bad5c.css",
-    "static/js/main.ad6d3d5f.js"
+    "static/js/main.3269f69d.js"
   ]
 }
